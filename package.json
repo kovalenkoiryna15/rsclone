@@ -1,0 +1,63 @@
+{
+  "name": "rsclone-trackingtime",
+  "version": "0.0.1",
+  "description": "Tracking Time.",
+  "main": "src/app.js",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-export-default-from": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.2",
+    "core-js": "^3.7.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^5.0.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-webpack-plugin": "^2.3.0",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^4.5.0",
+    "image-webpack-loader": "^7.0.1",
+    "json5-loader": "^4.0.1",
+    "source-map-loader": "^1.1.2",
+    "style-loader": "^2.0.0",
+    "stylelint": "^13.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-twbs-bootstrap": "^2.1.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0",
+    "webpack": "^5.6.0",
+    "webpack-bundle-analyzer": "^4.1.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kovalenkoiryna15/rsclone.git"
+  },
+  "broswerList": "> 0.25%, not dead",
+  "keywords": [
+    "tracking",
+    "time",
+    "rsclone"
+  ],
+  "author": "Artsiom Platkouski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kovalenkoiryna15/rsclone/issues"
+  },
+  "homepage": "https://github.com/kovalenkoiryna15/rsclone#README.md",
+  "dependencies": {}
+}

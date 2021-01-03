@@ -41,7 +41,13 @@
     "webpack-merge": "^5.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "fix": "cross-env NODE_ENV=development eslint ./src --ext .js --fix",
+    "lint": "cross-env NODE_ENV=development eslint ./src --ext .js",
+    "start": "cross-env NODE_ENV=development webpack serve --config webpack.config.js",
+    "stats": "cross-env NODE_ENV=production webpack --json > stats.json && webpack-bundle-analyzwer stats.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js --watch"
   },
   "repository": {
     "type": "git",

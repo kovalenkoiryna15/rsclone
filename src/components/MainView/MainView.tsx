@@ -3,13 +3,13 @@
 import React from 'react';
 import './MainView.scss';
 
-import TaskView from '../TaskView/TaskView';
-import TaskListNav from '../TaskListNav/TaskListNav';
-import TaskList from '../TaskList/TaskList';
+import TaskView from '../TaskView';
+import TaskListNav from '../TaskListNav';
+import TaskList from '../TaskList';
 
 export default function MainView() {
   return (
-    <main className="main row">
+    <main className="main-view row">
       <TaskListNav />
       <TaskList />
       <TaskView />

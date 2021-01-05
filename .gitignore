@@ -217,5 +217,4 @@ fabric.properties
 !.vscode/extensions.json
 *.code-workspace
 
-dist
 package-lock.json

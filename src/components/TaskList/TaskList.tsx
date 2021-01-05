@@ -3,7 +3,7 @@ import './TaskList.scss';
 
 export default function TaskList() {
   return (
-    <div className="TaskList col-6">
+    <div className="task-list col-6">
       TaskList
     </div>
   );

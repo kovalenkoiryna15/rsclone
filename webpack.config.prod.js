@@ -8,7 +8,11 @@ module.exports = {
   mode: 'production',
   context: path.resolve(__dirname, 'src'),
   entry: {
-    main: './app.js',
+    main: './components/index.tsx',
+  },
+  resolve: {
+    modules: ['node_modules'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,8 +31,8 @@ module.exports = {
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone TrackingTime',
-      template: './template.ejs',
-      filename: 'index.html',
+      template: './components/template.ejs',
+      filename: './components/index.html',
       minify: {
         collapseWhitespace: true,
         collapseBooleanAttributes: true,

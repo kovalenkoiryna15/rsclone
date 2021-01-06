@@ -9,7 +9,11 @@ module.exports = {
   mode: 'development',
   context: path.resolve(__dirname, 'src'),
   entry: {
-    bundle: './app.js',
+    bundle: './components/index.tsx',
+  },
+  resolve: {
+    modules: ['node_modules'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   devtool: 'source-map',
   watch: true,
@@ -33,8 +37,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'RSClone TrackingTime',
-      template: './template.ejs',
-      filename: 'index.html',
+      template: './components/template.ejs',
+      filename: './components/index.html',
     }),
     new ESLintPlugin(),
     new SourceMapDevToolPlugin({
@@ -61,7 +65,7 @@ module.exports = {
         },
       },
       {
-        test: /.css$/,
+        test: /.css$/i,
         exclude: /node_modules/,
         use: [
           { loader: 'style-loader' },

@@ -2,7 +2,7 @@
   "name": "rsclone-trackingtime",
   "version": "0.0.1",
   "description": "Tracking Time.",
-  "main": "src/app.js",
+  "main": "src/components/index.tsx",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",

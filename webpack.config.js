@@ -11,6 +11,7 @@ module.exports = {
   entry: {
     bundle: './components/index.tsx',
   },
+  target: 'web',
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -35,12 +36,12 @@ module.exports = {
     assetModuleFilename: 'assets/[name][ext]',
   },
   plugins: [
+    new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone TrackingTime',
       template: './components/template.ejs',
       filename: './components/index.html',
     }),
-    new ESLintPlugin(),
     new SourceMapDevToolPlugin({
       filename: '[file].map',
     }),
@@ -49,8 +50,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
         enforce: 'pre',
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: ['source-map-loader'],
       },
@@ -65,7 +66,11 @@ module.exports = {
         },
       },
       {
-        test: /.css$/i,
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+      },
+      {
+        test: /.css$/,
         exclude: /node_modules/,
         use: [
           { loader: 'style-loader' },

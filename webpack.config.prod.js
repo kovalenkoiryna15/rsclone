@@ -8,8 +8,9 @@ module.exports = {
   mode: 'production',
   context: path.resolve(__dirname, 'src'),
   entry: {
-    main: './components/index.tsx',
+    bundle: './components/index.tsx',
   },
+  target: 'web',
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -62,9 +63,16 @@ module.exports = {
         },
       },
       {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+      },
+      {
         test: /.css$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
       {
         test: /\.(?:jpe?g|png)$/i,

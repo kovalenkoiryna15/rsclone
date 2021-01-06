@@ -39,8 +39,8 @@ module.exports = {
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone TrackingTime',
-      template: './components/template.ejs',
-      filename: './components/index.html',
+      template: 'template.ejs',
+      filename: 'index.html',
     }),
     new SourceMapDevToolPlugin({
       filename: '[file].map',
@@ -52,12 +52,12 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules|bower_components/,
         use: ['source-map-loader'],
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules|bower_components/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -81,14 +81,14 @@ module.exports = {
         test: /\.(?:jpe?g|png)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name][ext]',
+          filename: 'assets/images/[name][ext]',
         },
       },
       {
         test: /\.(?:mp3|wav)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'audio/[name][ext]',
+          filename: 'assets/audio/[name][ext]',
         },
       },
       {

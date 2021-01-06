@@ -11,11 +11,7 @@ export const App = (props: HelloWorldProps) => {
   const { userName, lang } = props;
   return (
     <h1>
-      Hi
-      { userName }
-      from React! Welcome to
-      { lang }
-      !
+      Hi { userName } from React! Welcome to { lang }!
     </h1>
   );
 };

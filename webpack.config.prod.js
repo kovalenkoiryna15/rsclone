@@ -32,8 +32,8 @@ module.exports = {
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone TrackingTime',
-      template: './components/template.ejs',
-      filename: './components/index.html',
+      template: 'template.ejs',
+      filename: 'index.html',
       minify: {
         collapseWhitespace: true,
         collapseBooleanAttributes: true,
@@ -43,7 +43,7 @@ module.exports = {
       {
         patterns: [
           {
-            from: './favicon.ico',
+            from: 'favicon.ico',
             to: path.resolve(__dirname, 'dist'),
           },
         ],
@@ -54,7 +54,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules|bower_components/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -78,14 +78,14 @@ module.exports = {
         test: /\.(?:jpe?g|png)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[hash][ext][query]',
+          filename: 'assets/images/[hash][ext][query]',
         },
       },
       {
         test: /\.(?:mp3|wav)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'audio/[hash][ext][query]',
+          filename: 'assets/audio/[hash][ext][query]',
         },
       },
       {

@@ -4,7 +4,8 @@
     "es2020": true
   },
   "extends": [
-    "airbnb-base"
+    "airbnb",
+    "airbnb/hooks"
   ],
   "parserOptions": {
     "ecmaVersion": 11,
@@ -12,5 +13,36 @@
   },
   "parser": "babel-eslint",
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js",
+          ".jsx"
+        ]
+      }
+    }
   }
 }

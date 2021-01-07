@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

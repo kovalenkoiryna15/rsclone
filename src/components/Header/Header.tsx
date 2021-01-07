@@ -1,12 +1,14 @@
 import React from 'react';
-import './Header.scss';
+import Nav from 'react-bootstrap/Nav';
 
 export default function Header() {
   return (
     <header className="header">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#home" data-testid="header-title">TrackingTime</a>
-      </nav>
+      <Nav className="navbar-expand-lg navbar-light bg-light">
+        <Nav.Item>
+          <Nav.Link className="navbar-brand" href="#home" data-testid="header-title">TrackingTime</Nav.Link>
+        </Nav.Item>
+      </Nav>
     </header>
   );
 }

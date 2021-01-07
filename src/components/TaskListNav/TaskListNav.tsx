@@ -1,5 +1,4 @@
 import React from 'react';
-import './TaskListNav.scss';
 
 export default function TaskListNav() {
   return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import './MainView.scss';
 
 import TaskView from '../TaskView';
 import TaskListNav from '../TaskListNav';

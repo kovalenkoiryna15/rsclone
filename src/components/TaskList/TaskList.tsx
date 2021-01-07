@@ -1,9 +1,10 @@
 import React from 'react';
+import Col from 'react-bootstrap/Col';
 
 export default function TaskList() {
   return (
-    <div className="task-list col-6">
+    <Col className="task-list" xs={6}>
       TaskList
-    </div>
+    </Col>
   );
 }

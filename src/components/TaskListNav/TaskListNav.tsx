@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav';
+import { Col, Nav } from 'react-bootstrap';
 
 export default function TaskListNav() {
   return (
-    <div className="task-list-nav col-3">
+    <Col className="task-list-nav" xs={3}>
       <Nav className="flex-column bg-light">
         <Nav.Item>
           <Nav.Link href="#all-tasks">Tasks</Nav.Link>
@@ -18,6 +18,6 @@ export default function TaskListNav() {
           <Nav.Link href="#project/id">Project A</Nav.Link>
         </Nav.Item>
       </Nav>
-    </div>
+    </Col>
   );
 }

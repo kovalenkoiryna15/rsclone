@@ -1,9 +1,10 @@
 import React from 'react';
+import { Col } from 'react-bootstrap';
 
 export default function TaskView() {
   return (
-    <div className="task-view col-3 bg-light">
+    <Col className="task-view bg-light" xs={3}>
       TaskView
-    </div>
+    </Col>
   );
 }

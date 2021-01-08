@@ -1,0 +1,99 @@
+{
+  "user": "Test User",
+  "tasks": [
+    {
+      "id": "1610144206111",
+      "name": "Task 1",
+      "deadline": "2021-01-25",
+      "estimatedTime": "3604",
+      "wastedTime": "600",
+      "project": "1610144208540",
+      "timeEntries": [
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        }
+      ],
+      "isDone": "false"
+    },
+    {
+      "id": "1610144692427",
+      "name": "Task 2",
+      "deadline": "2021-01-25",
+      "estimatedTime": "3604",
+      "wastedTime": "600",
+      "project": "1610144208540",
+      "timeEntries": [
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-12T21:16:05.613Z",
+          "duration": "10000",
+          "comment": "2 hours"
+        }
+      ],
+      "isDone": "false"
+    },
+    {
+      "id": "1610144696539",
+      "name": "Task 3",
+      "deadline": "2021-01-25",
+      "estimatedTime": "3604",
+      "wastedTime": "600",
+      "project": "1610144690116",
+      "timeEntries": [
+        {
+          "startDate": "2021-01-25 00:00:00",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-25 02:00:00",
+          "duration": "10000",
+          "comment": "2 hours"
+        },
+        {
+          "startDate": "2021-01-25 04:00:00",
+          "duration": "10000",
+          "comment": "2 hours"
+        }
+      ],
+      "isDone": "false"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1610144208540",
+      "name": "Project 1",
+      "deadline": "2021-01-25",
+      "estimatedTime": "59043",
+      "defaultView": "board"
+    },
+    {
+      "id": "1610144690116",
+      "name": "Project 33",
+      "deadline": "2021-01-25",
+      "estimatedTime": "5904345",
+      "defaultView": "list"
+    }
+  ]
+}

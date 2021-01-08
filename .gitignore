@@ -217,4 +217,10 @@ fabric.properties
 !.vscode/extensions.json
 *.code-workspace
 
+# End of https://www.toptal.com/developers/gitignore/api/pycharm,webstorm,vscode
+
+# https://github.com/kovalenkoiryna15/rsclone/pull/2#discussion_r551258766
 package-lock.json
+
+# sensitive information: IP addresses, account credentials, and API keys/secrets
+.env.*

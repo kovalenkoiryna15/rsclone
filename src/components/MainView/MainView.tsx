@@ -1,9 +1,9 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 
-import TaskView from '../TaskView';
-import TaskListNav from '../TaskListNav';
-import TaskList from '../TaskList';
+import TaskView from 'Components/TaskView';
+import TaskListNav from 'Components/TaskListNav';
+import TaskList from 'Components/TaskList';
 
 export default function MainView() {
   return (

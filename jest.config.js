@@ -1,0 +1,15 @@
+module.exports = {
+  collectCoverage: true,
+  collectCoverageFrom: ['*.{ts,tsx}'],
+  coverageDirectory: './coverage/',
+  moduleDirectories: ['node_modules', './src'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleNameMapper: { '\\.(css|scss)$': 'identity-obj-proxy' },
+  roots: ['<rootDir>/src/', '<rootDir>/test'],
+  setupFiles: ['<rootDir>/test/setupTests.ts'],
+  setupFilesAfterEnv: ['jest-enzyme'],
+  testEnvironment: 'enzyme',
+  testEnvironmentOptions: { enzymeAdapter: 'react16' },
+  testMatch: ['./**/*.{spec,test}.{ts,tsx,js,jsx}'],
+  verbose: true,
+};

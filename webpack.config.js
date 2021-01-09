@@ -8,14 +8,23 @@ const { DefinePlugin, SourceMapDevToolPlugin, HotModuleReplacementPlugin } = req
 
 module.exports = {
   mode: 'development',
-  context: path.resolve(__dirname, 'src'),
   entry: {
-    bundle: './components/index.tsx',
+    bundle: './src/index.tsx',
   },
   target: 'web',
   resolve: {
+    descriptionFiles: ['package.json'],
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      Assets: path.resolve(__dirname, './src/assets'),
+      Audio: path.resolve(__dirname, './src/assets/audio'),
+      Components: path.resolve(__dirname, './src/components'),
+      Data: path.resolve(__dirname, './src/assets/data'),
+      Images: path.resolve(__dirname, './src/assets/images'),
+      Store: path.resolve(__dirname, './src/store'),
+      Styles: path.resolve(__dirname, './src/styles'),
+    },
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   devtool: 'inline-source-map',
   watch: true,
@@ -50,8 +59,8 @@ module.exports = {
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone Tracking Time',
-      favicon: 'favicon.ico',
-      template: 'template.ejs',
+      favicon: './src/favicon.ico',
+      template: './src/template.ejs',
       filename: 'index.html',
     }),
     new SourceMapDevToolPlugin({

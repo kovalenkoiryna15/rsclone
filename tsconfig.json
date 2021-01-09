@@ -17,6 +17,16 @@
     "resolveJsonModule": true,
     "removeComments": true,
     "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "Assets/*": ["assets/*"],
+      "Audio/*": ["assets/audio/*"],
+      "Components/*": ["components/*"],
+      "Data/*": ["assets/data/*"],
+      "Images/*": ["assets/images/*"],
+      "Store/*": ["store/*"],
+      "Styles/*": ["styles/*"]
+    },
     "skipLibCheck": true,
     "strict": true,
     "target": "es6",

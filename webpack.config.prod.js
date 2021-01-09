@@ -9,15 +9,23 @@ const { DefinePlugin } = require('webpack');
 
 module.exports = {
   mode: 'production',
-  context: path.resolve(__dirname, 'src'),
   entry: {
-    bundle: './components/index.tsx',
+    bundle: './src/index.tsx',
   },
   target: 'web',
   resolve: {
     descriptionFiles: ['package.json'],
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      Assets: path.resolve(__dirname, './src/assets'),
+      Audio: path.resolve(__dirname, './src/assets/audio'),
+      Components: path.resolve(__dirname, './src/components'),
+      Data: path.resolve(__dirname, './src/assets/data'),
+      Images: path.resolve(__dirname, './src/assets/images'),
+      Store: path.resolve(__dirname, './src/store'),
+      Styles: path.resolve(__dirname, './src/styles'),
+    },
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -47,7 +55,6 @@ module.exports = {
     new Dotenv({
       path: path.resolve(__dirname, './.env.production'),
     }),
-    // console.log(process.env.NODE_ENV);
     new DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -59,8 +66,8 @@ module.exports = {
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
       title: 'RSClone Tracking Time',
-      favicon: 'favicon.ico',
-      template: 'template.ejs',
+      favicon: './src/favicon.ico',
+      template: './src/template.ejs',
       filename: 'index.html',
       minify: {
         collapseWhitespace: true,

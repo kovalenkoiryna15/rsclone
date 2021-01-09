@@ -59,13 +59,9 @@
   },
   "settings": {
     "import/resolver": {
-      "node": {
-        "extensions": [
-          ".ts",
-          ".tsx",
-          ".js",
-          ".jsx"
-        ]
+      "node": {},
+      "webpack": {
+        "config": "webpack.config.js"
       }
     },
     "react": {

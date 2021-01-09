@@ -6,6 +6,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/react": "^11.2.2",
+    "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.14.0",
@@ -49,6 +50,7 @@
     "bootstrap": "^4.5.3",
     "eslint": "^7.17.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-import-resolver-webpack": "^0.13.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",

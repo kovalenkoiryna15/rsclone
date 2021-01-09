@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.scss';
 
-import Header from './components/Header/Header';
-import MainView from './components/MainView/MainView';
+import Header from './components/Header';
+import MainView from './components/MainView';
 
 export default function App() {
   return (

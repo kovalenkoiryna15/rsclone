@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Col, Nav } from 'react-bootstrap';
 
-export default function TaskListNav() {
+export default function TaskListNav(): JSX.Element {
   return (
     <Col className="task-list-nav" xs={3}>
       <Nav className="flex-column bg-light">

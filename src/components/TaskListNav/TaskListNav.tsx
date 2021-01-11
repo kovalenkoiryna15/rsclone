@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Col, Nav } from 'react-bootstrap';
 
 export default function TaskListNav() {

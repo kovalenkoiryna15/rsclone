@@ -2,9 +2,11 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const { DefinePlugin, SourceMapDevToolPlugin, HotModuleReplacementPlugin } = require(
-  'webpack',
-);
+const {
+  DefinePlugin,
+  SourceMapDevToolPlugin,
+  HotModuleReplacementPlugin,
+} = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -30,12 +32,12 @@ module.exports = {
   watch: true,
   watchOptions: {
     aggregateTimeout: 500,
-    poll: 5000,
     ignored: /node_modules/,
+    poll: 5000,
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
+    contentBase: path.resolve(__dirname, 'dist'),
     historyApiFallback: true,
     hot: true,
     inline: true,
@@ -43,9 +45,9 @@ module.exports = {
     watchContentBase: true,
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
     assetModuleFilename: 'assets/[name][ext]',
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
     new Dotenv({
@@ -58,10 +60,10 @@ module.exports = {
     }),
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
-      title: 'RSClone Tracking Time',
       favicon: './src/favicon.ico',
-      template: './src/template.ejs',
       filename: 'index.html',
+      template: './src/template.ejs',
+      title: 'RSClone Tracking Time',
     }),
     new SourceMapDevToolPlugin({
       filename: '[file].map',
@@ -92,10 +94,19 @@ module.exports = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { sourceMap: true, importLoaders: 2 },
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
           },
-          { loader: 'postcss-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: true },
+          },
+          {
+            loader: 'sass-loader',
+            options: { sourceMap: true },
+          },
         ],
       },
       {

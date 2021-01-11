@@ -28,9 +28,9 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[contenthash].bundle.js',
     assetModuleFilename: 'assets/[hash][ext][query]',
+    filename: '[contenthash].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
     splitChunks: {
@@ -65,18 +65,18 @@ module.exports = {
     }),
     new ESLintPlugin(),
     new HtmlWebpackPlugin({
-      title: 'RSClone Tracking Time',
       favicon: './src/favicon.ico',
-      template: './src/template.ejs',
       filename: 'index.html',
       minify: {
         collapseWhitespace: true,
         collapseBooleanAttributes: true,
       },
+      template: './src/template.ejs',
+      title: 'RSClone Tracking Time',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
       chunkFilename: '[id].css',
+      filename: 'styles/[name].[contenthash].css',
     }),
   ],
   module: {
@@ -93,7 +93,12 @@ module.exports = {
       {
         test: /\.s?css$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ],
       },
       {
         test: /\.(?:jpe?g|png)$/i,

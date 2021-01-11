@@ -71,25 +71,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /(?<!\.d)\.tsx?$/,
+        exclude: /node_modules|\.d\.ts$/,
+        use: 'ts-loader',
+      },
+      {
+        test: /\.d\.ts$/,
+        loader: 'ignore-loader',
+      },
+      {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules|bower_components/,
         use: ['source-map-loader'],
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules|bower_components/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.s?css$/,

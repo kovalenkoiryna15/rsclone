@@ -82,19 +82,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules|bower_components/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
+        test: /(?<!\.d)\.tsx?$/,
+        exclude: /node_modules|\.d\.ts$/,
+        use: 'ts-loader',
       },
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader'],
+        test: /\.d\.ts$/,
+        loader: 'ignore-loader',
       },
       {
         test: /\.s?css$/,

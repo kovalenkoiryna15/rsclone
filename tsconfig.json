@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "baseUrl": "src",
     "checkJs": false,
-    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react",
@@ -13,11 +13,7 @@
     ],
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "outDir": "build",
-    "resolveJsonModule": true,
-    "removeComments": true,
-    "rootDir": "src",
-    "baseUrl": "src",
+    "outDir": "./dist/",
     "paths": {
       "Assets/*": ["assets/*"],
       "Audio/*": ["assets/audio/*"],
@@ -27,14 +23,18 @@
       "Store/*": ["store/*"],
       "Styles/*": ["styles/*"]
     },
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "es6",
     "plugins": [
       {
         "name": "typescript-eslint-language-service"
       }
-    ]
+    ],
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6"
   },
   "include": [
     "src/**/*"

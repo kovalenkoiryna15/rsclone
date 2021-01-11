@@ -19,10 +19,11 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
-    "fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix && npx stylelint --syntax scss --fix './src/**/*.scss'",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "start": "webpack serve --config webpack.config.js",
     "stats": "webpack --config webpack.config.prod.js --profile --json > stats.json && webpack-bundle-analyzer stats.json dist/",
+    "stylelint": "npx stylelint --syntax scss './src/**/*.scss'",
     "test": "jest --coverage=false",
     "test:coverage": "jest --coverage=true",
     "watch": "webpack --config webpack.config.prod.js --watch"

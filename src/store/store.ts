@@ -1,14 +1,24 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { createStore, StoreEnhancer, combineReducers } from 'redux';
+import { projectsReducer } from './reducers/projects-reducers';
+import { tasksReducer } from './reducers/tasks-reducers';
 
-export const store = configureStore({
-  reducer: {
-  },
+const rootReducer = combineReducers({
+  projects: projectsReducer,
+  tasks: tasksReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-ReturnType,
-RootState,
-unknown,
-Action<string>
->;
+type WindowWithDevTools = Window & {
+  __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, {}>
+ }
+
+ const isReduxDevtoolsExtenstionExist =
+ (arg: Window | WindowWithDevTools):
+   arg is WindowWithDevTools  => {
+     return  '__REDUX_DEVTOOLS_EXTENSION__' in arg;
+ }
+
+export const store = createStore(
+  rootReducer,
+  isReduxDevtoolsExtenstionExist(window) ?
+  window.__REDUX_DEVTOOLS_EXTENSION__() : undefined
+);

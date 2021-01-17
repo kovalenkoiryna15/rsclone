@@ -23,7 +23,8 @@
     "project": [
       "tsconfig.json"
     ],
-    "sourceType": "module"
+    "sourceType": "module",
+    "tsconfigRootDir": "./"
   },
   "plugins": [
     "eslint-plugin-react",

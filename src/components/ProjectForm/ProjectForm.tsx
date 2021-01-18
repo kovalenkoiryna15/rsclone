@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
-
+import { connect } from 'react-redux';
 import { IProject } from '../../entities/project-entities';
 
 import { addProject } from '../../store/actions/project-action-creators';
@@ -9,6 +9,7 @@ interface ProjectFormProps {
   projectData?: IProject;
   show: boolean;
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
+  addProject: (newProject: IProject) => void;
 }
 
 interface ProjectFormState {
@@ -19,7 +20,7 @@ interface ProjectFormState {
   color: string;
 }
 
-export default class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
+class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
   constructor(props: ProjectFormProps) {
     super(props);
     this.state = {
@@ -59,7 +60,8 @@ export default class ProjectForm extends React.Component<ProjectFormProps, Proje
     if (!id) {
       newProject.id = Date.now().toString();
     }
-    addProject(newProject);
+    console.log(newProject);
+    this.props.addProject(newProject);
 
     this.setState((state) => ({
       ...state,
@@ -119,3 +121,9 @@ export default class ProjectForm extends React.Component<ProjectFormProps, Proje
     );
   }
 }
+
+const mapDispatchToProps = {
+  addProject,
+};
+
+export default connect(null, mapDispatchToProps)(ProjectForm);

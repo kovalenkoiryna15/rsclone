@@ -1,0 +1,19 @@
+.sidebar {
+  position: relative;
+  min-width: 50px;
+
+  &-btn {
+    position: absolute;
+    z-index: 1000;
+    top: 3%;
+    right: -6%;
+  }
+
+  &-collapsed {
+    flex-grow: 0;
+  }
+
+  &-uncollapsed {
+    flex-grow: 2;
+  }
+}

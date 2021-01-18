@@ -8,17 +8,17 @@ const rootReducer = combineReducers({
 });
 
 type WindowWithDevTools = Window & {
-  __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, {}>
- }
+  __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, unknown>
+};
 
- const isReduxDevtoolsExtenstionExist =
- (arg: Window | WindowWithDevTools):
-   arg is WindowWithDevTools  => {
-     return  '__REDUX_DEVTOOLS_EXTENSION__' in arg;
- }
+const isReduxDevtoolsExtenstionExist =
+  (arg: Window | WindowWithDevTools):
+    arg is WindowWithDevTools  => {
+      return  '__REDUX_DEVTOOLS_EXTENSION__' in arg;
+};
 
 export const store = createStore(
   rootReducer,
-  isReduxDevtoolsExtenstionExist(window) ?
-  window.__REDUX_DEVTOOLS_EXTENSION__() : undefined
+  isReduxDevtoolsExtenstionExist(window)
+  ? window.__REDUX_DEVTOOLS_EXTENSION__() : undefined,
 );

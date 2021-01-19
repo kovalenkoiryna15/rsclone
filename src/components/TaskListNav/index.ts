@@ -1,3 +1,1 @@
-import TaskListNav from './TaskListNav';
-
-export default TaskListNav;
+export { default } from './TaskListNav';

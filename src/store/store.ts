@@ -1,4 +1,5 @@
-import { createStore, StoreEnhancer, combineReducers } from 'redux';
+import { createStore, StoreEnhancer, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { projectsReducer } from './reducers/projects-reducers';
 import { tasksReducer } from './reducers/tasks-reducers';
 
@@ -19,6 +20,8 @@ const isReduxDevtoolsExtenstionExist =
 
 export const store = createStore(
   rootReducer,
-  isReduxDevtoolsExtenstionExist(window)
-  ? window.__REDUX_DEVTOOLS_EXTENSION__() : undefined,
-);
+  compose(
+    applyMiddleware(thunk),
+    isReduxDevtoolsExtenstionExist(window)
+    ? window.__REDUX_DEVTOOLS_EXTENSION__() : () => undefined,
+));

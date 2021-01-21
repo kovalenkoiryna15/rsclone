@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+const IconSVG = require('../../assets/icons/angle-right.svg') as string;
 import { Nav, Navbar, Button, Spinner, Col } from 'react-bootstrap';
 import ProjectForm from '../ProjectForm';
 import { IProject } from '../../entities/project-entities';
@@ -52,11 +53,13 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
     }
 
     return (
-      <Col xs={12} sm={3} md={3} lg={3}>
-        <Navbar className="flex-column bg-light" expand="md">
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar className="flex-column" expand="xxl">
+        <Col className="task-list-nav">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav">
+            <span className="navbar-toggler-icon" style={{ backgroundImage: `url(${IconSVG})`}} />
+          </Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="flex-column sidebar-nav">
+            <Nav className="flex-column sidebar-nav bg-light">
               <Nav.Item>
                 <Nav.Link href="#all-tasks">Tasks</Nav.Link>
               </Nav.Item>
@@ -84,8 +87,8 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
             </Nav>
             <ProjectForm show={show} handleShow={this.handleShow} />
           </Navbar.Collapse>
-        </Navbar>
-      </Col>
+        </Col>
+      </Navbar>
     );
   }
 }

@@ -1,8 +1,43 @@
-.task-list-nav {
-  height: 100%;
-  background-color: #f8f9fa;
+.navbar {
+  padding: 0;
 
-  .nav {
-    height: 100%;
+  .task-list-nav {
+    position: relative;
+    padding: 0;
+
+    .navbar-toggler {
+      position: absolute;
+      top: 0;
+      right: -1em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border-radius: 50%;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .navbar-toggler-icon {
+      position: static;
+      width: 10px;
+      height: 10px;
+    }
+
+    .navbar-collapse,
+    .sidebar-nav {
+      height: 100%;
+    }
+
+    .navbar-collapse {
+      padding: 0;
+    }
+
+    .sidebar-nav {
+      padding: 0 1em;
+    }
   }
 }

@@ -1,24 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-const IconSVG = require('../../assets/icons/angle-right.svg') as string;
-import { Nav, Navbar, Button, Spinner, Col } from 'react-bootstrap';
+import {
+  Nav, Navbar, Button, Spinner, Col,
+} from 'react-bootstrap';
 import ProjectForm from '../ProjectForm';
 import { IProject } from '../../entities/project-entities';
-
-import {
-  fetchProjects,
-} from '../../store/actions/project-action-creators';
+import { fetchProjects } from '../../store/actions/project-action-creators';
+import { TInitialProjectsState } from '../../store/actions/project-action-types';
 
 interface TaskListNavState {
   show: boolean;
-};
+}
 
 interface TaskListNavProps {
   projects: IProject[];
   loading: boolean;
   error: Error | null;
   fetchProjects: () => void;
-};
+}
 
 class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
   constructor(props: TaskListNavProps) {
@@ -45,18 +44,18 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
 
   render() {
     const { show } = this.state;
-    const { projects, loading, error } = this.props;
-    if(loading) {
+    const { projects, loading } = this.props;
+    if (loading) {
       return (
-        <Spinner animation="border" role="status" variant="primary"></Spinner>
-      )
+        <Spinner animation="border" role="status" variant="primary" />
+      );
     }
 
     return (
       <Navbar className="flex-column" expand="xxl">
         <Col className="task-list-nav">
           <Navbar.Toggle aria-controls="responsive-navbar-nav">
-            <span className="navbar-toggler-icon" style={{ backgroundImage: `url(${IconSVG})`}} />
+            <span className="navbar-toggler-icon" />
           </Navbar.Toggle>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="flex-column sidebar-nav bg-light">
@@ -66,14 +65,14 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
               <Nav.Item>
                 <Nav.Link>Projects</Nav.Link>
               </Nav.Item>
-              <Button onClick={this.handleShow} >Add Project</Button>
+              <Button onClick={this.handleShow}>Add Project</Button>
               <br />
               <Nav.Item>
                 <Nav.Link href="#no-project">no project</Nav.Link>
               </Nav.Item>
               {
-                projects ?
-                  projects.map((project: IProject) => {
+                projects
+                  ? projects.map((project: IProject) => {
                     const { id, name } = project;
                     const path = `#project/${id}`;
                     return (
@@ -81,8 +80,8 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
                         <Nav.Link href={path}>{name}</Nav.Link>
                       </Nav.Item>
                     );
-                  }) :
-                  <p>no projects</p>
+                  })
+                  : <p>no projects</p>
               }
             </Nav>
             <ProjectForm show={show} handleShow={this.handleShow} />
@@ -93,10 +92,10 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: TInitialProjectsState) {
   const { projects: { projects, loading, error } } = state;
   return { projects, loading, error };
-};
+}
 
 const mapDispatchToProps = {
   fetchProjects,

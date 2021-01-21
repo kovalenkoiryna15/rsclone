@@ -1,11 +1,10 @@
-// import * as React from 'react';
-// import { render } from '@testing-library/react';
+import * as React from 'react';
+import { render } from '@testing-library/react';
 
-// import TaskListNav from './TaskListNav';
+import TaskListNav from './TaskListNav';
 
-// test('renders TaskListNav', () => {
-//   const show: boolean = false;
-//   const { getByText } = render(<TaskListNav show={show} />);
+test('renders TaskListNav', () => {
+  const { getByText } = render(<TaskListNav />);
 
-//   expect(getByText(/Projects/i)).toBeInTheDocument();
-// });
+  expect(getByText(/Projects/i)).toBeInTheDocument();
+});

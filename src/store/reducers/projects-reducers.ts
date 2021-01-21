@@ -18,17 +18,20 @@ const InitialProjectsState = {
   error: null,
 };
 
-export const projectsReducer = (
+const projectsReducer = (
   state: TInitialProjectsState = InitialProjectsState,
   action: TProjectAction,
-) => {
+): TInitialProjectsState => {
   switch (action.type) {
     case ADD_PROJECT:
       return { ...state, projects: [...state.projects, action.payload] };
     case UPDATE_PROJECT:
       return { ...state, projects: [...state.projects, action.payload] };
     case DELETE_PROJECT:
-      return { ...state, projects: state.projects.filter((project) => project.id !== action.payload.id) };
+      return {
+        ...state,
+        projects: state.projects.filter((project) => project.id !== action.payload.id),
+      };
     case FETCH_PROJECTS_SUCCESS:
       return { ...state, projects: action.payload };
     case SHOW_LOADER:
@@ -41,3 +44,5 @@ export const projectsReducer = (
       return state;
   }
 };
+
+export default projectsReducer;

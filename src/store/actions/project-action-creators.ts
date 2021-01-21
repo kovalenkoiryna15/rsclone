@@ -1,4 +1,3 @@
-const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 import {
   ADD_PROJECT,
   HIDE_LOADER,
@@ -21,6 +20,8 @@ import {
   TDeleteProjectAction,
   TShowErrorAction,
 } from './project-action-types';
+
+const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
 export const addProject = (newProject: IProject): TAddProjectAction => ({
   type: ADD_PROJECT,
@@ -59,17 +60,15 @@ export const showError = (): TShowErrorAction => ({
   type: SHOW_ERROR,
 });
 
-export const fetchProjects = (): TFetchProjectsAction => {
-  return async (dispatch: any ) => {
-    try {
-      dispatch(showLoader);
-      const response = await fetch(DATA_URL);
-      const data = await response.json()
-      const { projects } = data;
-      dispatch(fetchProjectsSuccess(projects));
-      dispatch(hideLoader);
-    } catch(error) {
-      dispatch(fetchProjectsFailure(error));
-    };
+export const fetchProjects = (): TFetchProjectsAction => async (dispatch: Dispatch) => {
+  try {
+    dispatch(showLoader());
+    const response = await fetch(DATA_URL);
+    const data = await response.json();
+    const { projects } = data;
+    dispatch(fetchProjectsSuccess(projects));
+    dispatch(hideLoader());
+  } catch (error) {
+    dispatch(fetchProjectsFailure(error));
   }
 };

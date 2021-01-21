@@ -6,10 +6,10 @@ import TaskList from 'Components/TaskList';
 
 export default function MainView(): JSX.Element {
   return (
-      <div className="main-view">
-        <TaskListNav />
-        <TaskList />
-        <TaskView />
-      </div>
+    <div className="main-view">
+      <TaskListNav />
+      <TaskList />
+      <TaskView />
+    </div>
   );
 }

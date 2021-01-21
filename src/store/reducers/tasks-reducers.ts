@@ -1,10 +1,10 @@
 import { ADD_TASK } from '../actions/task-action-constants';
 import { TTaskAction, TInitialTasksState } from '../actions/task-action-types';
 
-export const tasksReducer = (
+const tasksReducer = (
   state: TInitialTasksState = { tasks: [] },
   action: TTaskAction,
-) => {
+): TInitialTasksState => {
   switch (action.type) {
     case ADD_TASK:
       return { ...state, tasks: [...state.tasks, action.payload] };
@@ -12,3 +12,5 @@ export const tasksReducer = (
       return state;
   }
 };
+
+export default tasksReducer;

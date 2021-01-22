@@ -52,7 +52,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv({
-      path: path.resolve(__dirname, './.env.development'),
+      path: path.resolve(__dirname, './.env.development.local'),
     }),
     new DefinePlugin({
       'process.env': {

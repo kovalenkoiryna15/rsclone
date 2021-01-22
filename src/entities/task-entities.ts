@@ -9,7 +9,7 @@ interface ITask {
   wastedTime?: number;
   project?: Types.ID;
   timeEntries: Array<ITimeEntry>;
-  isCompleted: string;
+  isCompleted: boolean;
 }
 
 export default ITask;

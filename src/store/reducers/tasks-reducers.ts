@@ -1,5 +1,5 @@
-import ADD_TASK from '../actions/task-action-constants';
-import { TTaskAction, TInitialTasksState } from '../actions/task-action-types';
+import ADD_TASK from 'Store/actions/task-action-constants';
+import { TTaskAction, TInitialTasksState } from 'Store/actions/task-action-types';
 
 const tasksReducer = (
   state: TInitialTasksState = { tasks: [] },

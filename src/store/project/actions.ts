@@ -9,8 +9,8 @@ import {
   SHOW_ERROR,
   UPDATE_PROJECT,
   DELETE_PROJECT,
-} from './project-action-constants';
-import { IProjectState } from './project-action-types';
+} from './action-constants';
+import { IProjectState } from './action-types';
 
 const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 

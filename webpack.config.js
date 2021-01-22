@@ -22,6 +22,7 @@ module.exports = {
       Audio: path.resolve(__dirname, './src/assets/audio'),
       Components: path.resolve(__dirname, './src/components'),
       Data: path.resolve(__dirname, './src/assets/data'),
+      Entities: path.resolve(__dirname, './src/entities'),
       Images: path.resolve(__dirname, './src/assets/images'),
       Store: path.resolve(__dirname, './src/store'),
       Styles: path.resolve(__dirname, './src/styles'),

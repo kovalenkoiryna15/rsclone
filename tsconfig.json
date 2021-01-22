@@ -19,6 +19,7 @@
       "Audio/*": ["assets/audio/*"],
       "Components/*": ["components/*"],
       "Data/*": ["assets/data/*"],
+      "Entities/*": ["entities/*"],
       "Images/*": ["assets/images/*"],
       "Store/*": ["store/*"],
       "Styles/*": ["styles/*"]

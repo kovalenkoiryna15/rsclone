@@ -1,2 +1,2 @@
-const ADD_TASK = 'ADD_TASK';
-export default ADD_TASK;
+// eslint-disable-next-line import/prefer-default-export
+export const ADD_TASK = 'ADD_TASK';

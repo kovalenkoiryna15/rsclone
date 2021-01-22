@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Nav, Spinner, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import * as MyModels from 'Store/types';
 import SideBar from 'Components/SideBar';
@@ -48,10 +49,10 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
     return projects ? (
       projects.map((project: IProject) => {
         const { id, name } = project;
-        const path = `#project/${id}`;
+        const path = `/projects/${id}`;
         return (
           <Nav.Item key={id}>
-            <Nav.Link href={path}>{name}</Nav.Link>
+            <NavLink to={path}>{name}</NavLink>
             <DropdownCustom id={id} />
           </Nav.Item>
         );
@@ -72,10 +73,12 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
       <SideBar>
         <Nav className="flex-column sidebar-nav bg-light">
           <Nav.Item>
-            <Nav.Link href="#all-tasks">Tasks</Nav.Link>
+            <NavLink exact to="/tasks">
+              Tasks
+            </NavLink>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link>Projects</Nav.Link>
+            <NavLink to="/projects">Projects</NavLink>
           </Nav.Item>
           <Button onClick={this.handleShow}>Add Project</Button>
           <br />

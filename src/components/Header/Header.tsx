@@ -5,7 +5,9 @@ export default function Header(): JSX.Element {
   return (
     <Row className="header">
       <Navbar className="navbar-expand-lg navbar-light bg-light">
-        <Navbar.Brand className="navbar-brand" href="#home" data-testid="header-title">TrackingTime</Navbar.Brand>
+        <Navbar.Brand className="navbar-brand" href="#home" data-testid="header-title">
+          RSClone Tracking Time
+        </Navbar.Brand>
       </Navbar>
     </Row>
   );

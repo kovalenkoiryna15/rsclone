@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import {
-  Nav, Navbar, Button, Spinner, Col,
+  Nav, Spinner, Button,
 } from 'react-bootstrap';
+import SideBar from '../SideBar';
 import ProjectForm from '../ProjectForm';
 import { IProject } from '../../entities/project-entities';
 import { fetchProjects } from '../../store/actions/project-action-creators';
@@ -52,42 +53,35 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
     }
 
     return (
-      <Navbar className="flex-column" expand="xxl">
-        <Col className="task-list-nav">
-          <Navbar.Toggle aria-controls="responsive-navbar-nav">
-            <span className="navbar-toggler-icon" />
-          </Navbar.Toggle>
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="flex-column sidebar-nav bg-light">
-              <Nav.Item>
-                <Nav.Link href="#all-tasks">Tasks</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>Projects</Nav.Link>
-              </Nav.Item>
-              <Button onClick={this.handleShow}>Add Project</Button>
-              <br />
-              <Nav.Item>
-                <Nav.Link href="#no-project">no project</Nav.Link>
-              </Nav.Item>
-              {
-                projects
-                  ? projects.map((project: IProject) => {
-                    const { id, name } = project;
-                    const path = `#project/${id}`;
-                    return (
-                      <Nav.Item key={id}>
-                        <Nav.Link href={path}>{name}</Nav.Link>
-                      </Nav.Item>
-                    );
-                  })
-                  : <p>no projects</p>
-              }
-            </Nav>
-            <ProjectForm show={show} handleShow={this.handleShow} />
-          </Navbar.Collapse>
-        </Col>
-      </Navbar>
+      <SideBar>
+        <Nav className="flex-column sidebar-nav bg-light">
+          <Nav.Item>
+            <Nav.Link href="#all-tasks">Tasks</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>Projects</Nav.Link>
+          </Nav.Item>
+          <Button onClick={this.handleShow}>Add Project</Button>
+          <br />
+          <Nav.Item>
+            <Nav.Link href="#no-project">no project</Nav.Link>
+          </Nav.Item>
+          {
+            projects
+              ? projects.map((project: IProject) => {
+                const { id, name } = project;
+                const path = `#project/${id}`;
+                return (
+                  <Nav.Item key={id}>
+                    <Nav.Link href={path}>{name}</Nav.Link>
+                  </Nav.Item>
+                );
+              })
+              : <p>no projects</p>
+          }
+        </Nav>
+        <ProjectForm show={show} handleShow={this.handleShow} />
+      </SideBar>
     );
   }
 }

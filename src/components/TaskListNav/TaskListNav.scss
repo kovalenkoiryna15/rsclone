@@ -1,44 +1,5 @@
-.navbar {
-  padding: 0;
-
-  .task-list-nav {
-    position: relative;
-    padding: 0;
-
-    .navbar-toggler {
-      position: absolute;
-      top: 0;
-      right: -1em;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2em;
-      height: 2em;
-      padding: 0;
-      border-radius: 50%;
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .navbar-toggler-icon {
-      position: static;
-      width: 0.5em;
-      height: 0.5em;
-    }
-
-    .navbar-collapse,
-    .sidebar-nav {
-      height: 100%;
-    }
-
-    .navbar-collapse {
-      padding: 0;
-    }
-
-    .sidebar-nav {
-      padding: 0 1em;
-      border-radius: 0.5em;
-    }
-  }
+.nav.sidebar-nav {
+  height: 100%;
+  padding: 0 15px;
+  border-radius: 0.5em;
 }

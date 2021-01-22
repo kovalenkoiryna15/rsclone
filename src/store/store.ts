@@ -17,6 +17,7 @@ type WindowWithDevTools = Window & {
 const isReduxDevtoolsExtenstionExist = (arg: Window | WindowWithDevTools):
   arg is WindowWithDevTools => '__REDUX_DEVTOOLS_EXTENSION__' in arg;
 
+/* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
   compose(
@@ -25,5 +26,6 @@ const store = createStore(
       ? window.__REDUX_DEVTOOLS_EXTENSION__() : () => undefined,
   ),
 );
+/* eslint-enable */
 
 export default store;

@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { Col } from 'react-bootstrap';
 
 export default function TaskView(): JSX.Element {
   return (
-    <div className="task-view bg-light">
+    <Col className="task-view bg-light">
       TaskView
-    </div>
+    </Col>
   );
 }

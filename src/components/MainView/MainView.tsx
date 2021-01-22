@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Row } from 'react-bootstrap';
 
 import TaskView from 'Components/TaskView';
 import TaskListNav from 'Components/TaskListNav';
@@ -6,10 +7,10 @@ import TaskList from 'Components/TaskList';
 
 export default function MainView(): JSX.Element {
   return (
-    <div className="main-view">
+    <Row className="main-view">
       <TaskListNav />
       <TaskList />
       <TaskView />
-    </div>
+    </Row>
   );
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { Col } from 'react-bootstrap';
 
 export default function TaskList(): JSX.Element {
   return (
-    <div className="task-list">
+    <Col className="task-list">
       TaskList
-    </div>
+    </Col>
   );
 }

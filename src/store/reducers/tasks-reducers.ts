@@ -1,4 +1,4 @@
-import { ADD_TASK } from '../actions/task-action-constants';
+import ADD_TASK from '../actions/task-action-constants';
 import { TTaskAction, TInitialTasksState } from '../actions/task-action-types';
 
 const tasksReducer = (

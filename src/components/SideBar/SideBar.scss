@@ -1,19 +1,29 @@
 .sidebar {
   position: relative;
   min-width: 50px;
+  height: 100%;
+  padding: 15px;
 
-  &-btn {
+  .sidebar-btn {
     position: absolute;
+    top: 2em;
+    right: -1em;
     z-index: 1000;
-    top: 3%;
-    right: -6%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    :focus {
+      outline: none;
+    }
   }
 
   &-collapsed {
     flex-grow: 0;
   }
 
-  &-uncollapsed {
-    flex-grow: 2;
+  .material-icons {
+    font-size: 1em;
   }
 }

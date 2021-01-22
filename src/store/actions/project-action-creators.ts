@@ -1,3 +1,4 @@
+import { ThunkDispatch } from 'redux-thunk';
 import {
   ADD_PROJECT,
   HIDE_LOADER,
@@ -19,6 +20,8 @@ import {
   TUpdateProjectAction,
   TDeleteProjectAction,
   TShowErrorAction,
+  TInitialProjectsState,
+  TProjectAction,
 } from './project-action-types';
 
 const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
@@ -60,11 +63,13 @@ export const showError = (): TShowErrorAction => ({
   type: SHOW_ERROR,
 });
 
-export const fetchProjects = (): TFetchProjectsAction => async (dispatch: Dispatch) => {
+export const fetchProjects = (): TFetchProjectsAction => async (
+  dispatch: ThunkDispatch<TInitialProjectsState, any, TProjectAction>,
+): Promise<void> => {
   try {
     dispatch(showLoader());
-    const response = await fetch(DATA_URL);
-    const data = await response.json();
+    const response: Response = await fetch(DATA_URL);
+    const data: { projects: IProject[] } = await response.json();
     const { projects } = data;
     dispatch(fetchProjectsSuccess(projects));
     dispatch(hideLoader());

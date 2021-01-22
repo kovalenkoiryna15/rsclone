@@ -6,7 +6,7 @@ import MainView from 'Components/MainView';
 
 export default function App(): JSX.Element {
   return (
-    <Container fluid>
+    <Container fluid className="app-container">
       <Header />
       <MainView />
     </Container>

@@ -1,6 +1,6 @@
 import { IProject } from 'Entities/project-entities';
 import * as MyModels from 'Store/types';
-import { IProjectState } from 'Store/actions/project-action-types';
+import { IProjectState } from 'Store/project/project-action-types';
 import {
   ADD_PROJECT,
   FETCH_PROJECTS_SUCCESS,
@@ -9,7 +9,7 @@ import {
   SHOW_ERROR,
   UPDATE_PROJECT,
   DELETE_PROJECT,
-} from '../actions/project-action-constants';
+} from './project-action-constants';
 
 const initialState = {
   projects: [],

@@ -1,4 +1,4 @@
-import { ITask } from '../../entities/task-entities';
+import { ITask } from 'Entities/task-entities';
 
 export interface TAddTaskAction {
   type: string;

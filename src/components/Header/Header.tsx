@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Navbar, Row } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 export default function Header(): JSX.Element {
   return (

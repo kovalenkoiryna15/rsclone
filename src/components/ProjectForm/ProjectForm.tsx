@@ -60,7 +60,6 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     if (!id) {
       newProject.id = Date.now().toString();
     }
-    console.log(newProject);
     this.props.addProject(newProject);
 
     this.setState((state) => ({
@@ -92,7 +91,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
           <Modal.Title>Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="project-form" onSubmit={this.handleSave} >
+          <Form className="project-form" onSubmit={this.handleSave}>
             <Form.Group controlId="formProjectName">
               <Form.Label>Project Name</Form.Label>
               <Form.Control type="text" placeholder="Project Name" name="name" value={name} onChange={this.handleChange} required />

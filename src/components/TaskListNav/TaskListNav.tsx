@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom';
 import * as MyModels from 'Store/types';
 import SideBar from 'Components/SideBar';
 import ProjectForm from 'Components/ProjectForm';
-import { IProject } from 'entities/project-entities';
-import { fetchProjects } from 'Store/actions/project-action-creators';
+import IProject from 'Entities/project-entities';
+import { fetchProjects } from 'Store/project/project-action-creators';
 import DropdownCustom from 'Components/DropdownCustom/index';
 
 interface TaskListNavState {

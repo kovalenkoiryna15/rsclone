@@ -3,7 +3,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IProject } from '../../entities/project-entities';
 
-import { addProject } from '../../store/actions/project-action-creators';
+import { addProject } from 'Store/project/project-action-creators';
 
 interface ProjectFormProps {
   projectData?: IProject;

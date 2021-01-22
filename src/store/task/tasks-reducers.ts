@@ -1,6 +1,6 @@
 import { ITask } from 'Entities/task-entities';
-import { ADD_TASK } from 'Store/actions/task-action-constants';
-import { ITaskState } from 'Store/actions/task-action-types';
+import { ADD_TASK } from 'Store/task/task-action-constants';
+import { ITaskState } from 'Store/task/task-action-types';
 import * as MyModels from 'Store/types';
 
 const initialState: ITaskState = {

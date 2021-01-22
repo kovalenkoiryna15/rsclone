@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-import { IProjectState } from 'Store/actions/project-action-types';
-import { ITaskState } from 'Store/actions/task-action-types';
+import { IProjectState } from 'Store/project/project-action-types';
+import { ITaskState } from 'Store/task/task-action-types';
 
 export interface IAction<P> {
   type: string,

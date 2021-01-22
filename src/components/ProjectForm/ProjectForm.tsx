@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { Component, ChangeEvent } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
+import { IProject } from '../../entities/project-entities';
+
+import { addProject } from '../../store/actions/project-action-creators';
+
 interface ProjectFormProps {
-  projectData: Project;
+  projectData?: IProject;
+  show: boolean;
+  handleShow: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface ProjectFormState {
-  loading: boolean;
   id: string;
   name: string;
   deadline: string;
@@ -15,36 +19,24 @@ interface ProjectFormState {
   color: string;
 }
 
-interface Project {
-  id: string;
-  name: string;
-  deadline: string;
-  estimatedTime: string;
-  color: string;
-}
-
-export default class ProjectForm extends Component<ProjectFormProps, ProjectFormState> {
+export default class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
   constructor(props: ProjectFormProps) {
     super(props);
-    const {
-      projectData: {
-        id, name, deadline, estimatedTime, color,
-      },
-    } = this.props;
     this.state = {
-      id,
-      name,
-      deadline,
-      estimatedTime,
-      color,
-      loading: true,
+      id: '',
+      name: '',
+      deadline: '',
+      estimatedTime: '',
+      color: '#000000',
     };
-    this.handleChange: () => void = this.handleChange.bind(this);
-    this.handleClose: () => void = this.handleClose.bind(this);
-    this.onProjectSave: () => void = this.onProjectSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
-  handleChange(event: ChangeEvent<HTMLInputElement>) {
+  handleChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    event.persist();
     this.setState((state) => {
       const { name, value } = event.target;
       return {
@@ -54,30 +46,52 @@ export default class ProjectForm extends Component<ProjectFormProps, ProjectForm
     });
   }
 
+  handleSave(
+    event: React.MouseEvent<HTMLElement>,
+  ) {
+    event.preventDefault();
+    const {
+      id, name, deadline, estimatedTime, color,
+    } = this.state;
+    const newProject = {
+      id, name, deadline, estimatedTime, color,
+    };
+    if (!id) {
+      newProject.id = Date.now().toString();
+    }
+    console.log(newProject);
+    addProject(newProject);
+
+    this.setState((state) => ({
+      ...state,
+      id: '',
+      name: '',
+      deadline: '',
+      estimatedTime: '',
+      color: '#000000',
+    }));
+
+    const { handleShow } = this.props;
+    handleShow(event);
+  }
+
   render() {
     const {
-      name,
-      deadline,
-      estimatedTime,
-      color,
-      loading,
+      name, deadline, estimatedTime, color,
     } = this.state;
-    console.log(loading);
-    const show = true;
-    const nodeRef = React.useRef(null);
+    const { show, handleShow } = this.props;
     return (
       <Modal
         show={show}
-        onHide={this.handleClose}
+        onHide={handleShow}
         animation={false}
-        ref={nodeRef}
         className="project-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form className="project-form">
+          <Form className="project-form" onSubmit={this.handleSave}>
             <Form.Group controlId="formProjectName">
               <Form.Label>Project Name</Form.Label>
               <Form.Control type="text" placeholder="Project Name" name="name" value={name} onChange={this.handleChange} required />
@@ -94,10 +108,10 @@ export default class ProjectForm extends Component<ProjectFormProps, ProjectForm
               <Form.Label>Color</Form.Label>
               <Form.Control type="color" value={color} name="color" onChange={this.handleChange} />
             </Form.Group>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={handleShow}>
               Close
             </Button>
-            <Button variant="primary" type="submit" onSubmit={this.onProjectSave}>
+            <Button variant="primary" type="submit" onClick={this.handleSave}>
               Save
             </Button>
           </Form>

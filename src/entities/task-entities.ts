@@ -8,7 +8,7 @@ interface ITask {
   estimatedTime?: number;
   wastedTime?: number;
   project?: Types.ID;
-  timeEntries?: Array<ITimeEntry>;
+  timeEntries: Array<ITimeEntry>;
   isCompleted: string;
 }
 

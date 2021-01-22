@@ -1,9 +1,17 @@
-export interface IProject {
-  id: ID;
-  name: string;
-  deadline?: string;
-  estimatedTime?: string;
-  color?: string;
+import * as Types from './types';
+
+export enum ProjectView {
+  List,
+  Board,
 }
 
-type ID = string | number;
+interface IProject {
+  id: Types.ID;
+  title: string;
+  color?: string;
+  deadline?: Date;
+  defaultView?: ProjectView;
+  estimatedTime?: number;
+}
+
+export default IProject;

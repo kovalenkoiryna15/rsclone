@@ -1,4 +1,4 @@
-import { IProject } from 'Entities/project-entities';
+import IProject from 'Entities/project-entities';
 
 export interface IProjectState {
   projects: IProject[];

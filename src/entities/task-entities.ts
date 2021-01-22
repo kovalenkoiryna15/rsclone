@@ -1,16 +1,15 @@
-export interface ITask {
-  id: string;
-  name: string;
-  deadline: string;
-  estimatedTime: string;
-  wastedTime: string;
-  project: string;
-  timeEntries: ITimeEntry[];
-  isDone: string;
+import * as Types from './types';
+import ITimeEntry from './time-entry';
+
+interface ITask {
+  id: Types.ID;
+  title: string;
+  deadline?: Date;
+  estimatedTime?: number;
+  wastedTime?: number;
+  project?: Types.ID;
+  timeEntries?: Array<ITimeEntry>;
+  isCompleted: string;
 }
 
-export interface ITimeEntry {
-  startDate: string;
-  duration: string;
-  comment: string;
-}
+export default ITask;

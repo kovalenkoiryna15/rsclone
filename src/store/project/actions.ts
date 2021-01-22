@@ -1,5 +1,5 @@
 import * as MyModels from 'Store/types';
-import { IProject } from 'Entities/project-entities';
+import IProject from 'Entities/project-entities';
 import {
   ADD_PROJECT,
   HIDE_LOADER,

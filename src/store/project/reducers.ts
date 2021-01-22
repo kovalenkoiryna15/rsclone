@@ -1,5 +1,5 @@
 import * as MyModels from 'Store/types';
-import { IProject } from 'Entities/project-entities';
+import IProject from 'Entities/project-entities';
 import { IProjectState } from './action-types';
 import {
   ADD_PROJECT,

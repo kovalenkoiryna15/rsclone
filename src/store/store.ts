@@ -14,7 +14,7 @@ type WindowWithDevTools = Window & {
   __REDUX_DEVTOOLS_EXTENSION__: () => StoreEnhancer<unknown, unknown>
 };
 
-const isReduxDevtoolsExtenstionExist = (arg: Window | WindowWithDevTools):
+const isReduxDevtoolsExtensionExist = (arg: Window | WindowWithDevTools):
   arg is WindowWithDevTools => '__REDUX_DEVTOOLS_EXTENSION__' in arg;
 
 /* eslint-disable no-underscore-dangle */
@@ -22,7 +22,7 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    isReduxDevtoolsExtenstionExist(window)
+    isReduxDevtoolsExtensionExist(window)
       ? window.__REDUX_DEVTOOLS_EXTENSION__() : () => undefined,
   ),
 );

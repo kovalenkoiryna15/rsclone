@@ -13,7 +13,7 @@ import {
 
 const initialState = {
   projects: [],
-  loading: false,
+  isLoading: false,
   error: null,
 };
 
@@ -36,11 +36,11 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   }),
   [SHOW_LOADER]: (state) => ({
     ...state,
-    loading: true,
+    isLoading: true,
   }),
   [HIDE_LOADER]: (state) => ({
     ...state,
-    loading: false,
+    isLoading: false,
   }),
   [SHOW_ERROR]: (state, action: MyModels.IAction<Error>) => ({
     ...state,

@@ -16,7 +16,7 @@ interface TaskListNavState {
 
 interface TaskListNavProps {
   projects: IProject[];
-  loading: boolean;
+  isLoading: boolean;
   error: Error | null;
   fetchProjects: () => void;
 }
@@ -63,8 +63,8 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
 
   render() {
     const { show } = this.state;
-    const { loading } = this.props;
-    if (loading) {
+    const { isLoading } = this.props;
+    if (isLoading) {
       return <Spinner animation="border" role="status" variant="primary" />;
     }
 
@@ -91,9 +91,9 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
 
 function mapStateToProps(state: MyModels.RootReducer) {
   const {
-    projects: { projects, loading, error },
+    projects: { projects, isLoading, error },
   } = state;
-  return { projects, loading, error };
+  return { projects, isLoading, error };
 }
 
 const mapDispatchToProps = {

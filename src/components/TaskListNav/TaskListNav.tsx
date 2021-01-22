@@ -5,7 +5,7 @@ import { Nav, Spinner, Button } from 'react-bootstrap';
 import * as MyModels from 'Store/types';
 import SideBar from 'Components/SideBar';
 import ProjectForm from 'Components/ProjectForm';
-import { IProject } from 'Entities/project-entities';
+import { IProject } from 'entities/project-entities';
 import { fetchProjects } from 'Store/actions/project-action-creators';
 
 interface TaskListNavState {

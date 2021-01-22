@@ -32,6 +32,23 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleClose(
+    event: React.MouseEvent<HTMLElement>,
+  ) {
+    this.setState((state) => ({
+      ...state,
+      id: '',
+      name: '',
+      deadline: '',
+      estimatedTime: '',
+      color: '#000000',
+    }));
+
+    const { handleShow } = this.props;
+    handleShow(event);
   }
 
   handleChange(
@@ -83,7 +100,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     return (
       <Modal
         show={show}
-        onHide={handleShow}
+        onHide={this.handleClose}
         animation={false}
         className="project-modal"
       >
@@ -108,7 +125,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
               <Form.Label>Color</Form.Label>
               <Form.Control type="color" value={color} name="color" onChange={this.handleChange} />
             </Form.Group>
-            <Button variant="secondary" onClick={handleShow}>
+            <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
             <Button variant="primary" type="submit" onClick={this.handleSave}>

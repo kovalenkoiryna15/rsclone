@@ -1,6 +1,5 @@
 import { IProject } from 'Entities/project-entities';
-import { IAction } from 'MyModels';
-import * as MyModels from 'MyModels';
+import * as MyModels from 'Store/types';
 import { IProjectState } from 'Store/actions/project-action-types';
 import {
   ADD_PROJECT,
@@ -19,19 +18,19 @@ const initialState = {
 };
 
 const handlers: MyModels.IHandlers<IProjectState, any> = {
-  [ADD_PROJECT]: (state, action: IAction<IProject>) => ({
+  [ADD_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
     ...state,
     projects: [...state.projects, action.payload],
   }),
-  [UPDATE_PROJECT]: (state, action: IAction<IProject>) => ({
+  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
     ...state,
     projects: [...state.projects, action.payload],
   }),
-  [DELETE_PROJECT]: (state, action: IAction<IProject>) => ({
+  [DELETE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
     ...state,
     projects: state.projects.filter((project) => project.id !== action.payload.id),
   }),
-  [FETCH_PROJECTS_SUCCESS]: (state, action: IAction<Array<IProject>>) => ({
+  [FETCH_PROJECTS_SUCCESS]: (state, action: MyModels.IAction<Array<IProject>>) => ({
     ...state,
     projects: action.payload,
   }),
@@ -43,7 +42,7 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     loading: false,
   }),
-  [SHOW_ERROR]: (state, action: IAction<Error>) => ({
+  [SHOW_ERROR]: (state, action: MyModels.IAction<Error>) => ({
     ...state,
     error: action.payload,
   }),

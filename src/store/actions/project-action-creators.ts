@@ -1,4 +1,4 @@
-import { IAction, AsyncDispatch } from 'MyModels';
+import * as MyModels from 'Store/types';
 import { IProject } from 'Entities/project-entities';
 import {
   ADD_PROJECT,
@@ -14,48 +14,48 @@ import { IProjectState } from './project-action-types';
 
 const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
-export const addProject = (newProject: IProject): IAction<IProject> => ({
+export const addProject = (newProject: IProject): MyModels.IAction<IProject> => ({
   type: ADD_PROJECT,
   payload: newProject,
 });
 
-export const updateProject = (project: IProject): IAction<IProject> => ({
+export const updateProject = (project: IProject): MyModels.IAction<IProject> => ({
   type: UPDATE_PROJECT,
   payload: project,
 });
 
-export const deleteProject = (project: IProject): IAction<IProject> => ({
+export const deleteProject = (project: IProject): MyModels.IAction<IProject> => ({
   type: DELETE_PROJECT,
   payload: project,
 });
 
-export const fetchProjectsSuccess = (projects: IProject[]): IAction<Array<IProject>> => ({
+export const fetchProjectsSuccess = (projects: IProject[]): MyModels.IAction<Array<IProject>> => ({
   type: FETCH_PROJECTS_SUCCESS,
   payload: projects,
 });
 
-export const fetchProjectsFailure = (error: Error): IAction<Error> => ({
+export const fetchProjectsFailure = (error: Error): MyModels.IAction<Error> => ({
   type: FETCH_PROJECTS_FAILURE,
   payload: error,
 });
 
-export const showLoader = (): IAction<undefined> => ({
+export const showLoader = (): MyModels.IAction<undefined> => ({
   type: SHOW_LOADER,
   payload: undefined,
 });
 
-export const hideLoader = (): IAction<undefined> => ({
+export const hideLoader = (): MyModels.IAction<undefined> => ({
   type: HIDE_LOADER,
   payload: undefined,
 });
 
-export const showError = (): IAction<undefined> => ({
+export const showError = (): MyModels.IAction<undefined> => ({
   type: SHOW_ERROR,
   payload: undefined,
 });
 
 export const fetchProjects = (
-): AsyncDispatch<IProjectState, any> => async (dispatch) => {
+): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
     const response: Response = await fetch(DATA_URL);

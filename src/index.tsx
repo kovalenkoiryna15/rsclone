@@ -2,9 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import store from 'Store/store';
-
 import './index.scss';
+import store from 'Store/store';
 import App from './App';
 
 ReactDOM.render(

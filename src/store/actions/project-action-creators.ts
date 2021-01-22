@@ -1,4 +1,5 @@
-import { ThunkDispatch } from 'redux-thunk';
+import { IAction, AsyncDispatch } from 'MyModels';
+import { IProject } from 'Entities/project-entities';
 import {
   ADD_PROJECT,
   HIDE_LOADER,
@@ -9,67 +10,56 @@ import {
   UPDATE_PROJECT,
   DELETE_PROJECT,
 } from './project-action-constants';
-import { IProject } from '../../entities/project-entities';
-import {
-  TAddProjectAction,
-  TShowLoaderAction,
-  THideLoaderAction,
-  TFetchProjectsSuccessAction,
-  TFetchProjectsFailureAction,
-  TFetchProjectsAction,
-  TUpdateProjectAction,
-  TDeleteProjectAction,
-  TShowErrorAction,
-  TInitialProjectsState,
-  TProjectAction,
-} from './project-action-types';
+import { IProjectState } from './project-action-types';
 
 const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
-export const addProject = (newProject: IProject): TAddProjectAction => ({
+export const addProject = (newProject: IProject): IAction<IProject> => ({
   type: ADD_PROJECT,
   payload: newProject,
 });
 
-export const updateProject = (project: IProject): TUpdateProjectAction => ({
+export const updateProject = (project: IProject): IAction<IProject> => ({
   type: UPDATE_PROJECT,
   payload: project,
 });
 
-export const deleteProject = (project: IProject): TDeleteProjectAction => ({
+export const deleteProject = (project: IProject): IAction<IProject> => ({
   type: DELETE_PROJECT,
   payload: project,
 });
 
-export const fetchProjectsSuccess = (projects: IProject[]): TFetchProjectsSuccessAction => ({
+export const fetchProjectsSuccess = (projects: IProject[]): IAction<Array<IProject>> => ({
   type: FETCH_PROJECTS_SUCCESS,
   payload: projects,
 });
 
-export const fetchProjectsFailure = (error: Error): TFetchProjectsFailureAction => ({
+export const fetchProjectsFailure = (error: Error): IAction<Error> => ({
   type: FETCH_PROJECTS_FAILURE,
   payload: error,
 });
 
-export const showLoader = (): TShowLoaderAction => ({
+export const showLoader = (): IAction<undefined> => ({
   type: SHOW_LOADER,
+  payload: undefined,
 });
 
-export const hideLoader = (): THideLoaderAction => ({
+export const hideLoader = (): IAction<undefined> => ({
   type: HIDE_LOADER,
+  payload: undefined,
 });
 
-export const showError = (): TShowErrorAction => ({
+export const showError = (): IAction<undefined> => ({
   type: SHOW_ERROR,
+  payload: undefined,
 });
 
-export const fetchProjects = (): TFetchProjectsAction => async (
-  dispatch: ThunkDispatch<TInitialProjectsState, any, TProjectAction>,
-): Promise<void> => {
+export const fetchProjects = (
+): AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
     const response: Response = await fetch(DATA_URL);
-    const data: { projects: IProject[] } = await response.json();
+    const data: IProjectState = await response.json() as IProjectState;
     const { projects } = data;
     dispatch(fetchProjectsSuccess(projects));
     dispatch(hideLoader());

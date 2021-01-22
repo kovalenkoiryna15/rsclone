@@ -7,6 +7,7 @@ import SideBar from 'Components/SideBar';
 import ProjectForm from 'Components/ProjectForm';
 import { IProject } from 'entities/project-entities';
 import { fetchProjects } from 'Store/actions/project-action-creators';
+import DropdownCustom from 'Components/DropdownCustom/index';
 
 interface TaskListNavState {
   show: boolean;
@@ -42,13 +43,29 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
     });
   }
 
+  renderProjectList() {
+    const { projects } = this.props;
+    return projects ? (
+      projects.map((project: IProject) => {
+        const { id, name } = project;
+        const path = `#project/${id}`;
+        return (
+          <Nav.Item key={id}>
+            <Nav.Link href={path}>{name}</Nav.Link>
+            <DropdownCustom id={id} />
+          </Nav.Item>
+        );
+      })
+    ) : (
+      <p>no projects</p>
+    );
+  }
+
   render() {
     const { show } = this.state;
-    const { projects, loading } = this.props;
+    const { loading } = this.props;
     if (loading) {
-      return (
-        <Spinner animation="border" role="status" variant="primary" />
-      );
+      return <Spinner animation="border" role="status" variant="primary" />;
     }
 
     return (
@@ -62,22 +79,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
           </Nav.Item>
           <Button onClick={this.handleShow}>Add Project</Button>
           <br />
-          <Nav.Item>
-            <Nav.Link href="#no-project">no project</Nav.Link>
-          </Nav.Item>
-          {
-            projects
-              ? projects.map((project: IProject) => {
-                const { id, name } = project;
-                const path = `#project/${id}`;
-                return (
-                  <Nav.Item key={id}>
-                    <Nav.Link href={path}>{name}</Nav.Link>
-                  </Nav.Item>
-                );
-              })
-              : <p>no projects</p>
-          }
+          {this.renderProjectList()}
         </Nav>
         <ProjectForm show={show} handleShow={this.handleShow} />
       </SideBar>
@@ -86,7 +88,9 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
 }
 
 function mapStateToProps(state: MyModels.RootReducer) {
-  const { projects: { projects, loading, error } } = state;
+  const {
+    projects: { projects, loading, error },
+  } = state;
   return { projects, loading, error };
 }
 

@@ -11,7 +11,7 @@ import { fetchProjects } from 'Store/project/actions';
 import DropdownCustom from 'Components/DropdownCustom/index';
 
 interface TaskListNavState {
-  show: boolean;
+  isVisible: boolean;
 }
 
 interface TaskListNavProps {
@@ -25,7 +25,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
   constructor(props: TaskListNavProps) {
     super(props);
     this.state = {
-      show: false,
+      isVisible: false,
     };
     this.handleShow = this.handleShow.bind(this);
   }
@@ -36,10 +36,10 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
 
   handleShow() {
     this.setState((state) => {
-      const { show } = this.state;
+      const { isVisible } = this.state;
       return {
         ...state,
-        show: !show,
+        isVisible: !isVisible,
       };
     });
   }
@@ -62,37 +62,35 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
   }
 
   render() {
-    const { show } = this.state;
+    const { isVisible } = this.state;
     const { isLoading } = this.props;
     if (isLoading) {
-      return <Spinner animation="border" role="status" variant="primary" />;
+      return (
+        <Spinner animation="border" role="status" variant="primary" />
+      );
     }
 
     return (
       <SideBar>
         <Nav className="flex-column sidebar-nav bg-light">
           <Nav.Item>
-            <NavLink exact to="/tasks">
-              Tasks
-            </NavLink>
+            <Nav.Link href="#all-tasks">Tasks</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <NavLink to="/projects">Projects</NavLink>
+            <Nav.Link>Projects</Nav.Link>
           </Nav.Item>
           <Button onClick={this.handleShow}>Add Project</Button>
           <br />
           {this.renderProjectList()}
         </Nav>
-        <ProjectForm show={show} handleShow={this.handleShow} />
+        <ProjectForm show={isVisible} handleShow={this.handleShow} />
       </SideBar>
     );
   }
 }
 
 function mapStateToProps(state: MyModels.RootReducer) {
-  const {
-    projects: { projects, isLoading, error },
-  } = state;
+  const { projects: { projects, isLoading, error } } = state;
   return { projects, isLoading, error };
 }
 

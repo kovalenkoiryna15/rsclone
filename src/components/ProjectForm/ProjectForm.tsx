@@ -7,7 +7,7 @@ import { addProject } from 'Store/project/actions';
 
 interface ProjectFormProps {
   projectData?: IProject;
-  show: boolean;
+  isVisible: boolean;
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
   addProject: (newProject: IProject) => void;
 }
@@ -96,10 +96,10 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     const {
       title, deadline, estimatedTime, color,
     } = this.state;
-    const { show, handleShow } = this.props;
+    const { isVisible, handleShow } = this.props;
     return (
       <Modal
-        show={show}
+        show={isVisible}
         onHide={this.handleClose}
         animation={false}
         className="project-modal"

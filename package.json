@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "5.11.8",
     "@testing-library/react": "11.2.3",
     "@types/react-select": "3.1.2",
+    "axios": "0.21.1",
     "bootstrap": "4.5.3",
     "bootswatch": "4.6.0",
     "react": "16.14.0",

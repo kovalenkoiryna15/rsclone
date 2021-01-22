@@ -3,26 +3,22 @@ import IProject from 'Entities/project-entities';
 import { IProjectState } from './action-types';
 import {
   ADD_PROJECT,
+  DELETE_PROJECT,
   FETCH_PROJECTS_SUCCESS,
-  SHOW_LOADER,
   HIDE_LOADER,
   SHOW_ERROR,
+  SHOW_LOADER,
   UPDATE_PROJECT,
-  DELETE_PROJECT,
 } from './action-constants';
 
 const initialState = {
-  projects: [],
-  isLoading: false,
   error: null,
+  isLoading: false,
+  projects: [],
 };
 
 const handlers: MyModels.IHandlers<IProjectState, any> = {
   [ADD_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
-    ...state,
-    projects: [...state.projects, action.payload],
-  }),
-  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
     ...state,
     projects: [...state.projects, action.payload],
   }),
@@ -34,17 +30,21 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     projects: action.payload,
   }),
-  [SHOW_LOADER]: (state) => ({
-    ...state,
-    isLoading: true,
-  }),
   [HIDE_LOADER]: (state) => ({
     ...state,
     isLoading: false,
   }),
+  [SHOW_LOADER]: (state) => ({
+    ...state,
+    isLoading: true,
+  }),
   [SHOW_ERROR]: (state, action: MyModels.IAction<Error>) => ({
     ...state,
     error: action.payload,
+  }),
+  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
+    ...state,
+    projects: [...state.projects, action.payload],
   }),
   DEFAULT: (state) => state,
 };

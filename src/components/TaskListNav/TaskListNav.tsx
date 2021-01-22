@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {
-  Nav, Spinner, Button,
-} from 'react-bootstrap';
-import SideBar from '../SideBar';
-import ProjectForm from '../ProjectForm';
-import { IProject } from '../../entities/project-entities';
-import { fetchProjects } from '../../store/actions/project-action-creators';
-import { TInitialProjectsState } from '../../store/actions/project-action-types';
+import { Nav, Spinner, Button } from 'react-bootstrap';
+
+import SideBar from 'Components/SideBar';
+import ProjectForm from 'Components/ProjectForm';
+import { IProject } from 'Entities/project-entities';
+import { fetchProjects } from 'Store/actions/project-action-creators';
+import { TInitialProjectsState } from 'Store/actions/project-action-types';
 
 interface TaskListNavState {
   show: boolean;

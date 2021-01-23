@@ -58,7 +58,7 @@ const parseTask = (data: FirebaseData<ITask>) => Object.entries(data)
     ...rest,
   }));
 
-export const getTasks = () => axios
+export const getTasks = (): Promise<Array<ITask>> => axios
   .get<FirebaseData<ITask>>(`${url}/tasks.json`, { timeout: AXIOS_TIMEOUT })
   .then((response) => {
     if (response.status === 200 && response.data) {
@@ -67,7 +67,7 @@ export const getTasks = () => axios
     return [];
   });
 
-export const completeTask = (task: ITask) => {
+export const toggleCompleteTask = (task: ITask): Promise<ITask> => {
   const {
     id,
     isCompleted,
@@ -79,4 +79,4 @@ export const completeTask = (task: ITask) => {
   );
 };
 
-export const deleteTask = (id: Types.ID) => axios.delete(`${url}/tasks/${id}.json`);
+export const deleteTask = (id: Types.ID): Promise<undefined> => axios.delete(`${url}/tasks/${id}.json`);

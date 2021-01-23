@@ -8,7 +8,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1em;
+  }
+
+  .ptb0 {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .pt8 {
@@ -19,6 +23,11 @@
     padding: 8px 12px;
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  .btn-signup:focus {
+    color: "#007bff";
+    outline: none;
   }
 
   .login-form {

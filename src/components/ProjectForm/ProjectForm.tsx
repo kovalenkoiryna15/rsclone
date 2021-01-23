@@ -96,7 +96,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     const {
       title, deadline, estimatedTime, color,
     } = this.state;
-    const { isVisible, handleShow } = this.props;
+    const { isVisible } = this.props;
     return (
       <Modal
         show={isVisible}

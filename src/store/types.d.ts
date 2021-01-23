@@ -3,6 +3,7 @@ import { IFirebaseState } from 'Store/firebase/action-types';
 
 import { IProjectState } from 'Store/project/action-types';
 import { ITaskState } from 'Store/task/action-types';
+import { IUserState } from './actions/user-types';
 
 export interface IAction<P> {
   type: string,
@@ -25,4 +26,5 @@ export interface RootReducer {
   firebase: IFirebaseState,
   projects: IProjectState,
   tasks: ITaskState,
+  user: IUserState,
 }

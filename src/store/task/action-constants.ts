@@ -1,2 +1,6 @@
-// eslint-disable-next-line import/prefer-default-export
-export const ADD_TASK = 'ADD_TASK';
+export const ADD_TASK = 'TASK/ADD';
+export const FETCH_TASKS = 'TASK/FETCH_TASKS';
+export const REMOVE_TASK = 'TASK/REMOVE';
+export const TOGGLE_COMPLETE_TASK = 'TASK/COMPLETE';
+
+export const SET_NEW_TASK_TITLE = 'TASK/SET_NEW_TASK_TITLE';

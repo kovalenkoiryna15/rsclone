@@ -1,5 +1,6 @@
 export const ADD_TASK = 'TASK/ADD';
 export const FETCH_TASKS = 'TASK/FETCH_TASKS';
+export const FETCH_TASKS_FAILURE = 'TASK/FETCH_TASKS_FAILURE';
 export const REMOVE_TASK = 'TASK/REMOVE';
 export const TOGGLE_COMPLETE_TASK = 'TASK/COMPLETE';
 

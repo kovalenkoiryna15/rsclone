@@ -1,4 +1,5 @@
 import { ThunkDispatch } from 'redux-thunk';
+import { IFirebaseState } from 'Store/firebase/action-types';
 
 import { IProjectState } from 'Store/project/action-types';
 import { ITaskState } from 'Store/task/action-types';
@@ -17,7 +18,9 @@ export type AsyncDispatch<T, P> = (
     [key: string]: T,
   },
 ) => Promise<void>;
+
 export interface RootReducer {
-  tasks: ITaskState,
+  firebase: IFirebaseState,
   projects: IProjectState,
+  tasks: ITaskState,
 }

@@ -1,28 +1,21 @@
 import * as React from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 type TLoginModalProps = {
   isVisible: boolean;
 };
 
-type TUserName = string | undefined;
-
 const LoginModal = (props: TLoginModalProps): JSX.Element => {
-  const [username, setUsername] = React.useState<TUserName>('');
-  const [validated, setValidated] = React.useState<boolean>(false);
+  const [registered, setRegistered] = React.useState<boolean>(true);
 
-  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
+  const handleRegistered = (
+    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLSpanElement>,
+  ) => {
+    event.preventDefault();
+    setRegistered((prev) => !prev);
   };
 
   const { isVisible } = props;
@@ -35,45 +28,49 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="text-center">
-          Welcome to RSClone
-          <br />
           <span className="text-uppercase">Tracking Time</span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label className="text-center">User name</Form.Label>
-            <Form.Control
-              value={username}
-              onChange={handleUserNameChange}
-              type="text"
-              placeholder="Enter user name"
-              required
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label className="text-center">Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              aria-describedby="passwordHelpBlock"
-              required
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-            />
-            <Form.Text className="text-muted" id="passwordHelpBlock">
-              Password must be at least 6 characters
-              and contain at least one number and one uppercase letter.
-            </Form.Text>
-          </Form.Group>
-          <Button variant="primary" type="submit" className="text-uppercase">Login</Button>
-        </Form>
+        {
+          registered
+            ? <LoginForm />
+            : <RegisterForm />
+        }
       </Modal.Body>
-      <Modal.Footer>
-        <div className="block-signup">
-          <h6 className="pt8">Don’t have an account?</h6>
-          <span className="text-uppercase btn-signup">Sign up</span>
-        </div>
+      <Modal.Footer className="ptb0">
+        {
+          registered
+            ? (
+              <div className="block-signup">
+                <h6 className="pt8">Don’t have an account?</h6>
+                <span
+                  role="button"
+                  className="text-uppercase btn-signup"
+                  onClick={handleRegistered}
+                  tabIndex={0}
+                  aria-labelledby="move-to-register-form"
+                  onKeyDown={handleRegistered}
+                >
+                  Sign up
+                </span>
+              </div>
+            )
+            : (
+              <div className="block-signup">
+                <span
+                  role="button"
+                  className="text-uppercase btn-signup"
+                  onClick={handleRegistered}
+                  tabIndex={0}
+                  aria-labelledby="move-to-register-form"
+                  onKeyDown={handleRegistered}
+                >
+                  Back to login
+                </span>
+              </div>
+            )
+        }
       </Modal.Footer>
     </Modal>
   );

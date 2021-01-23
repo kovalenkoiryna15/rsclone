@@ -1,3 +1,4 @@
+import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
 import * as MyModels from 'Store/types';
 import IProject from 'Entities/project-entities';
 import {
@@ -59,8 +60,7 @@ export const fetchProjects = (
   try {
     dispatch(showLoader());
     const response: Response = await fetch(DATA_URL);
-    const data: IProjectState = await response.json() as IProjectState;
-    const { projects } = data;
+    const { projects } = await response.json() as IRSCloneTrackingTime;
     dispatch(fetchProjectsSuccess(projects));
     dispatch(hideLoader());
   } catch (error) {

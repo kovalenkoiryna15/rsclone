@@ -4,6 +4,7 @@ export interface IUser {
   firstName: string;
   lastName: string;
   token?: Token;
+  password: Token;
 }
 
 type ID = string | number;

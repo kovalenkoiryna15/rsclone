@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import * as MyModels from 'Store/types';
 import { Modal } from 'react-bootstrap';
 
 import LoginForm from './LoginForm';
@@ -18,6 +20,15 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
     setRegistered((prev) => !prev);
   };
 
+  const alert = useSelector((state: MyModels.RootReducer) => {
+    const { user: { alertMessage } } = state;
+    return alertMessage;
+  });
+  const error = useSelector((state: MyModels.RootReducer) => {
+    const { user: { errorMessage } } = state;
+    return errorMessage;
+  });
+
   const { isVisible } = props;
   return (
     <Modal
@@ -34,6 +45,12 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        {
+          alert ? <div className="invalid-feedback">{alert}</div> : null
+        }
+        {
+          error ? <div className="invalid-feedback">{error}</div> : null
+        }
         {
           registered
             ? <LoginForm />

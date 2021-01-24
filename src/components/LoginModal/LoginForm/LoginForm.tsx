@@ -1,12 +1,16 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
+import { login } from 'Store/user/user-action-creators';
 
 type TValue = string | undefined;
 
 const LoginForm = (): JSX.Element => {
+  const dispatch = useDispatch();
   const [username, setUsername] = React.useState<TValue>('');
   const [password, setPassword] = React.useState<TValue>('');
   const [validated, setValidated] = React.useState<boolean>(false);
+  const [submitted, setSubmitted] = React.useState<boolean>(false);
 
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -16,29 +20,40 @@ const LoginForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setSubmitted(true);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
+
+    if (validated && username && password) {
+      const user = {
+        username,
+        password,
+      };
+      dispatch(login(user));
+    }
   };
 
   return (
     <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicUsername">
-        <Form.Label className="text-center">User name</Form.Label>
         <Form.Control
           value={username}
           onChange={handleUserNameChange}
           type="text"
-          placeholder="Enter user name"
+          placeholder="User Name"
           required
+          autoComplete="off"
         />
+        {
+          submitted && !username
+          && <div className="invalid-feedback">User Name is required</div>
+        }
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-        <Form.Label className="text-center">Password</Form.Label>
         <Form.Control
           value={password}
           type="password"
@@ -47,11 +62,12 @@ const LoginForm = (): JSX.Element => {
           required
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
           onChange={handlePasswordChange}
+          autoComplete="off"
         />
-        <Form.Text className="text-muted" id="passwordHelpBlock">
-          Password must be at least 6 characters
-          and contain at least one number and one uppercase letter.
-        </Form.Text>
+        {
+          submitted && !password
+          && <div className="invalid-feedback">Password is required</div>
+        }
       </Form.Group>
       <Button variant="primary" type="submit" className="text-uppercase">Login</Button>
     </Form>

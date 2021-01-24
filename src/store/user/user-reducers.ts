@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
 } from './user-action-constants';
 
-const initialState = {
+export const initialUserState: IUserState = {
   user: {
     id: '',
     username: '',
@@ -43,7 +43,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
 };
 
 const userReducer: MyModels.Reducer<IUserState, any> = (
-  state = initialState, action,
+  state = initialUserState, action,
 ) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);

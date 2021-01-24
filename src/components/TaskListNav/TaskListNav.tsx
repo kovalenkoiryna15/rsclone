@@ -87,7 +87,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
           <br />
           {this.renderProjectList()}
         </Nav>
-        <ProjectForm show={isVisible} handleShow={this.handleShow} />
+        <ProjectForm isVisible={isVisible} handleShow={this.handleShow} />
       </SideBar>
     );
   }

@@ -18,6 +18,7 @@ interface ProjectFormState {
   deadline?: Date;
   estimatedTime?: number;
   color?: string;
+  validated: boolean;
 }
 
 class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
@@ -29,11 +30,39 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
       deadline: undefined,
       estimatedTime: 0,
       color: '#000000',
+      validated: false,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSave = this.handleSave.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
+
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    this.setState((state) => ({
+      ...state,
+      validated: true,
+    }));
+    const { validated } = this.state;
+    if (validated) {
+      const {
+        id, title, deadline, estimatedTime, color,
+      } = this.state;
+      const newProject = {
+        id, title, deadline, estimatedTime, color,
+      };
+      if (!id) {
+        newProject.id = Date.now().toString();
+      }
+      this.props.addProject(newProject);
+    }
+  };
 
   handleClose(
     event: React.MouseEvent<HTMLElement>,
@@ -41,10 +70,11 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     this.setState((state) => ({
       ...state,
       id: '',
-      name: '',
-      deadline: '',
-      estimatedTime: '',
+      title: '',
+      deadline: undefined,
+      estimatedTime: 0,
       color: '#000000',
+      validated: false,
     }));
 
     const { handleShow } = this.props;
@@ -64,43 +94,15 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     });
   }
 
-  handleSave(
-    event: React.MouseEvent<HTMLElement>,
-  ) {
-    event.preventDefault();
-    const {
-      id, title, deadline, estimatedTime, color,
-    } = this.state;
-    const newProject = {
-      id, title, deadline, estimatedTime, color,
-    };
-    if (!id) {
-      newProject.id = Date.now().toString();
-    }
-    this.props.addProject(newProject);
-
-    this.setState((state) => ({
-      ...state,
-      id: '',
-      title: '',
-      deadline: undefined,
-      estimatedTime: 0,
-      color: '#000000',
-    }));
-
-    const { handleShow } = this.props;
-    handleShow(event);
-  }
-
   render() {
     const {
-      title, deadline, estimatedTime, color,
+      title, deadline, estimatedTime, color, validated,
     } = this.state;
     const { isVisible } = this.props;
     return (
       <Modal
         show={isVisible}
-        onHide={this.handleClose}
+        onHide={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
         animation={false}
         className="project-modal"
       >
@@ -110,7 +112,8 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
         <Modal.Body>
           <Form
             className="project-form"
-            onSubmit={(e: React.MouseEvent<HTMLElement>) => this.handleSave(e)}
+            validated={validated}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
           >
             <Form.Group controlId="formProjectName">
               <Form.Label>Title</Form.Label>
@@ -150,13 +153,13 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
                 value={color}
               />
             </Form.Group>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}>
               Close
             </Button>
             <Button
               variant="primary"
               type="submit"
-              onClick={(e: React.MouseEvent<HTMLElement>) => this.handleSave(e)}
+              onClick={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
             >
               Save
             </Button>

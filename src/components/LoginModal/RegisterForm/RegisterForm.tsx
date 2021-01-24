@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import { register } from 'Store/user/user-action-creators';
+import { register } from 'Store/user/actions';
 
 type TValue = string;
 
@@ -28,12 +28,9 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     setSubmitted(true);
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
     setValidated(true);
 
     if (validated && firstName && lastName && username && password) {
@@ -42,6 +39,7 @@ const RegisterForm = (): JSX.Element => {
         firstName,
         lastName,
         username,
+        password,
       };
       dispatch(register(user));
     }

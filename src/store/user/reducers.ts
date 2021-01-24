@@ -1,11 +1,11 @@
 import * as MyModels from 'Store/types';
 import { IUser } from 'Entities/user-entities';
-import { IUserState } from 'Store/user/user-types';
+import { IUserState } from 'Store/user/types';
 import { ALERT_SUCCESS, ALERT_ERROR } from './alert-action-constants';
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
-} from './user-action-constants';
+} from './action-constants';
 
 export const initialUserState: IUserState = {
   user: {

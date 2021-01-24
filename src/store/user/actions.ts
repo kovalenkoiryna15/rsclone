@@ -1,6 +1,9 @@
 import * as MyModels from 'Store/types';
+import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
 import { IUser } from 'entities/user-entities';
-import { TUserLogin, IUserState } from './user-types';
+import { TUserLogin, IUserState } from './types';
+import { loginLocal, registerLocal } from '../../services/localStorage-helpers';
+
 import { alertSuccess, alertError } from './alert-action-creators';
 import {
   REGISTER_REQUEST,
@@ -10,14 +13,16 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-} from './user-action-constants';
+} from './action-constants';
+
+const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
 export const loginRequest = (user: TUserLogin): MyModels.IAction<TUserLogin> => ({
   type: LOGIN_REQUEST,
   payload: user,
 });
 
-export const loginSuccess = (user: TUserLogin): MyModels.IAction<TUserLogin> => ({
+export const loginSuccess = (user: IUser): MyModels.IAction<IUser> => ({
   type: LOGIN_SUCCESS,
   payload: user,
 });
@@ -31,16 +36,15 @@ export const login = (
   userData: TUserLogin,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(loginRequest(userData));
-  userService.login(username, password)
-    .then(
-      (user): TUserLogin => {
-        dispatch(loginSuccess(user));
-      },
-      (error): Error => {
-        dispatch(loginFailure(error.message));
-        dispatch(alertError(error.toString()));
-      },
-    );
+  loginLocal(userData);
+  try {
+    const response: Response = await loginLocal(userData) as Response;
+    const { user } = await response.json() as IRSCloneTrackingTime;
+    dispatch(loginSuccess(user));
+  } catch (error) {
+    dispatch(loginFailure(error.message));
+    dispatch(alertError(error.toString()));
+  }
 };
 
 export const registerRequest = (user: IUser): MyModels.IAction<IUser> => ({
@@ -59,24 +63,22 @@ export const registerFailure = (errorMessage: string): MyModels.IAction<string> 
 });
 
 export const register = (
-  user: IUser,
+  newUser: IUser,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
-  dispatch(registerRequest(userData));
-  userService.register(user)
-    .then(
-      (user): IUser => {
-        dispatch(registerSuccess(user));
-        dispatch(alertSuccess('Registration successful'));
-      },
-      (error): Error => {
-        dispatch(registerFailure(error.message));
-        dispatch(alertError(error.toString()));
-      },
-    );
+  dispatch(registerRequest(newUser));
+  try {
+    const response: Response = await registerLocal(newUser) as Response;
+    const { user } = await response.json() as IRSCloneTrackingTime;
+    dispatch(registerSuccess(user));
+    dispatch(alertSuccess('Registration successful'));
+  } catch (error) {
+    dispatch(registerFailure(error.message));
+    dispatch(alertError(error.toString()));
+  }
 };
 
 export const logout = (
-): MyModels.AsyncDispatch<IUserState, any> => {
-  userService.logout();
-  return { type: LOGOUT };
-};
+): MyModels.IAction<undefined> => ({
+  type: LOGOUT,
+  payload: undefined,
+});

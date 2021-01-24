@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import { login } from 'Store/user/user-action-creators';
+import { login } from 'Store/user/actions';
 
 type TValue = string | undefined;
 
@@ -20,12 +20,9 @@ const LoginForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     setSubmitted(true);
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
     setValidated(true);
 
     if (validated && username && password) {

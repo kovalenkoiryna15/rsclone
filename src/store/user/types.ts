@@ -9,4 +9,5 @@ export interface IUserState {
 
 export interface TUserLogin {
   username: string;
+  password: string | number;
 }

@@ -1,14 +1,18 @@
 import * as React from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
+import { register } from 'Store/user/user-action-creators';
 
-type TValue = string | undefined;
+type TValue = string;
 
 const RegisterForm = (): JSX.Element => {
+  const dispatch = useDispatch();
   const [username, setUserName] = React.useState<TValue>('');
   const [password, setPassword] = React.useState<TValue>('');
   const [firstName, setFirstName] = React.useState<TValue>('');
   const [lastName, setLastName] = React.useState<TValue>('');
   const [validated, setValidated] = React.useState<boolean>(false);
+  const [submitted, setSubmitted] = React.useState<boolean>(false);
 
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
@@ -24,56 +28,87 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    setSubmitted(true);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
+
+    if (validated && firstName && lastName && username && password) {
+      const user = {
+        id: Date.now(),
+        firstName,
+        lastName,
+        username,
+      };
+      dispatch(register(user));
+    }
   };
 
   return (
     <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicFirstName">
-        <Form.Label className="text-center">First name</Form.Label>
         <Form.Control
           value={firstName}
           onChange={handleFirstNameChange}
           type="text"
-          placeholder="Enter first name"
+          placeholder="First Name"
+          required
+          pattern="(?=.*[A-Za-z]).{2,15}"
+          autoComplete="off"
         />
+        {
+          submitted && !firstName
+          && <div className="invalid-feedback">First Name is required</div>
+        }
       </Form.Group>
       <Form.Group controlId="formBasicLastName">
-        <Form.Label className="text-center">Last name</Form.Label>
         <Form.Control
           value={lastName}
           onChange={handleLastNameChange}
           type="text"
-          placeholder="Enter last name"
+          placeholder="Last Name"
+          required
+          pattern="(?=.*[A-Za-z]).{2,15}"
+          autoComplete="off"
         />
+        {
+          submitted && !lastName
+          && <div className="invalid-feedback">Last Name is required</div>
+        }
       </Form.Group>
       <Form.Group controlId="formBasicUserName">
-        <Form.Label className="text-center">User name</Form.Label>
         <Form.Control
           value={username}
           onChange={handleUserNameChange}
           type="text"
-          placeholder="Enter user name"
+          placeholder="User Name"
           required
+          pattern="([A-Za-z0-9_-]).{2,15}"
+          autoComplete="off"
         />
+        {
+          submitted && !username
+          && <div className="invalid-feedback">User Name is required</div>
+        }
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-        <Form.Label className="text-center">Password</Form.Label>
         <Form.Control
           value={password}
           type="password"
           placeholder="Password"
           aria-describedby="passwordHelpBlock"
           required
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
           onChange={handlePasswordChange}
+          autoComplete="off"
         />
+        {
+          submitted && !password
+          && <div className="invalid-feedback">Password is required</div>
+        }
         <Form.Text className="text-muted" id="passwordHelpBlock">
           Password must be at least 6 characters
           and contain at least one number and one uppercase letter.

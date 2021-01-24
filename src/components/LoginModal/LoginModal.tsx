@@ -28,6 +28,8 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="text-center">
+          RSClone
+          &#8194;
           <span className="text-uppercase">Tracking Time</span>
         </Modal.Title>
       </Modal.Header>
@@ -38,15 +40,15 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
             : <RegisterForm />
         }
       </Modal.Body>
-      <Modal.Footer className="ptb0">
+      <Modal.Footer className="pt-0 pb-0">
         {
           registered
             ? (
-              <div className="block-signup">
-                <h6 className="pt8">Don’t have an account?</h6>
+              <div className="block-signup block-login">
+                <h6 className="pt-2">Don’t have an account?</h6>
                 <span
                   role="button"
-                  className="text-uppercase btn-signup"
+                  className="text-uppercase btn-signup btn-login"
                   onClick={handleRegistered}
                   tabIndex={0}
                   aria-labelledby="move-to-register-form"

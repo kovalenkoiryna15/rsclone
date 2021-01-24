@@ -3,7 +3,7 @@ export interface IUser {
   username: string;
   firstName: string;
   lastName: string;
-  token: Token;
+  token?: Token;
 }
 
 type ID = string | number;

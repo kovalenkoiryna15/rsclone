@@ -5,14 +5,16 @@ import { ALERT_SUCCESS, ALERT_ERROR } from './alert-action-constants';
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
+  LOGIN_REQUEST,
+  REGISTER_REQUEST,
 } from './action-constants';
 
 export const initialUserState: IUserState = {
   user: {
     id: '',
+    email: '',
     username: '',
-    firstName: '',
-    lastName: '',
+    password: '',
     token: '',
   },
   loggingIn: false,
@@ -29,10 +31,20 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     ...state,
     alertMessage: action.payload,
   }),
+  [REGISTER_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({
+    ...state,
+    user: action.payload,
+    loggingIn: false,
+  }),
   [REGISTER_SUCCESS]: (state, action: MyModels.IAction<IUser>) => ({
     ...state,
     user: action.payload,
     loggingIn: true,
+  }),
+  [LOGIN_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({
+    ...state,
+    user: action.payload,
+    loggingIn: false,
   }),
   [LOGIN_SUCCESS]: (state, action: MyModels.IAction<IUser>) => ({
     ...state,

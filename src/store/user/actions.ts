@@ -1,6 +1,7 @@
 import * as MyModels from 'Store/types';
 import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
 import { IUser } from 'entities/user-entities';
+import auth from './src/firebase';
 import { TUserLogin, IUserState } from './types';
 import { loginLocal, registerLocal } from '../../services/localStorage-helpers';
 
@@ -14,8 +15,6 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
 } from './action-constants';
-
-const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
 export const loginRequest = (user: TUserLogin): MyModels.IAction<TUserLogin> => ({
   type: LOGIN_REQUEST,
@@ -36,7 +35,6 @@ export const login = (
   userData: TUserLogin,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(loginRequest(userData));
-  loginLocal(userData);
   try {
     const response: Response = await loginLocal(userData) as Response;
     const { user } = await response.json() as IRSCloneTrackingTime;
@@ -66,11 +64,23 @@ export const register = (
   newUser: IUser,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(registerRequest(newUser));
+  // try {
+  //   const response: Response = await registerLocal(newUser) as Response;
+  //   const { user } = await response.json() as IRSCloneTrackingTime;
+  //   dispatch(registerSuccess(user));
+  //   dispatch(alertSuccess('Registration successful'));
+  // } catch (error) {
+  //   dispatch(registerFailure(error.message));
+  //   dispatch(alertError(error.toString()));
+  // }
+
   try {
-    const response: Response = await registerLocal(newUser) as Response;
-    const { user } = await response.json() as IRSCloneTrackingTime;
-    dispatch(registerSuccess(user));
-    dispatch(alertSuccess('Registration successful'));
+    const { email, password } = newUser;
+    await auth.createUserWithEmailAndPassword(email, password);
+    auth.onAuthStateChanged((user) => {
+      dispatch(registerSuccess(user));
+      dispatch(alertSuccess('Registration successful'));
+    });
   } catch (error) {
     dispatch(registerFailure(error.message));
     dispatch(alertError(error.toString()));

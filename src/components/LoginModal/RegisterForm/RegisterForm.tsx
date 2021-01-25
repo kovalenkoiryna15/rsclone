@@ -1,110 +1,83 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import { register } from 'Store/user/actions';
 
-type TValue = string;
+import * as MyModels from 'Store/types';
+import { register } from 'Store/user/actions';
+import { IUser } from 'Entities/user-entities';
 
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();
-  const [username, setUserName] = React.useState<TValue>('');
-  const [password, setPassword] = React.useState<TValue>('');
-  const [firstName, setFirstName] = React.useState<TValue>('');
-  const [lastName, setLastName] = React.useState<TValue>('');
-  const [validated, setValidated] = React.useState<boolean>(false);
-  const [submitted, setSubmitted] = React.useState<boolean>(false);
-
-  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(event.target.value);
-  };
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-  const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstName(event.target.value);
-  };
-  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(event.target.value);
-  };
+  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
+    const { user: { loggingIn } } = state;
+    return loggingIn;
+  });
+  const emailRef = useRef({ value: '' });
+  const usernameRef = useRef({ value: '' });
+  const passwordRef = useRef({ value: '' });
+  const [validated, setValidated] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    event.stopPropagation();
     setSubmitted(true);
     setValidated(true);
 
-    if (validated && firstName && lastName && username && password) {
-      const user = {
-        id: Date.now(),
-        firstName,
-        lastName,
-        username,
-        password,
-      };
-      dispatch(register(user));
-    }
+    const newUser: IUser = {
+      id: Date.now(),
+      email: emailRef.current.value,
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+    };
+    dispatch(register(newUser));
   };
 
   return (
     <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
-      <Form.Group controlId="formBasicFirstName">
+      <Form.Group controlId="formBasicEmail">
         <Form.Control
-          value={firstName}
-          onChange={handleFirstNameChange}
-          type="text"
-          placeholder="First Name"
+          ref={emailRef}
+          type="email"
+          placeholder="Email"
           required
-          pattern="(?=.*[A-Za-z]).{2,15}"
-          autoComplete="off"
+          name="email"
         />
         {
-          submitted && !firstName
-          && <div className="invalid-feedback">First Name is required</div>
-        }
-      </Form.Group>
-      <Form.Group controlId="formBasicLastName">
-        <Form.Control
-          value={lastName}
-          onChange={handleLastNameChange}
-          type="text"
-          placeholder="Last Name"
-          required
-          pattern="(?=.*[A-Za-z]).{2,15}"
-          autoComplete="off"
-        />
-        {
-          submitted && !lastName
-          && <div className="invalid-feedback">Last Name is required</div>
+          submitted && !emailRef.current.value
+          && <div className="invalid-feedback">Email is required</div>
         }
       </Form.Group>
       <Form.Group controlId="formBasicUserName">
         <Form.Control
-          value={username}
-          onChange={handleUserNameChange}
+          ref={usernameRef}
           type="text"
-          placeholder="User Name"
+          placeholder="Username"
           required
           pattern="([A-Za-z0-9_-]).{2,15}"
-          autoComplete="off"
+          name="username"
+          minLength="2"
+          maxLength="15"
         />
         {
-          submitted && !username
+          submitted && !usernameRef.current.value
           && <div className="invalid-feedback">User Name is required</div>
         }
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Control
-          value={password}
+          ref={passwordRef}
           type="password"
           placeholder="Password"
           aria-describedby="passwordHelpBlock"
           required
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
-          onChange={handlePasswordChange}
-          autoComplete="off"
+          minLength="6"
+          maxLength="15"
+          name="password"
         />
         {
-          submitted && !password
+          submitted && !passwordRef.current.value
           && <div className="invalid-feedback">Password is required</div>
         }
         <Form.Text className="text-muted" id="passwordHelpBlock">
@@ -112,7 +85,7 @@ const RegisterForm = (): JSX.Element => {
           and contain at least one number and one uppercase letter.
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" type="submit" className="text-uppercase">Sign up</Button>
+      <Button disabled={isloggingIn} variant="primary" type="submit" className="text-uppercase">Sign up</Button>
     </Form>
   );
 };

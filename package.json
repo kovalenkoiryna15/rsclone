@@ -11,6 +11,7 @@
     "axios": "0.21.1",
     "bootstrap": "4.5.3",
     "bootswatch": "4.6.0",
+    "firebase": "8.2.4",
     "react": "16.14.0",
     "react-bootstrap": "1.4.3",
     "react-dom": "16.14.0",

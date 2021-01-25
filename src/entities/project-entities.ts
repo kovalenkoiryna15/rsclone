@@ -9,7 +9,7 @@ interface IProject {
   id: Types.ID;
   title: string;
   color?: string;
-  deadline?: Date;
+  deadline?: string;
   defaultView?: ProjectView;
   estimatedTime?: number;
 }

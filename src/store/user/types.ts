@@ -9,5 +9,6 @@ export interface IUserState {
 
 export interface TUserLogin {
   username: string;
-  password: string | number;
+  email: string;
+  password: string;
 }

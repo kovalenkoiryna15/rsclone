@@ -15,7 +15,7 @@ interface ProjectFormProps {
 interface ProjectFormState {
   id: string;
   title: string;
-  deadline?: Date;
+  deadline?: string;
   estimatedTime?: number;
   color?: string;
   validated: boolean;
@@ -159,7 +159,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
             <Button
               variant="primary"
               type="submit"
-              onClick={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
+              onClick={(e: React.MouseEvent<HTMLFormElement>) => this.handleSubmit(e)}
             >
               Save
             </Button>

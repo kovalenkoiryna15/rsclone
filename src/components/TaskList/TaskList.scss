@@ -1,3 +1,7 @@
 .task-list {
   padding: 15px;
+
+  @include tablet() {
+    min-height: auto;
+  }
 }

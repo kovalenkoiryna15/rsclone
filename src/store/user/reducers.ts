@@ -1,5 +1,5 @@
 import * as MyModels from 'Store/types';
-import { IUser } from 'Entities/user-entities';
+import { IUser, ID } from 'Entities/user-entities';
 import { IUserState } from 'Store/user/types';
 import { ALERT_SUCCESS, ALERT_ERROR } from './alert-action-constants';
 import {
@@ -7,15 +7,14 @@ import {
   LOGIN_SUCCESS,
   LOGIN_REQUEST,
   REGISTER_REQUEST,
+  SET_USER_ID,
 } from './action-constants';
 
 export const initialUserState: IUserState = {
   user: {
     id: '',
     email: '',
-    username: '',
     password: '',
-    token: '',
   },
   loggingIn: false,
   alertMessage: null,
@@ -31,6 +30,17 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     ...state,
     alertMessage: action.payload,
   }),
+  [SET_USER_ID]: (state, action: MyModels.IAction<ID>) => {
+    const { user } = state;
+    const newUser = {
+      ...user,
+      id: action.payload,
+    };
+    return {
+      ...state,
+      user: newUser,
+    };
+  },
   [REGISTER_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({
     ...state,
     user: action.payload,

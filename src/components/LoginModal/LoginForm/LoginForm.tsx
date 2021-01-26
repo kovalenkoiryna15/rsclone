@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
+
+import * as MyModels from 'Store/types';
 import { login } from 'Store/user/actions';
 
 type TValue = string | undefined;
@@ -8,16 +10,15 @@ type TValue = string | undefined;
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState<TValue>('');
-  const [username, setUsername] = React.useState<TValue>('');
   const [password, setPassword] = React.useState<TValue>('');
   const [validated, setValidated] = React.useState<boolean>(false);
   const [submitted, setSubmitted] = React.useState<boolean>(false);
-
+  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
+    const { user: { loggingIn } } = state;
+    return loggingIn;
+  });
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-  };
-  const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
   };
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
@@ -29,9 +30,9 @@ const LoginForm = (): JSX.Element => {
     setSubmitted(true);
     setValidated(true);
 
-    if (validated && email && password && username) {
+    if (validated && email && password) {
       const user = {
-        username,
+        id: '',
         email,
         password,
       };
@@ -55,23 +56,6 @@ const LoginForm = (): JSX.Element => {
           && <div className="invalid-feedback">Email is required</div>
         }
       </Form.Group>
-      <Form.Group controlId="formBasicUsername">
-        <Form.Control
-          value={username}
-          onChange={handleUserNameChange}
-          type="text"
-          placeholder="Username"
-          required
-          pattern="([A-Za-z0-9_-]).{2,15}"
-          name="username"
-          minLength="2"
-          maxLength="15"
-        />
-        {
-          submitted && !username
-          && <div className="invalid-feedback">User Name is required</div>
-        }
-      </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Control
           value={password}
@@ -80,8 +64,8 @@ const LoginForm = (): JSX.Element => {
           aria-describedby="passwordHelpBlock"
           required
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
-          minLength="6"
-          maxLength="15"
+          minLength={Number(6)}
+          maxLength={Number(15)}
           onChange={handlePasswordChange}
           name="password"
         />
@@ -90,7 +74,7 @@ const LoginForm = (): JSX.Element => {
           && <div className="invalid-feedback">Password is required</div>
         }
       </Form.Group>
-      <Button variant="primary" type="submit" className="text-uppercase">Login</Button>
+      <Button disabled={isloggingIn} variant="primary" type="submit" className="text-uppercase">Login</Button>
     </Form>
   );
 };

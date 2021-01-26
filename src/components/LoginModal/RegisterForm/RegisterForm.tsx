@@ -14,7 +14,6 @@ const RegisterForm = (): JSX.Element => {
     return loggingIn;
   });
   const emailRef = useRef({ value: '' });
-  const usernameRef = useRef({ value: '' });
   const passwordRef = useRef({ value: '' });
   const [validated, setValidated] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -27,7 +26,6 @@ const RegisterForm = (): JSX.Element => {
     const newUser: IUser = {
       id: Date.now(),
       email: emailRef.current.value,
-      username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
     dispatch(register(newUser));
@@ -45,23 +43,7 @@ const RegisterForm = (): JSX.Element => {
         />
         {
           submitted && !emailRef.current.value
-          && <div className="invalid-feedback">Email is required</div>
-        }
-      </Form.Group>
-      <Form.Group controlId="formBasicUserName">
-        <Form.Control
-          ref={usernameRef}
-          type="text"
-          placeholder="Username"
-          required
-          pattern="([A-Za-z0-9_-]).{2,15}"
-          name="username"
-          minLength="2"
-          maxLength="15"
-        />
-        {
-          submitted && !usernameRef.current.value
-          && <div className="invalid-feedback">User Name is required</div>
+          && <div className="invalid-feedback">Email is required or not valid.</div>
         }
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
@@ -72,8 +54,8 @@ const RegisterForm = (): JSX.Element => {
           aria-describedby="passwordHelpBlock"
           required
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
-          minLength="6"
-          maxLength="15"
+          minLength={Number(6)}
+          maxLength={Number(15)}
           name="password"
         />
         {

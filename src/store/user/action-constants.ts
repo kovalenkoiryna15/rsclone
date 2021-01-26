@@ -5,3 +5,4 @@ export const LOGIN_REQUEST = 'APP/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'APP/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'APP/LOGIN_FAILURE';
 export const LOGOUT = 'APP/LOGOUT';
+export const SET_USER_ID = 'USER/SET_USER_ID';

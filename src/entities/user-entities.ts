@@ -1,10 +1,7 @@
 export interface IUser {
   id: ID;
   email: string;
-  username: string;
-  password: Token;
-  token?: Token;
+  password: string;
 }
 
-type ID = string | number;
-type Token = string;
+export type ID = string | number;

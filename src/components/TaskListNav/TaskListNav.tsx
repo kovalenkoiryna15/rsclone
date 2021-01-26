@@ -7,7 +7,6 @@ import * as MyModels from 'Store/types';
 import SideBar from 'Components/SideBar';
 import ProjectForm from 'Components/ProjectForm';
 import IProject from 'Entities/project-entities';
-import { fetchProjects } from 'Store/project/actions';
 import DropdownCustom from 'Components/DropdownCustom/index';
 
 interface TaskListNavState {
@@ -18,7 +17,6 @@ interface TaskListNavProps {
   projects: IProject[];
   isLoading: boolean;
   error: Error | null;
-  fetchProjects: () => void;
 }
 
 class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
@@ -28,10 +26,6 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
       isVisible: false,
     };
     this.handleShow = this.handleShow.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.fetchProjects();
   }
 
   handleShow() {
@@ -87,7 +81,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
           <br />
           {this.renderProjectList()}
         </Nav>
-        <ProjectForm isVisible={isVisible} handleShow={this.handleShow} />
+        <ProjectForm isVisible={isVisible} handleShow={() => this.handleShow()} />
       </SideBar>
     );
   }
@@ -98,8 +92,4 @@ function mapStateToProps(state: MyModels.RootReducer) {
   return { projects, isLoading, error };
 }
 
-const mapDispatchToProps = {
-  fetchProjects,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskListNav);
+export default connect(mapStateToProps)(TaskListNav);

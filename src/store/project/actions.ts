@@ -1,4 +1,3 @@
-import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
 import * as MyModels from 'Store/types';
 import IProject from 'Entities/project-entities';
 import {
@@ -12,8 +11,6 @@ import {
   DELETE_PROJECT,
 } from './action-constants';
 import { IProjectState } from './action-types';
-
-const DATA_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
 
 export const addProject = (newProject: IProject): MyModels.IAction<IProject> => ({
   type: ADD_PROJECT,
@@ -56,12 +53,13 @@ export const showError = (): MyModels.IAction<undefined> => ({
 });
 
 export const fetchProjects = (
+  idToken: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
-    const response: Response = await fetch(DATA_URL);
-    const { projects } = await response.json() as IRSCloneTrackingTime;
-    dispatch(fetchProjectsSuccess(projects));
+    const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/projects.json?auth=${idToken}`);
+    const data = await response.json() as IProject[];
+    dispatch(fetchProjectsSuccess(data));
     dispatch(hideLoader());
   } catch (error) {
     dispatch(fetchProjectsFailure(error));

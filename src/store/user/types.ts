@@ -6,9 +6,3 @@ export interface IUserState {
   alertMessage?: string | null;
   errorMessage?: string | null;
 }
-
-export interface TUserLogin {
-  username: string;
-  email: string;
-  password: string;
-}

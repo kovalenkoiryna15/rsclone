@@ -1,9 +1,9 @@
 import * as MyModels from 'Store/types';
-import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
-import { IUser } from 'entities/user-entities';
+// import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
+import { IUser, ID } from 'entities/user-entities';
 import auth from './src/firebase';
-import { TUserLogin, IUserState } from './types';
-import { loginLocal, registerLocal } from '../../services/localStorage-helpers';
+import { IUserState } from './types';
+// import { loginLocal, registerLocal } from '../../services/localStorage-helpers';
 
 import { alertSuccess, alertError } from './alert-action-creators';
 import {
@@ -16,7 +16,12 @@ import {
   LOGOUT,
 } from './action-constants';
 
-export const loginRequest = (user: TUserLogin): MyModels.IAction<TUserLogin> => ({
+export const setUserID = (id: ID): MyModels.IAction<ID> => ({
+  type: LOGIN_REQUEST,
+  payload: id,
+});
+
+export const loginRequest = (user: IUser): MyModels.IAction<IUser> => ({
   type: LOGIN_REQUEST,
   payload: user,
 });
@@ -32,13 +37,22 @@ export const loginFailure = (errorMessage: string): MyModels.IAction<string> => 
 });
 
 export const login = (
-  userData: TUserLogin,
+  userData: IUser,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(loginRequest(userData));
+  // try {
+  //   const response: Response = await loginLocal(userData) as Response;
+  //   const { user } = await response.json() as IRSCloneTrackingTime;
+  //   dispatch(loginSuccess(user));
+  // } catch (error) {
+  //   dispatch(loginFailure(error.message));
+  //   dispatch(alertError(error.toString()));
+  // }
   try {
-    const response: Response = await loginLocal(userData) as Response;
-    const { user } = await response.json() as IRSCloneTrackingTime;
-    dispatch(loginSuccess(user));
+    const { email, password } = userData;
+    await auth.signInWithEmailAndPassword(email, password);
+    dispatch(loginSuccess(userData));
+    dispatch(setUserID(String(auth.currentUser.uid)));
   } catch (error) {
     dispatch(loginFailure(error.message));
     dispatch(alertError(error.toString()));
@@ -80,6 +94,7 @@ export const register = (
     auth.onAuthStateChanged((user) => {
       dispatch(registerSuccess(user));
       dispatch(alertSuccess('Registration successful'));
+      dispatch(setUserID(String(auth.currentUser.uid)));
     });
   } catch (error) {
     dispatch(registerFailure(error.message));

@@ -1,50 +1,35 @@
 import * as React from 'react';
-import { forwardRef } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './DropdownCustom.scss';
-import { ButtonGroup, Dropdown, Button } from 'react-bootstrap';
+import { ButtonGroup, Dropdown } from 'react-bootstrap';
+import { deleteProject } from 'Store/project/actions';
+import * as Types from 'Entities/types';
+import IProject from 'Entities/project-entities';
+import ProjectForm from 'Components/ProjectForm';
 
-type TCustomToggleProps = {
-  children: any;
-  onClick: () => void;
-};
+export default function DropdownCustom({ project }: { project: IProject }): JSX.Element {
+  const dispatch = useDispatch();
+  const [isVisible, setVisible] = useState(false);
+  const { id } = project;
+  const handleDelete = (projectId: Types.ID) => {
+    dispatch(deleteProject(projectId));
+  };
 
-function CustomToggleComponent(
-  { children, onClick }: TCustomToggleProps, ref: React.ReactNode,
-): JSX.Element {
+  const handleShow = () => {
+    setVisible(!isVisible);
+  };
+
   return (
-    <Button
-      type="button"
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-      className="btn-outline-none custom-dropdown"
-    >
-      {children}
-      <span className="three-dots" />
-    </Button>
-  );
-}
-
-const CustomToggle = forwardRef<TCustomToggleProps, React.ReactNode>(CustomToggleComponent);
-
-const handleEdit = (id: string | number) => {
-  console.log('Edit Click', id);
-};
-
-const handleDelete = (id: string | number) => {
-  console.log('Delete Click', id);
-};
-
-export default function DropdownCustom({ id }: { id: string | number }): JSX.Element {
-  return (
-    <Dropdown as={ButtonGroup}>
-      <Dropdown.Toggle as={CustomToggle} />
-      <Dropdown.Menu title="">
-        <Dropdown.Item onClick={(e) => handleEdit(id)}>Edit</Dropdown.Item>
-        <Dropdown.Item onClick={(e) => handleDelete(id)}>Delete</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <>
+      <Dropdown as={ButtonGroup}>
+        <Dropdown.Toggle bsPrefix="btn" className="custom-toggle" variant="default"><span className="three-dots" /></Dropdown.Toggle>
+        <Dropdown.Menu title="">
+          <Dropdown.Item onClick={() => handleShow()}>Edit</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleDelete(id)}>Delete</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <ProjectForm isVisible={isVisible} handleShow={() => handleShow()} projectData={project} />
+    </>
   );
 }

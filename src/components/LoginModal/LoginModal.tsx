@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import * as MyModels from 'Store/types';
@@ -20,14 +19,6 @@ const LoginModal = (): JSX.Element => {
     setRegistered((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   const isloggingIn = useSelector((state: MyModels.RootReducer) => {
-  //     const { user: { loggingIn } } = state;
-  //     return loggingIn;
-  //   });
-  // }, [isloggingIn]);
-
-  console.log(isloggingIn);
   return (
     <Modal
       show={!isloggingIn}

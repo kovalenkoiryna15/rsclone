@@ -1,5 +1,6 @@
 import * as MyModels from 'Store/types';
 import IProject from 'Entities/project-entities';
+import * as Types from 'Entities/types';
 import { IProjectState } from './action-types';
 import {
   ADD_PROJECT,
@@ -22,9 +23,9 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     projects: [...state.projects, action.payload],
   }),
-  [DELETE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
+  [DELETE_PROJECT]: (state, action: MyModels.IAction<Types.ID>) => ({
     ...state,
-    projects: state.projects.filter((project) => project.id !== action.payload.id),
+    projects: state.projects.filter((project) => project.id !== action.payload),
   }),
   [FETCH_PROJECTS_SUCCESS]: (state, action: MyModels.IAction<Array<IProject>>) => ({
     ...state,
@@ -42,10 +43,15 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     error: action.payload,
   }),
-  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
-    ...state,
-    projects: [...state.projects, action.payload],
-  }),
+  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => {
+    const oldProjectIndex = state.projects.findIndex((project) => project.id === action.payload.id);
+    const newStateProjects = [...state.projects];
+    newStateProjects.splice(oldProjectIndex, 1, action.payload);
+    return {
+      ...state,
+      projects: [...newStateProjects],
+    };
+  },
   DEFAULT: (state) => state,
 };
 

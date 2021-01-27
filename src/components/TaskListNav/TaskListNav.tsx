@@ -46,7 +46,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
         return (
           <Nav.Item key={id}>
             <NavLink to={`/projects/${id}`}>{title}</NavLink>
-            <DropdownCustom id={id} />
+            <DropdownCustom project={project} />
           </Nav.Item>
         );
       })

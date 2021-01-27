@@ -13,8 +13,8 @@ const RegisterForm = (): JSX.Element => {
     const { user: { loggingIn } } = state;
     return loggingIn;
   });
-  const emailRef = useRef({ value: '' });
-  const passwordRef = useRef({ value: '' });
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [validated, setValidated] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -23,12 +23,14 @@ const RegisterForm = (): JSX.Element => {
     setSubmitted(true);
     setValidated(true);
 
-    const newUser: IUser = {
-      id: Date.now(),
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-    dispatch(register(newUser));
+    if (emailRef && emailRef.current && passwordRef && passwordRef.current) {
+      const newUser: IUser = {
+        id: Date.now(),
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      };
+      dispatch(register(newUser));
+    }
   };
 
   return (
@@ -40,9 +42,10 @@ const RegisterForm = (): JSX.Element => {
           placeholder="Email"
           required
           name="email"
+          autoComplete="off"
         />
         {
-          submitted && !emailRef.current.value
+          submitted && !emailRef.current?.value
           && <div className="invalid-feedback">Email is required or not valid.</div>
         }
       </Form.Group>
@@ -57,9 +60,10 @@ const RegisterForm = (): JSX.Element => {
           minLength={Number(6)}
           maxLength={Number(15)}
           name="password"
+          autoComplete="off"
         />
         {
-          submitted && !passwordRef.current.value
+          submitted && !passwordRef.current?.value
           && <div className="invalid-feedback">Password is required</div>
         }
         <Form.Text className="text-muted" id="passwordHelpBlock">

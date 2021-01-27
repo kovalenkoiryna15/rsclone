@@ -1,14 +1,16 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Modal } from 'react-bootstrap';
-
+import * as MyModels from 'Store/types';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
-type TLoginModalProps = {
-  isVisible: boolean;
-};
-
-const LoginModal = (props: TLoginModalProps): JSX.Element => {
+const LoginModal = (): JSX.Element => {
+  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
+    const { user: { loggingIn } } = state;
+    return loggingIn;
+  });
   const [registered, setRegistered] = React.useState<boolean>(true);
 
   const handleRegistered = (
@@ -18,10 +20,17 @@ const LoginModal = (props: TLoginModalProps): JSX.Element => {
     setRegistered((prev) => !prev);
   };
 
-  const { isVisible } = props;
+  // useEffect(() => {
+  //   const isloggingIn = useSelector((state: MyModels.RootReducer) => {
+  //     const { user: { loggingIn } } = state;
+  //     return loggingIn;
+  //   });
+  // }, [isloggingIn]);
+
+  console.log(isloggingIn);
   return (
     <Modal
-      show={isVisible}
+      show={!isloggingIn}
       className="login-modal"
       centered
       aria-labelledby="contained-modal-title-vcenter"

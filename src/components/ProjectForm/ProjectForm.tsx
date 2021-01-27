@@ -3,13 +3,14 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import IProject from 'Entities/project-entities';
-import { addProject } from 'Store/project/actions';
+import { addProject, updateProject } from 'Store/project/actions';
 
 interface ProjectFormProps {
   projectData?: IProject;
   isVisible: boolean;
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
   addProject: (newProject: IProject) => void;
+  updateProject: (newProject: IProject) => void;
 }
 
 interface ProjectFormState {
@@ -24,14 +25,29 @@ interface ProjectFormState {
 class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
   constructor(props: ProjectFormProps) {
     super(props);
-    this.state = {
-      id: '',
-      title: '',
-      deadline: undefined,
-      estimatedTime: 0,
-      color: '#000000',
-      validated: false,
-    };
+    const { projectData } = props;
+    if (projectData) {
+      const {
+        id, title, deadline, estimatedTime, color,
+      } = projectData;
+      this.state = {
+        id,
+        title,
+        deadline,
+        estimatedTime,
+        color,
+        validated: false,
+      };
+    } else {
+      this.state = {
+        id: '',
+        title: '',
+        deadline: undefined,
+        estimatedTime: 0,
+        color: '#000000',
+        validated: false,
+      };
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -49,17 +65,17 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
       ...state,
       validated: true,
     }));
-    const { validated } = this.state;
-    if (validated) {
-      const {
-        id, title, deadline, estimatedTime, color,
-      } = this.state;
-      const newProject = {
-        id, title, deadline, estimatedTime, color,
-      };
-      if (!id) {
-        newProject.id = Date.now().toString();
-      }
+
+    const {
+      id, title, deadline, estimatedTime, color,
+    } = this.state;
+    const newProject = {
+      id, title, deadline, estimatedTime, color,
+    };
+    if (id) {
+      this.props.updateProject(newProject);
+    } else {
+      newProject.id = Date.now().toString();
       this.props.addProject(newProject);
     }
   };
@@ -67,16 +83,23 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
   handleClose(
     event: React.MouseEvent<HTMLElement>,
   ) {
-    this.setState((state) => ({
-      ...state,
-      id: '',
-      title: '',
-      deadline: undefined,
-      estimatedTime: 0,
-      color: '#000000',
-      validated: false,
-    }));
-
+    const { projectData } = this.props;
+    if (!projectData) {
+      this.setState((state) => ({
+        ...state,
+        id: '',
+        title: '',
+        deadline: undefined,
+        estimatedTime: 0,
+        color: '#000000',
+        validated: false,
+      }));
+    } else {
+      this.setState((state) => ({
+        ...state,
+        validated: false,
+      }));
+    }
     const { handleShow } = this.props;
     handleShow(event);
   }
@@ -99,6 +122,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
       title, deadline, estimatedTime, color, validated,
     } = this.state;
     const { isVisible } = this.props;
+
     return (
       <Modal
         show={isVisible}
@@ -172,6 +196,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
 
 const mapDispatchToProps = {
   addProject,
+  updateProject,
 };
 
 export default connect(null, mapDispatchToProps)(ProjectForm);

@@ -1,5 +1,6 @@
 import * as MyModels from 'Store/types';
 import IProject from 'Entities/project-entities';
+import * as Types from 'Entities/types';
 import {
   ADD_PROJECT,
   HIDE_LOADER,
@@ -22,9 +23,9 @@ export const updateProject = (project: IProject): MyModels.IAction<IProject> => 
   payload: project,
 });
 
-export const deleteProject = (project: IProject): MyModels.IAction<IProject> => ({
+export const deleteProject = (id: Types.ID): MyModels.IAction<Types.ID> => ({
   type: DELETE_PROJECT,
-  payload: project,
+  payload: id,
 });
 
 export const fetchProjectsSuccess = (projects: IProject[]): MyModels.IAction<Array<IProject>> => ({

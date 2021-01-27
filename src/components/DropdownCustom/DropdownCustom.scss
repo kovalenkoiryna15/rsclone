@@ -5,25 +5,20 @@
   content: "\2807";
 }
 
-.btn-outline-none,
-.btn-outline-none:focus,
-.btn-outline-none:hover,
-.btn-outline-none:active,
-.btn-outline-none:disabled {
+.custom-toggle.btn.btn-default,
+.custom-toggle.btn.btn-default:focus,
+.custom-toggle.btn.btn-default:hover,
+.custom-toggle.btn.btn-default:active {
+  padding: 0;
+  text-decoration: none;
   background: transparent;
-  background-color: transparent;
-  border: none;
-  border-color: transparent;
   outline: none;
   box-shadow: none;
+  transition: none;
 }
 
-.btn-outline-none:hover {
+.custom-toggle.btn.btn-default:hover {
   .three-dots::after {
     color: #d33682;
   }
-}
-
-.custom-dropdown {
-  padding: 0;
 }

@@ -1,9 +1,7 @@
 import * as MyModels from 'Store/types';
-// import IRSCloneTrackingTime from 'Entities/rsclone-tracking-time';
 import { IUser, ID } from 'entities/user-entities';
 import auth from './src/firebase';
 import { IUserState } from './types';
-// import { loginLocal, registerLocal } from '../../services/localStorage-helpers';
 
 import { alertSuccess, alertError } from './alert-action-creators';
 import {
@@ -14,10 +12,15 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
+  SET_USER_ID,
 } from './action-constants';
 
+function isError(error: Error | unknown): error is Error {
+  return (error as Error).message !== undefined;
+}
+
 export const setUserID = (id: ID): MyModels.IAction<ID> => ({
-  type: LOGIN_REQUEST,
+  type: SET_USER_ID,
   payload: id,
 });
 
@@ -40,22 +43,18 @@ export const login = (
   userData: IUser,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(loginRequest(userData));
-  // try {
-  //   const response: Response = await loginLocal(userData) as Response;
-  //   const { user } = await response.json() as IRSCloneTrackingTime;
-  //   dispatch(loginSuccess(user));
-  // } catch (error) {
-  //   dispatch(loginFailure(error.message));
-  //   dispatch(alertError(error.toString()));
-  // }
   try {
     const { email, password } = userData;
     await auth.signInWithEmailAndPassword(email, password);
     dispatch(loginSuccess(userData));
-    dispatch(setUserID(String(auth.currentUser.uid)));
+    if (auth.currentUser) {
+      dispatch(setUserID(String(auth.currentUser.uid)));
+    }
   } catch (error) {
-    dispatch(loginFailure(error.message));
-    dispatch(alertError(error.toString()));
+    if (isError(error)) {
+      dispatch(loginFailure(error.message));
+      dispatch(alertError(error.message));
+    }
   }
 };
 
@@ -64,9 +63,9 @@ export const registerRequest = (user: IUser): MyModels.IAction<IUser> => ({
   payload: user,
 });
 
-export const registerSuccess = (user: IUser): MyModels.IAction<IUser> => ({
+export const registerSuccess = (): MyModels.IAction<undefined> => ({
   type: REGISTER_SUCCESS,
-  payload: user,
+  payload: undefined,
 });
 
 export const registerFailure = (errorMessage: string): MyModels.IAction<string> => ({
@@ -78,27 +77,21 @@ export const register = (
   newUser: IUser,
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(registerRequest(newUser));
-  // try {
-  //   const response: Response = await registerLocal(newUser) as Response;
-  //   const { user } = await response.json() as IRSCloneTrackingTime;
-  //   dispatch(registerSuccess(user));
-  //   dispatch(alertSuccess('Registration successful'));
-  // } catch (error) {
-  //   dispatch(registerFailure(error.message));
-  //   dispatch(alertError(error.toString()));
-  // }
-
   try {
     const { email, password } = newUser;
     await auth.createUserWithEmailAndPassword(email, password);
-    auth.onAuthStateChanged((user) => {
-      dispatch(registerSuccess(user));
+    auth.onAuthStateChanged((/* user */) => {
+      dispatch(registerSuccess());
       dispatch(alertSuccess('Registration successful'));
-      dispatch(setUserID(String(auth.currentUser.uid)));
+      if (auth.currentUser) {
+        dispatch(setUserID(String(auth.currentUser.uid)));
+      }
     });
   } catch (error) {
-    dispatch(registerFailure(error.message));
-    dispatch(alertError(error.toString()));
+    if (isError(error)) {
+      dispatch(registerFailure(error.message));
+      dispatch(alertError(error.message));
+    }
   }
 };
 

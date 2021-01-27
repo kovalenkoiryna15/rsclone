@@ -21,15 +21,17 @@ export default function App(): JSX.Element {
 
   useEffect(() => {
     if (isloggingIn) {
-      console.log(auth.currentUser);
-      auth.currentUser.getIdToken(/* forceRefresh */ true)
-        .then((idToken) => {
-          console.log(idToken);
-          dispatch(fetchProjects(idToken));
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+      if (auth.currentUser) {
+        auth.currentUser.getIdToken(/* forceRefresh */ true)
+          .then((idToken) => {
+            dispatch(fetchProjects(idToken));
+          })
+          .catch((error: Error | null) => {
+            if (error && 'message' in error) {
+              console.log(error.message);
+            }
+          });
+      }
     }
     dispatch(fetchTasksJSON());
     // eslint-disable-next-line
@@ -39,7 +41,7 @@ export default function App(): JSX.Element {
     <Container fluid className="app-container">
       <Header />
       <MainView />
-      <LoginModal isVisible={!isloggingIn} />
+      <LoginModal />
       <Footer />
     </Container>
   );

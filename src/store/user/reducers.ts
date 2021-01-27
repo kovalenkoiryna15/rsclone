@@ -46,9 +46,8 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     user: action.payload,
     loggingIn: false,
   }),
-  [REGISTER_SUCCESS]: (state, action: MyModels.IAction<IUser>) => ({
+  [REGISTER_SUCCESS]: (state) => ({
     ...state,
-    user: action.payload,
     loggingIn: true,
   }),
   [LOGIN_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({

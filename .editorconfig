@@ -88,7 +88,7 @@ ij_xml_space_around_equals_in_attribute = false
 ij_xml_space_inside_empty_tag = false
 ij_xml_text_wrap = normal
 
-[{*.ats,*.ts}]
+[{*.ats,*.ts,*.tsx}]
 ij_continuation_indent_size = 2
 ij_visual_guides = none
 ij_typescript_align_imports = false
@@ -257,7 +257,7 @@ ij_typescript_while_brace_force = if_multiline
 ij_typescript_while_on_new_line = false
 ij_typescript_wrap_comments = true
 
-[{*.cjs,*.js}]
+[{*.cjs,*.js,*.jsx}]
 ij_continuation_indent_size = 2
 ij_visual_guides = none
 ij_javascript_align_imports = false

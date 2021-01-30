@@ -15,12 +15,12 @@ export interface IHandlers<S, P> {
   [key: string]: Reducer<S, P>,
 }
 
-export type AsyncDispatch<T, P> = (
+export type AsyncDispatch<T, P> = Promise<void> | ((
   dispatch: ThunkDispatch<T, any, IAction<P>>,
   getState: () => {
     [key: string]: T,
   },
-) => Promise<void>;
+) => Promise<void>);
 
 export interface RootState {
   firebase: IFirebaseState,

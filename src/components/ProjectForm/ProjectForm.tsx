@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import IProject from 'Entities/project-entities';
 import { addProject, updateProject } from 'Store/project/actions';
 
-interface ProjectFormProps {
+interface IProjectFormProps {
   projectData?: IProject;
   isVisible: boolean;
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
@@ -13,40 +13,30 @@ interface ProjectFormProps {
   updateProject: (newProject: IProject) => void;
 }
 
-interface ProjectFormState {
-  id: string;
-  title: string;
-  deadline?: string;
-  estimatedTime?: number;
-  color?: string;
+interface IProjectFormState extends IProject {
   validated: boolean;
 }
 
-class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
-  constructor(props: ProjectFormProps) {
+const initialState: Readonly<IProjectFormState> = {
+  id: '',
+  title: '',
+  color: '#000',
+  deadline: undefined,
+  estimatedTime: 0,
+  validated: false,
+};
+
+class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> {
+  constructor(props: IProjectFormProps) {
     super(props);
     const { projectData } = props;
     if (projectData) {
-      const {
-        id, title, deadline, estimatedTime, color,
-      } = projectData;
       this.state = {
-        id,
-        title,
-        deadline,
-        estimatedTime,
-        color,
+        ...projectData,
         validated: false,
       };
     } else {
-      this.state = {
-        id: '',
-        title: '',
-        deadline: undefined,
-        estimatedTime: 0,
-        color: '#000000',
-        validated: false,
-      };
+      this.state = initialState;
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -56,7 +46,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -87,12 +77,7 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
     if (!projectData) {
       this.setState((state) => ({
         ...state,
-        id: '',
-        title: '',
-        deadline: undefined,
-        estimatedTime: 0,
-        color: '#000000',
-        validated: false,
+        ...initialState,
       }));
     } else {
       this.setState((state) => ({

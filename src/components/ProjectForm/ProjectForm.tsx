@@ -2,8 +2,26 @@ import * as React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import IProject from 'Entities/project-entities';
+import IProject, { ProjectView } from 'Entities/project-entities';
+import * as Types from 'Entities/types';
 import { addProject, updateProject } from 'Store/project/actions';
+
+const MILLISECONDS_IN_HOUR = 3.6E6;
+const MILLISECONDS_IN_MINUTE = 60E3;
+
+const addLeadingZero = (value: number): string => `${value < 10 ? '0' : ''}${value}`;
+
+function parseToNumberOfMS(/* hh:mm */ time: string) {
+  const hours = time.split(':')[0];
+  const minutes = time.split(':')[1];
+  return Number(hours) * MILLISECONDS_IN_HOUR + Number(minutes) * MILLISECONDS_IN_MINUTE;
+}
+
+function parseToTime(/* ms */ time: number) {
+  const hours = Math.trunc(time / MILLISECONDS_IN_HOUR);
+  const minutes = Math.trunc((time - hours * MILLISECONDS_IN_HOUR) / MILLISECONDS_IN_MINUTE);
+  return `${addLeadingZero(hours)}:${addLeadingZero(minutes)}`;
+}
 
 interface IProjectFormProps {
   projectData?: IProject;
@@ -13,16 +31,18 @@ interface IProjectFormProps {
   updateProject: (newProject: IProject) => void;
 }
 
-interface IProjectFormState extends IProject {
+interface IProjectFormState extends Omit<IProject, 'deadline' | 'estimatedTime'> {
+  deadline?: string;
+  estimatedTime?: string;
   validated: boolean;
 }
 
 const initialState: Readonly<IProjectFormState> = {
   id: '',
   title: '',
-  color: '#000',
-  deadline: undefined,
-  estimatedTime: 0,
+  color: '#000000',
+  deadline: '',
+  estimatedTime: '00:00',
   validated: false,
 };
 
@@ -31,9 +51,12 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     super(props);
     const { projectData } = props;
     if (projectData) {
+      const { deadline, estimatedTime } = projectData;
       this.state = {
         ...projectData,
         validated: false,
+        deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
+        estimatedTime: estimatedTime ? parseToTime(estimatedTime) : '',
       };
     } else {
       this.state = initialState;
@@ -59,13 +82,23 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     const {
       id, title, deadline, estimatedTime, color,
     } = this.state;
+
     const newProject = {
-      id, title, deadline, estimatedTime, color,
+      id,
+      title,
+      deadline: deadline ? new Date(deadline) : undefined,
+      estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : undefined,
+      color,
     };
     if (id) {
       this.props.updateProject(newProject);
     } else {
-      newProject.id = Date.now().toString();
+      const createdID = Date.now().toString();
+      this.setState((state) => ({
+        ...state,
+        id: createdID,
+      }));
+      newProject.id = createdID;
       this.props.addProject(newProject);
     }
   };
@@ -104,10 +137,13 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
 
   render() {
     const {
-      title, deadline, estimatedTime, color, validated,
+      title,
+      deadline,
+      estimatedTime,
+      color,
+      validated,
     } = this.state;
     const { isVisible } = this.props;
-
     return (
       <Modal
         show={isVisible}
@@ -129,7 +165,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               <Form.Control
                 name="title"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                placeholder="title"
+                placeholder="Title"
                 required
                 type="text"
                 value={title}

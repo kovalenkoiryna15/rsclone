@@ -7,10 +7,9 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
 const LoginModal = (): JSX.Element => {
-  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
-    const { user: { loggingIn } } = state;
-    return loggingIn;
-  });
+  const isloggingIn = useSelector(
+    ({ user: { loggingIn } }: MyModels.RootReducer) => loggingIn,
+  );
   const [registered, setRegistered] = React.useState<boolean>(true);
 
   const handleRegistered = (
@@ -29,7 +28,7 @@ const LoginModal = (): JSX.Element => {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="text-center">
-          RSClone
+          RSClone Tracking Time
           &#8194;
           <span className="text-uppercase">Tracking Time</span>
         </Modal.Title>

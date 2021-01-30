@@ -32,11 +32,7 @@ export default function App(): JSX.Element {
               dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
             }
           })
-          .catch((error: Error) => {
-            if (error && 'message' in error) {
-              console.log(error.message);
-            }
-          });
+          .catch(() => {});
       }
     }
     dispatch(fetchTasksJSON());

@@ -26,7 +26,7 @@ export default function App(): JSX.Element {
           .then((idToken) => {
             dispatch(fetchProjects(idToken));
           })
-          .catch((error: Error | null) => {
+          .catch((error: Error) => {
             if (error && 'message' in error) {
               console.log(error.message);
             }

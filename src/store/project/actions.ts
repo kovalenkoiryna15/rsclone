@@ -53,6 +53,11 @@ export const showError = (): MyModels.IAction<undefined> => ({
   payload: undefined,
 });
 
+const parseProject = (data: IProject): IProject => ({
+  ...data,
+  deadline: data.deadline ? new Date(data.deadline) : undefined,
+});
+
 export const fetchProjects = (
   idToken: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
@@ -60,7 +65,8 @@ export const fetchProjects = (
     dispatch(showLoader());
     const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/projects.json?auth=${idToken}`);
     const data = await response.json() as IProject[];
-    dispatch(fetchProjectsSuccess(data));
+    const parsedData = data.map((item: IProject) => parseProject(item));
+    dispatch(fetchProjectsSuccess(parsedData));
     dispatch(hideLoader());
   } catch (error) {
     dispatch(fetchProjectsFailure(error));

@@ -177,7 +177,10 @@ class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {
                 value={color}
               />
             </Form.Group>
-            <Button variant="secondary" onClick={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}>
+            <Button
+              variant="secondary"
+              onClick={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
+            >
               Close
             </Button>
             <Button

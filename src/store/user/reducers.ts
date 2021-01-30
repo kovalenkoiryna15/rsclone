@@ -23,13 +23,13 @@ const initialState: IUserState = {
 };
 
 const handlers: MyModels.IHandlers<IUserState, any> = {
-  [ALERT_SUCCESS]: (state, action: MyModels.IAction<string>) => ({
+  [ALERT_SUCCESS]: (state, { payload: message }: MyModels.IAction<string>) => ({
     ...state,
-    alertMessage: action.payload,
+    alertMessage: message,
   }),
-  [ALERT_ERROR]: (state, action: MyModels.IAction<string>) => ({
+  [ALERT_ERROR]: (state, { payload: message }: MyModels.IAction<string>) => ({
     ...state,
-    alertMessage: action.payload,
+    alertMessage: message,
   }),
   [SET_USER_ID]: (state, { payload: id }: MyModels.IAction<Types.ID>) => {
     const { user } = state;
@@ -42,23 +42,23 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
       user: newUser,
     };
   },
-  [REGISTER_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({
+  [REGISTER_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
-    user: action.payload,
+    user,
     loggingIn: false,
   }),
   [REGISTER_SUCCESS]: (state) => ({
     ...state,
     loggingIn: true,
   }),
-  [LOGIN_REQUEST]: (state, action: MyModels.IAction<IUser>) => ({
+  [LOGIN_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
-    user: action.payload,
+    user,
     loggingIn: false,
   }),
-  [LOGIN_SUCCESS]: (state, action: MyModels.IAction<IUser>) => ({
+  [LOGIN_SUCCESS]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
-    user: action.payload,
+    user,
     loggingIn: true,
   }),
   DEFAULT: (state) => state,

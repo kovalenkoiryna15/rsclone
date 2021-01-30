@@ -1,8 +1,8 @@
+import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
-import { IUser, ID } from 'entities/user-entities';
+import IUser from 'Entities/user-entities';
 import auth from './src/firebase';
-import { IUserState } from './types';
-
+import { IUserState } from './action-types';
 import { alertSuccess, alertError } from './alert-action-creators';
 import {
   REGISTER_REQUEST,
@@ -19,7 +19,7 @@ function isError(error: Error | unknown): error is Error {
   return (error as Error).message !== undefined;
 }
 
-export const setUserID = (id: ID): MyModels.IAction<ID> => ({
+export const setUserID = (id: Types.ID): MyModels.IAction<Types.ID> => ({
   type: SET_USER_ID,
   payload: id,
 });

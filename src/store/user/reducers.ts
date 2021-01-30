@@ -1,6 +1,7 @@
 import * as MyModels from 'Store/types';
-import { IUser, ID } from 'Entities/user-entities';
-import { IUserState } from 'Store/user/types';
+import * as Types from 'Entities/types';
+import IUser from 'Entities/user-entities';
+import { IUserState } from 'Store/user/action-types';
 import { ALERT_SUCCESS, ALERT_ERROR } from './alert-action-constants';
 import {
   REGISTER_SUCCESS,
@@ -17,8 +18,8 @@ export const initialUserState: IUserState = {
     password: '',
   },
   loggingIn: false,
-  alertMessage: null,
-  errorMessage: null,
+  alertMessage: undefined,
+  errorMessage: undefined,
 };
 
 const handlers: MyModels.IHandlers<IUserState, any> = {
@@ -30,11 +31,11 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     ...state,
     alertMessage: action.payload,
   }),
-  [SET_USER_ID]: (state, action: MyModels.IAction<ID>) => {
+  [SET_USER_ID]: (state, { payload: id }: MyModels.IAction<Types.ID>) => {
     const { user } = state;
     const newUser = {
       ...user,
-      id: action.payload,
+      id,
     };
     return {
       ...state,

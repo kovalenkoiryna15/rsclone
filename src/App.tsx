@@ -34,7 +34,6 @@ export default function App(): JSX.Element {
       }
     }
     dispatch(fetchTasksJSON());
-    // eslint-disable-next-line
   }, [isloggingIn]);
 
   return (

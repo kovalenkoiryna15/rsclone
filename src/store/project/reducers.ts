@@ -1,7 +1,6 @@
-import * as MyModels from 'Store/types';
 import IProject from 'Entities/project-entities';
 import * as Types from 'Entities/types';
-import { IProjectState } from './action-types';
+import * as MyModels from 'Store/types';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -11,6 +10,7 @@ import {
   SHOW_LOADER,
   UPDATE_PROJECT,
 } from './action-constants';
+import { IProjectState } from './action-types';
 
 const initialState = {
   error: null,

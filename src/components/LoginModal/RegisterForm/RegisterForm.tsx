@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
 import IUser from 'Entities/user-entities';
 import * as MyModels from 'Store/types';

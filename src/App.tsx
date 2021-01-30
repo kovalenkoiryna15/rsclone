@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import auth from 'Store/user/src/firebase';
 import Container from 'react-bootstrap/Container';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Footer from 'Components/Footer';
-import * as MyModels from 'Store/types';
 import Header from 'Components/Header';
-import MainView from 'Components/MainView';
-import { fetchTasksJSON } from 'Store/task/actions';
 import LoginModal from 'Components/LoginModal';
+import MainView from 'Components/MainView';
 import { fetchProjects } from 'Store/project/actions';
+import { fetchTasksJSON } from 'Store/task/actions';
+import * as MyModels from 'Store/types';
+import auth from 'Store/user/src/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();

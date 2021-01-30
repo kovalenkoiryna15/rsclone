@@ -1,7 +1,7 @@
-export interface IUser {
-  id: ID;
+import * as Types from './types';
+
+export default interface IUser {
+  id: Types.ID;
   email: string;
   password: string;
 }
-
-export type ID = string | number;

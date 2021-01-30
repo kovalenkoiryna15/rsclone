@@ -20,7 +20,9 @@
       "jsx": true
     },
     "ecmaVersion": 12,
-    "project": [ "tsconfig.json" ],
+    "project": [
+      "tsconfig.json"
+    ],
     "sourceType": "module"
   },
   "plugins": [
@@ -53,7 +55,8 @@
           ".tsx"
         ]
       }
-    ]
+    ],
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "settings": {
     "import/resolver": {

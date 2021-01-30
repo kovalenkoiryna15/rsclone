@@ -8,7 +8,7 @@ import RegisterForm from './RegisterForm';
 
 const LoginModal = (): JSX.Element => {
   const isAuth = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootReducer) => isAuthorized,
+    ({ user: { isAuthorized } }: MyModels.RootState) => isAuthorized,
   );
   const [registered, setRegistered] = React.useState<boolean>(true);
 

@@ -10,7 +10,7 @@ import { register } from 'Store/user/actions';
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedUp = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootReducer): boolean => isAuthorized,
+    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized,
   );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

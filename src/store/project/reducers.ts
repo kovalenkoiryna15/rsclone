@@ -19,17 +19,17 @@ const initialState: IProjectState = {
 };
 
 const handlers: MyModels.IHandlers<IProjectState, any> = {
-  [ADD_PROJECT]: (state, action: MyModels.IAction<IProject>) => ({
+  [ADD_PROJECT]: (state, { payload: project }: MyModels.IAction<IProject>) => ({
     ...state,
-    projects: [...state.projects, action.payload],
+    projects: [...state.projects, project],
   }),
-  [DELETE_PROJECT]: (state, action: MyModels.IAction<Types.ID>) => ({
+  [DELETE_PROJECT]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,
-    projects: state.projects.filter((project) => project.id !== action.payload),
+    projects: state.projects.filter((project) => project.id !== id),
   }),
-  [FETCH_PROJECTS_SUCCESS]: (state, action: MyModels.IAction<Array<IProject>>) => ({
+  [FETCH_PROJECTS_SUCCESS]: (state, { payload: projects }: MyModels.IAction<Array<IProject>>) => ({
     ...state,
-    projects: action.payload,
+    projects,
   }),
   [HIDE_LOADER]: (state) => ({
     ...state,
@@ -39,14 +39,16 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     isLoading: true,
   }),
-  [SHOW_ERROR]: (state, action: MyModels.IAction<Error>) => ({
+  [SHOW_ERROR]: (state, { payload: error }: MyModels.IAction<Error>) => ({
     ...state,
-    error: action.payload,
+    error,
   }),
-  [UPDATE_PROJECT]: (state, action: MyModels.IAction<IProject>) => {
-    const oldProjectIndex = state.projects.findIndex((project) => project.id === action.payload.id);
+  [UPDATE_PROJECT]: (state, { payload }: MyModels.IAction<IProject>) => {
+    const oldProjectIndex = state.projects.findIndex(
+      (project) => project.id === payload.id,
+    );
     const newStateProjects = [...state.projects];
-    newStateProjects.splice(oldProjectIndex, 1, action.payload);
+    newStateProjects.splice(oldProjectIndex, 1, payload);
     return {
       ...state,
       projects: [...newStateProjects],

@@ -14,13 +14,13 @@ import auth from 'Store/user/src/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();
-  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
-    const { user: { loggingIn } } = state;
-    return loggingIn;
+  const isAuth = useSelector((state: MyModels.RootReducer) => {
+    const { user: { isAuthorized } } = state;
+    return isAuthorized;
   });
 
   useEffect(() => {
-    if (isloggingIn) {
+    if (isAuth) {
       if (auth.currentUser) {
         auth.currentUser.getIdToken(/* forceRefresh */ true)
           .then((idToken) => {
@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
       }
     }
     dispatch(fetchTasksJSON());
-  }, [isloggingIn]);
+  }, [isAuth]);
 
   return (
     <Container fluid className="app-container">

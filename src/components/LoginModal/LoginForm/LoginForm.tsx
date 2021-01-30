@@ -8,9 +8,8 @@ import { login } from 'Store/user/actions';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
-  const isloggingIn: boolean = useSelector(
-    ({ user: { loggingIn } }: MyModels.RootReducer) => loggingIn,
-  );
+  const isSignedIn = useSelector(
+    ({ user: { isAuthorized } }: MyModels.RootReducer): boolean => isAuthorized  );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [validated, setValidated] = useState<boolean>(false);
@@ -72,7 +71,7 @@ const LoginForm = (): JSX.Element => {
         }
       </Form.Group>
       <Button
-        disabled={isloggingIn}
+        disabled={isSignedIn}
         variant="primary"
         type="submit"
         className="text-uppercase"

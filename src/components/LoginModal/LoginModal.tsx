@@ -7,8 +7,8 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
 const LoginModal = (): JSX.Element => {
-  const isloggingIn = useSelector(
-    ({ user: { loggingIn } }: MyModels.RootReducer) => loggingIn,
+  const isAuth = useSelector(
+    ({ user: { isAuthorized } }: MyModels.RootReducer) => isAuthorized,
   );
   const [registered, setRegistered] = React.useState<boolean>(true);
 
@@ -21,7 +21,7 @@ const LoginModal = (): JSX.Element => {
 
   return (
     <Modal
-      show={!isloggingIn}
+      show={!isAuth}
       className="login-modal"
       centered
       aria-labelledby="contained-modal-title-vcenter"

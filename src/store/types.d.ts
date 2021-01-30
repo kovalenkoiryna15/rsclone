@@ -3,7 +3,7 @@ import { IFirebaseState } from 'Store/firebase/action-types';
 
 import { IProjectState } from 'Store/project/action-types';
 import { ITaskState } from 'Store/task/action-types';
-import { IUserState } from './user/types';
+import { IUserState } from './user/action-types';
 
 export interface IAction<P> {
   type: string,

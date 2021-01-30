@@ -1,6 +1,6 @@
 import IProject from 'Entities/project-entities';
 import ITask from 'Entities/task-entities';
-import { IUser } from './user-entities';
+import IUser from 'Entities/user-entities';
 
 interface IRSCloneTrackingTime {
   user: IUser;

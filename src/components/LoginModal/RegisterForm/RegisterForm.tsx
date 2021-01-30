@@ -3,9 +3,9 @@ import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
 
+import IUser from 'Entities/user-entities';
 import * as MyModels from 'Store/types';
 import { register } from 'Store/user/actions';
-import { IUser } from 'Entities/user-entities';
 
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();

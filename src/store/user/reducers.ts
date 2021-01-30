@@ -17,7 +17,7 @@ const initialState: IUserState = {
     email: '',
     password: '',
   },
-  loggingIn: false,
+  isAuthorized: false,
   alertMessage: undefined,
   errorMessage: undefined,
 };
@@ -45,21 +45,21 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
   [REGISTER_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
     user,
-    loggingIn: false,
+    isAuthorized: false,
   }),
   [REGISTER_SUCCESS]: (state) => ({
     ...state,
-    loggingIn: true,
+    isAuthorized: true,
   }),
   [LOGIN_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
     user,
-    loggingIn: false,
+    isAuthorized: false,
   }),
   [LOGIN_SUCCESS]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
     ...state,
     user,
-    loggingIn: true,
+    isAuthorized: true,
   }),
   DEFAULT: (state) => state,
 };

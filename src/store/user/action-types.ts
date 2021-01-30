@@ -2,7 +2,7 @@ import IUser from 'Entities/user-entities';
 
 export interface IUserState {
   user: IUser;
-  loggingIn: boolean;
+  isAuthorized: boolean;
   alertMessage?: string;
   errorMessage?: string;
 }

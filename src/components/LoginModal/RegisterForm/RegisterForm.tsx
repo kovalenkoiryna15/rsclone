@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,35 +9,43 @@ import { register } from 'Store/user/actions';
 
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();
-  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
-    const { user: { loggingIn } } = state;
-    return loggingIn;
-  });
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const [validated, setValidated] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const isSignedUp = useSelector(
+    ({ user: { isAuthorized } }: MyModels.RootReducer): boolean => isAuthorized,
+  );
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [validated, setValidated] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitted(true);
     setValidated(true);
 
-    if (emailRef && emailRef.current && passwordRef && passwordRef.current) {
+    if (email && password) {
       const newUser: IUser = {
-        id: Date.now().toString(),
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
+        id: '',
+        email,
+        password,
       };
       dispatch(register(newUser));
     }
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
   };
 
   return (
     <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
         <Form.Control
-          ref={emailRef}
+          value={email}
+          onChange={handleEmailChange}
           type="email"
           placeholder="Email"
           required
@@ -45,13 +53,14 @@ const RegisterForm = (): JSX.Element => {
           autoComplete="off"
         />
         {
-          submitted && !emailRef.current?.value
+          submitted && !email
           && <div className="invalid-feedback">Email is required or not valid.</div>
         }
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Control
-          ref={passwordRef}
+          value={password}
+          onChange={handlePasswordChange}
           type="password"
           placeholder="Password"
           aria-describedby="passwordHelpBlock"
@@ -63,7 +72,7 @@ const RegisterForm = (): JSX.Element => {
           autoComplete="off"
         />
         {
-          submitted && !passwordRef.current?.value
+          submitted && !password
           && <div className="invalid-feedback">Password is required</div>
         }
         <Form.Text className="text-muted" id="passwordHelpBlock">
@@ -71,7 +80,7 @@ const RegisterForm = (): JSX.Element => {
           and contain at least one number and one uppercase letter.
         </Form.Text>
       </Form.Group>
-      <Button disabled={isloggingIn} variant="primary" type="submit" className="text-uppercase">Sign up</Button>
+      <Button disabled={isSignedUp} variant="primary" type="submit" className="text-uppercase">Sign up</Button>
     </Form>
   );
 };

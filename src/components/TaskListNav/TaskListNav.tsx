@@ -9,18 +9,18 @@ import ProjectForm from 'Components/ProjectForm';
 import IProject from 'Entities/project-entities';
 import DropdownCustom from 'Components/DropdownCustom/index';
 
-interface TaskListNavState {
+interface ITaskListNavState {
   isVisible: boolean;
 }
 
-interface TaskListNavProps {
+interface ITaskListNavProps {
   projects: IProject[];
   isLoading: boolean;
-  error: Error | null;
+  error?: Error;
 }
 
-class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
-  constructor(props: TaskListNavProps) {
+class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> {
+  constructor(props: ITaskListNavProps) {
     super(props);
     this.state = {
       isVisible: false,

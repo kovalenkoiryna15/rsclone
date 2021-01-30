@@ -25,7 +25,7 @@ const RegisterForm = (): JSX.Element => {
 
     if (emailRef && emailRef.current && passwordRef && passwordRef.current) {
       const newUser: IUser = {
-        id: Date.now(),
+        id: Date.now().toString(),
         email: emailRef.current.value,
         password: passwordRef.current.value,
       };

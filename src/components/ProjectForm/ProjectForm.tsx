@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import IProject from 'Entities/project-entities';

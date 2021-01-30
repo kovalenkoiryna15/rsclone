@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
 import { Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
 import * as MyModels from 'Store/types';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';

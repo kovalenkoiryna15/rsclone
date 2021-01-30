@@ -73,9 +73,7 @@ class TaskListNav extends React.Component<TaskListNavProps, TaskListNavState> {
           <Nav.Item>
             <Nav.Link>Projects</Nav.Link>
           </Nav.Item>
-          <Button
-            onClick={() => this.handleShow()}
-          >
+          <Button onClick={() => this.handleShow()}>
             Add Project
           </Button>
           <br />

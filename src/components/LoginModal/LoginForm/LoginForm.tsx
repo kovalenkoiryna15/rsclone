@@ -72,7 +72,14 @@ const LoginForm = (): JSX.Element => {
           && <div className="invalid-feedback">Password is required</div>
         }
       </Form.Group>
-      <Button disabled={isloggingIn} variant="primary" type="submit" className="text-uppercase">Login</Button>
+      <Button
+        disabled={isloggingIn}
+        variant="primary"
+        type="submit"
+        className="text-uppercase"
+      >
+        Login
+      </Button>
     </Form>
   );
 };

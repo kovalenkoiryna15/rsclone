@@ -8,10 +8,9 @@ import { login } from 'Store/user/actions';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
-  const isloggingIn = useSelector((state: MyModels.RootReducer) => {
-    const { user: { loggingIn } } = state;
-    return loggingIn;
-  });
+  const isloggingIn: boolean = useSelector(
+    ({ user: { loggingIn } }: MyModels.RootReducer) => loggingIn,
+  );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [validated, setValidated] = useState<boolean>(false);

@@ -12,10 +12,10 @@ import {
 } from './action-constants';
 import { IProjectState } from './action-types';
 
-const initialState = {
-  error: null,
+const initialState: IProjectState = {
+  projects: [] as Array<IProject>,
   isLoading: false,
-  projects: [],
+  error: undefined,
 };
 
 const handlers: MyModels.IHandlers<IProjectState, any> = {

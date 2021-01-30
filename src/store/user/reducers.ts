@@ -11,7 +11,7 @@ import {
   SET_USER_ID,
 } from './action-constants';
 
-export const initialUserState: IUserState = {
+const initialState: IUserState = {
   user: {
     id: '',
     email: '',
@@ -33,7 +33,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
   }),
   [SET_USER_ID]: (state, { payload: id }: MyModels.IAction<Types.ID>) => {
     const { user } = state;
-    const newUser = {
+    const newUser: IUser = {
       ...user,
       id,
     };
@@ -65,7 +65,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
 };
 
 const userReducer: MyModels.Reducer<IUserState, any> = (
-  state = initialUserState, action,
+  state = initialState, action,
 ) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);

@@ -14,7 +14,7 @@ import auth from 'Store/user/src/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: MyModels.RootReducer) => {
+  const isAuth = useSelector((state: MyModels.RootState) => {
     const { user: { isAuthorized } } = state;
     return isAuthorized;
   });

@@ -85,7 +85,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
   }
 }
 
-function mapStateToProps(state: MyModels.RootReducer) {
+function mapStateToProps(state: MyModels.RootState) {
   const { projects: { projects, isLoading, error } } = state;
   return { projects, isLoading, error };
 }

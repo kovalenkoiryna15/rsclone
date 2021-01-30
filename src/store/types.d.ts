@@ -22,7 +22,7 @@ export type AsyncDispatch<T, P> = (
   },
 ) => Promise<void>;
 
-export interface RootReducer {
+export interface RootState {
   firebase: IFirebaseState,
   projects: IProjectState,
   tasks: ITaskState,

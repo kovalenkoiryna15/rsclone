@@ -3,7 +3,7 @@ import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
 import * as React from 'react';
 import { IProjectState } from 'Store/project/action-types';
-import { ITaskState } from 'Store/task/action-types';
+import { TasksState } from 'Store/task/action-types';
 import * as MyModels from 'Store/types';
 import { IAction } from 'Store/types';
 import {
@@ -30,7 +30,7 @@ export const setTitle = (title: string): IAction<string> => ({
   payload: title,
 });
 
-export const addTask = (title: string): MyModels.AsyncDispatch<ITaskState, any> => async (
+export const addTask = (title: string): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
@@ -50,7 +50,7 @@ export const addTask = (title: string): MyModels.AsyncDispatch<ITaskState, any> 
   dispatch(hideLoader());
 };
 
-export const fetchTasksFirebase = (): MyModels.AsyncDispatch<ITaskState, any> => async (
+export const fetchTasksFirebase = (): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
@@ -62,7 +62,7 @@ export const fetchTasksFirebase = (): MyModels.AsyncDispatch<ITaskState, any> =>
   dispatch(hideLoader());
 };
 
-export const toggleCompleteTask = (id: Types.ID): MyModels.AsyncDispatch<ITaskState, any> => async (
+export const toggleCompleteTask = (id: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch, getState,
 ) => {
   dispatch(showLoader());
@@ -79,7 +79,7 @@ export const toggleCompleteTask = (id: Types.ID): MyModels.AsyncDispatch<ITaskSt
   }
 };
 
-export const removeTask = (id: Types.ID): MyModels.AsyncDispatch<ITaskState, any> => async (
+export const removeTask = (id: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());

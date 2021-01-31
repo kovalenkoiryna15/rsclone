@@ -89,9 +89,15 @@ export const writeProject = (
   newProject: IProject,
   userId: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async () => {
-  const { id }: { id: Types.ID} = newProject as { id: Types.ID};
+  const { id, deadline }: {
+    id: Types.ID, deadline: Date | null,
+  } = newProject as { id: Types.ID, deadline: Date | null};
+  const parsedProject = {
+    ...newProject,
+    deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
+  };
   try {
-    await database.ref(`${userId}/projects/${id}`).set(newProject);
+    await database.ref(`${userId}/projects/${id}`).set(parsedProject);
   } catch (error) {
     console.log(error);
   }

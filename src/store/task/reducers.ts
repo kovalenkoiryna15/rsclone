@@ -2,7 +2,7 @@ import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
 import ITask from 'Entities/task-entities';
 import {
-  ADD_TASK, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE,
+  ADD, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE,
 } from './action-constants';
 import { TasksState } from './action-types';
 
@@ -12,7 +12,7 @@ const initialState: TasksState = {
 };
 
 const handlers: MyModels.IHandlers<TasksState, any> = {
-  [ADD_TASK]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
+  [ADD]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
   }),

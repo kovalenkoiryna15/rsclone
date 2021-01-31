@@ -4,14 +4,14 @@ import ITask from 'Entities/task-entities';
 import {
   ADD_TASK, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK,
 } from './action-constants';
-import { ITaskState } from './action-types';
+import { TasksState } from './action-types';
 
-const initialState: ITaskState = {
+const initialState: TasksState = {
   tasks: [],
   newTaskTitle: '',
 };
 
-const handlers: MyModels.IHandlers<ITaskState, any> = {
+const handlers: MyModels.IHandlers<TasksState, any> = {
   [ADD_TASK]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
@@ -35,7 +35,7 @@ const handlers: MyModels.IHandlers<ITaskState, any> = {
   DEFAULT: (state) => state,
 };
 
-const tasksReducer: MyModels.Reducer<ITaskState, any> = (state = initialState, action) => {
+const tasksReducer: MyModels.Reducer<TasksState, any> = (state = initialState, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

@@ -2,7 +2,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { IFirebaseState } from 'Store/firebase/action-types';
 
 import { IProjectState } from 'Store/project/action-types';
-import { ITaskState } from 'Store/task/action-types';
+import { TasksState } from 'Store/task/action-types';
 import { IUserState } from './user/action-types';
 
 export interface IAction<P> {
@@ -25,6 +25,6 @@ export type AsyncDispatch<T, P> = (
 export interface RootState {
   firebase: IFirebaseState,
   projects: IProjectState,
-  tasks: ITaskState,
+  tasks: TasksState,
   user: IUserState,
 }

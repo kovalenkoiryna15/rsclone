@@ -1,13 +1,18 @@
 import * as React from 'react';
 import ITask from 'Entities/task-entities';
-import { ITaskState } from 'Store/task/action-types';
+import { TasksState } from 'Store/task/action-types';
 import * as MyModels from 'Store/types';
 import * as Types from 'Entities/types';
 
 interface ITaskItemProps {
   task: ITask;
+<<<<<<< HEAD
   removeTask: (id: Types.ID) => void;
   toggleCompleteTask: (id: Types.ID) => void;
+=======
+  removeTask(id: Types.ID): MyModels.AsyncDispatch<TasksState, any>,
+  toggleCompleteTask(id: Types.ID): MyModels.AsyncDispatch<TasksState, any>,
+>>>>>>> refactor: replace interface 'ITaskState' with type 'TasksState'
 }
 
 function TaskItem({

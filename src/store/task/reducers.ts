@@ -2,7 +2,7 @@ import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
 import ITask from 'Entities/task-entities';
 import {
-  ADD_TASK, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK,
+  ADD_TASK, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE,
 } from './action-constants';
 import { TasksState } from './action-types';
 
@@ -32,6 +32,7 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
       return task;
     }),
   }),
+  [FETCH_TASKS_FAILURE]: (state) => state,
   DEFAULT: (state) => state,
 };
 

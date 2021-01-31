@@ -47,11 +47,11 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <Container fluid className="app-container">
+    <>
       <Header />
       <MainView />
       <LoginModal />
       <Footer />
-    </Container>
+    </>
   );
 }

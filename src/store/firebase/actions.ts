@@ -46,15 +46,17 @@ const parseTask = (data: FirebaseData<ITask>) => Object.entries(data)
   ]) => ({
     id: key,
     deadline: deadline ? new Date(deadline) : deadline,
-    timeEntries: timeEntries.map(
-      ({
-        startDate,
-        ...timeEntryRest
-      }: ITimeEntry) => ({
-        startDate: new Date(startDate),
-        ...timeEntryRest,
-      }),
-    ),
+    timeEntries: timeEntries
+      ? timeEntries.map(
+        ({
+          startDate,
+          ...timeEntryRest
+        }: ITimeEntry) => ({
+          startDate: new Date(startDate),
+          ...timeEntryRest,
+        }),
+      )
+      : [],
     ...rest,
   }));
 

@@ -73,8 +73,12 @@ export const fetchProjects = (
     dispatch(showLoader());
     const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/${userId}/projects.json?auth=${idToken}`);
     const data = await response.json() as IProjects<IProject>;
-    const parsedData = parseProjects(data);
-    dispatch(fetchProjectsSuccess(parsedData));
+    if (data) {
+      const parsedData = parseProjects(data);
+      dispatch(fetchProjectsSuccess(parsedData));
+    } else {
+      dispatch(fetchProjectsSuccess({}));
+    }
     dispatch(hideLoader());
   } catch (error) {
     dispatch(fetchProjectsFailure(error));

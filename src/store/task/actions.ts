@@ -15,7 +15,7 @@ import {
   toggleCompleteTask as putToggleCompleteTask,
 } from '../firebase/actions';
 import {
-  ADD_TASK,
+  ADD,
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
   REMOVE_TASK,
@@ -41,7 +41,7 @@ export const addTask = (title: string): MyModels.AsyncDispatch<TasksState, any> 
   };
   const { id } = await postTask(task);
   dispatch({
-    type: ADD_TASK,
+    type: ADD,
     payload: {
       ...task,
       id,

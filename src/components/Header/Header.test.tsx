@@ -6,5 +6,5 @@ import Header from './Header';
 test('renders Header', () => {
   const { getByText } = render(<Header />);
 
-  expect(getByText(/TrackingTime/i)).toBeInTheDocument();
+  expect(getByText(/RSClone Tracking Time/i)).toBeInTheDocument();
 });

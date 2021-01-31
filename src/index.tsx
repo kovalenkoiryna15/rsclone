@@ -1,7 +1,8 @@
 import * as React from 'react';
+import Container from 'react-bootstrap/Container';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+
 import store from 'Store/store';
 import App from './App';
 
@@ -9,11 +10,11 @@ import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <Container fluid className="app-container">
         <App />
-      </Provider>
-    </BrowserRouter>
+      </Container>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

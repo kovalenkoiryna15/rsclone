@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import * as MyModels from 'Store/types';
 import TaskListContainer from 'Components/TaskList/TaskListContainer';
 import TaskListNav from 'Components/TaskListNav';
+import TaskView from 'Components/TaskView';
 import IProject from 'Entities/project-entities';
 
 export default function MainView(): JSX.Element {
@@ -28,17 +29,21 @@ export default function MainView(): JSX.Element {
   }
 
   return (
-    <Row className="main-view">
-      <TaskListNav />
-      <Col className="task-list">
-        <Switch>
-          <Route exact path="/rsclone/tasks">
-            <TaskListContainer id="" />
-          </Route>
-          {renderTaskListPages()}
-          <Redirect to="/rsclone/tasks" />
-        </Switch>
-      </Col>
-    </Row>
+
+    <Router>
+      <Row className="main-view">
+        <TaskListNav />
+        <Col className="task-list">
+          <Switch>
+            <Route exact path="/rsclone/tasks">
+              <TaskListContainer id="" />
+            </Route>
+            {renderTaskListPages()}
+            <Redirect to="/rsclone/tasks" />
+          </Switch>
+        </Col>
+        <TaskView />
+      </Row>
+    </Router>
   );
 }

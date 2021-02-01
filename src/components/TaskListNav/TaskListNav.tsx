@@ -1,20 +1,21 @@
 import * as React from 'react';
+import { Button, Nav, Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Nav, Spinner, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 import * as MyModels from 'Store/types';
-import SideBar from 'Components/SideBar';
-import ProjectForm from 'Components/ProjectForm';
-import IProject from 'Entities/project-entities';
 import DropdownCustom from 'Components/DropdownCustom/index';
+import ProjectForm from 'Components/ProjectForm';
+import SideBar from 'Components/SideBar';
+import IProject from 'Entities/project-entities';
+import IProjects from 'Entities/projects-entity';
 
 interface ITaskListNavState {
   isVisible: boolean;
 }
 
 interface ITaskListNavProps {
-  projects: IProject[];
+  projects: IProjects<IProject>;
   isLoading: boolean;
   error?: Error;
 }

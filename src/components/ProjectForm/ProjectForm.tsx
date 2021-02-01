@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import IProject, { ProjectView } from 'Entities/project-entities';
-import * as Types from 'Entities/types';
+import IProject from 'Entities/project-entities';
 import { addProject, updateProject } from 'Store/project/actions';
 
 const MILLISECONDS_IN_HOUR = 3.6E6;

@@ -1,7 +1,7 @@
 import IProject from 'Entities/project-entities';
+import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
-import { database } from 'Store/src/firebase';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -14,7 +14,7 @@ import {
 import { IProjectState } from './action-types';
 
 const initialState: IProjectState = {
-  projects: [] as Array<IProject>,
+  projects: {} as IProjects<IProject>,
   isLoading: false,
   error: undefined,
 };
@@ -22,13 +22,16 @@ const initialState: IProjectState = {
 const handlers: MyModels.IHandlers<IProjectState, any> = {
   [ADD_PROJECT]: (state, { payload: project }: MyModels.IAction<IProject>) => ({
     ...state,
-    projects: [...state.projects, project],
+    projects: { ...state.projects, project },
   }),
   [DELETE_PROJECT]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,
-    projects: state.projects.filter((project) => project.id !== id),
+    projects: Object.fromEntries(Object.entries(state.projects)
+      .filter((project) => project[0] !== id)),
   }),
-  [FETCH_PROJECTS_SUCCESS]: (state, { payload: projects }: MyModels.IAction<Array<IProject>>) => ({
+  [FETCH_PROJECTS_SUCCESS]: (
+    state, { payload: projects }: MyModels.IAction<IProjects<IProject>>,
+  ) => ({
     ...state,
     projects,
   }),
@@ -44,17 +47,21 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     error,
   }),
-  [UPDATE_PROJECT]: (state, { payload }: MyModels.IAction<IProject>) => {
-    const oldProjectIndex = state.projects.findIndex(
-      (project) => project.id === payload.id,
-    );
-    const newStateProjects = [...state.projects];
-    newStateProjects.splice(oldProjectIndex, 1, payload);
-    return {
-      ...state,
-      projects: [...newStateProjects],
-    };
-  },
+  [UPDATE_PROJECT]: (state, { payload }: MyModels.IAction<IProject>) => ({
+    ...state,
+    projects: Object.fromEntries(Object.entries(state.projects)
+      .map(([key, value]) => {
+        if (key === payload.id) {
+          return [
+            key, {
+              ...value,
+              ...payload,
+            },
+          ];
+        }
+        return [key, value];
+      })),
+  }),
   DEFAULT: (state) => state,
 };
 

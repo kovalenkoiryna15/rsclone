@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import IProject from 'Entities/project-entities';
-import { addProject, updateProject } from 'Store/project/actions';
+import { addProject, updateProject, writeProject } from 'Store/project/actions';
 
 const MILLISECONDS_IN_HOUR = 3.6E6;
 const MILLISECONDS_IN_MINUTE = 60E3;
@@ -28,6 +28,7 @@ interface IProjectFormProps {
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
   addProject: (newProject: IProject) => void;
   updateProject: (newProject: IProject) => void;
+  writeProject: (newProject: IProject) => void;
 }
 
 interface IProjectFormState extends Omit<IProject, 'deadline' | 'estimatedTime'> {
@@ -85,12 +86,13 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     const newProject = {
       id,
       title,
-      deadline: deadline ? new Date(deadline) : undefined,
-      estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : undefined,
+      deadline: deadline ? new Date(deadline) : null,
+      estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : null,
       color,
     };
     if (id) {
       this.props.updateProject(newProject);
+      this.props.writeProject(newProject);
     } else {
       const createdID = Date.now().toString();
       this.setState((state) => ({
@@ -99,6 +101,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       }));
       newProject.id = createdID;
       this.props.addProject(newProject);
+      this.props.writeProject(newProject);
     }
   };
 
@@ -220,6 +223,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
 const mapDispatchToProps = {
   addProject,
   updateProject,
+  writeProject,
 };
 
 export default connect(null, mapDispatchToProps)(ProjectForm);

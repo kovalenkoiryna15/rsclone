@@ -22,7 +22,7 @@ const initialState: IProjectState = {
 const handlers: MyModels.IHandlers<IProjectState, any> = {
   [ADD_PROJECT]: (state, { payload: project }: MyModels.IAction<IProject>) => ({
     ...state,
-    projects: { ...state.projects, project },
+    projects: { ...state.projects, [project.id]: project },
   }),
   [DELETE_PROJECT]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,

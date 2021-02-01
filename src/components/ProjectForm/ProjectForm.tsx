@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 import IProject from 'Entities/project-entities';
 import { addProject, updateProject, writeProject } from 'Store/project/actions';
+import IUser from 'Entities/user-entities';
+import { IUserState } from 'Store/user/action-types';
+import * as MyModels from 'Store/types';
 
 const MILLISECONDS_IN_HOUR = 3.6E6;
 const MILLISECONDS_IN_MINUTE = 60E3;
@@ -28,28 +31,31 @@ interface IProjectFormProps {
   handleShow: (event: React.MouseEvent<HTMLElement>) => void;
   addProject: (newProject: IProject) => void;
   updateProject: (newProject: IProject) => void;
-  writeProject: (newProject: IProject) => void;
+  writeProject: (newProject: IProject, uid: string) => void;
+  userID: string;
 }
 
 interface IProjectFormState extends Omit<IProject, 'deadline' | 'estimatedTime'> {
   deadline?: string;
   estimatedTime?: string;
   validated: boolean;
+  userID: string;
 }
 
-const initialState: Readonly<IProjectFormState> = {
+const initialState: IProjectFormState = {
   id: '',
   title: '',
   color: '#000000',
   deadline: '',
   estimatedTime: '00:00',
   validated: false,
+  userID: '',
 };
 
 class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> {
   constructor(props: IProjectFormProps) {
     super(props);
-    const { projectData } = props;
+    const { projectData, userID } = props;
     if (projectData) {
       const { deadline, estimatedTime } = projectData;
       this.state = {
@@ -57,9 +63,13 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         validated: false,
         deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
         estimatedTime: estimatedTime ? parseToTime(estimatedTime) : '',
+        userID,
       };
     } else {
-      this.state = initialState;
+      this.state = {
+        ...initialState,
+        userID,
+      };
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -92,7 +102,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     };
     if (id) {
       this.props.updateProject(newProject);
-      this.props.writeProject(newProject);
+      this.props.writeProject(newProject, this.props.userID);
     } else {
       const createdID = Date.now().toString();
       this.setState((state) => ({
@@ -101,7 +111,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       }));
       newProject.id = createdID;
       this.props.addProject(newProject);
-      this.props.writeProject(newProject);
+      this.props.writeProject(newProject, this.props.userID);
     }
   };
 
@@ -220,10 +230,17 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
   }
 }
 
+const mapStateToProps = (state: MyModels.RootState) => {
+  const { user: userState }: { user: IUserState } = state as { user: IUserState};
+  const { user }: { user: IUser } = userState as { user: IUser };
+  const { id: userID }: { id: string } = user as { id: string };
+  return { userID };
+};
+
 const mapDispatchToProps = {
   addProject,
   updateProject,
   writeProject,
 };
 
-export default connect(null, mapDispatchToProps)(ProjectForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectForm);

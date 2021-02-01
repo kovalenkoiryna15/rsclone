@@ -46,14 +46,14 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
         const { id, title, color } = project;
         return (
           <Nav.Item key={id} className="w-100 border-0 p-0 m-0 project-item">
-            <Nav.Link
+            <NavLink
+              to={`/projects/${id}`}
               style={{ color: `${color || '#2aa198'}` }}
-              className="w-100 project-link border-0"
-              href={`#projects/${id}`}
+              className="w-100 project-link border-0  nav-link"
             >
               {title}
-              <DropdownCustom project={project} />
-            </Nav.Link>
+            </NavLink>
+            <DropdownCustom project={project} />
           </Nav.Item>
         );
       })
@@ -75,7 +75,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
       <SideBar>
         <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="tabs">
           <Nav.Item className="w-100 border-0 p-0 m-0">
-            <Nav.Link href="#all-tasks" className="w-100 border-0">Tasks</Nav.Link>
+            <NavLink to="/" className="w-100 border-0 nav-link">Tasks</NavLink>
           </Nav.Item>
           <Nav.Item className="w-100 border-0 px-3 py-2 m-0">
             <Nav.Link disabled className="w-100 border-0 p-0 disabled">

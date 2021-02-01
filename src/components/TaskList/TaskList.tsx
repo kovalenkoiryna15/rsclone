@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import ITask from 'Entities/task-entities';
-import TaskItemContainer from 'Components/TaskItem/TaskItemContainer';
+import TaskItem from 'Components/TaskItem';
 
 interface ITaskListProps {
   tasks: Array<ITask>;
@@ -24,7 +24,7 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => (
                   />
                 ))
                 : tasks.map((task) => (
-                  <TaskItemContainer
+                  <TaskItem
                     task={task}
                     key={task.id.toString()}
                   />

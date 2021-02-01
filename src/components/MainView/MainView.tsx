@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import * as MyModels from 'Store/types';
-import TaskListContainer from 'Components/TaskList/TaskListContainer';
+import TaskList from 'Components/TaskList';
 import TaskListNav from 'Components/TaskListNav';
 import TaskView from 'Components/TaskView';
 import IProject from 'Entities/project-entities';
@@ -36,7 +36,7 @@ export default function MainView(): JSX.Element {
         <Col className="task-list">
           <Switch>
             <Route exact path="/rsclone/tasks">
-              <TaskListContainer id="" />
+              <TaskList id="" />
             </Route>
             {renderTaskListPages()}
             <Redirect to="/rsclone/tasks" />

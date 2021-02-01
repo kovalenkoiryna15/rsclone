@@ -24,7 +24,7 @@ export default function App(): JSX.Element {
       if (auth.currentUser) {
         auth.currentUser.getIdToken(/* forceRefresh */ true)
           .then((idToken) => {
-            dispatch(fetchProjects(idToken));
+            dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
           })
           .catch((error: Error) => {
             if (error && 'message' in error) {

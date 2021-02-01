@@ -67,10 +67,11 @@ const parseProjects = (
 
 export const fetchProjects = (
   idToken: string,
+  userId: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
-    const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/projects.json?auth=${idToken}`);
+    const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/${userId}/projects.json?auth=${idToken}`);
     const data = await response.json() as IProjects<IProject>;
     const parsedData = parseProjects(data);
     dispatch(fetchProjectsSuccess(parsedData));
@@ -82,10 +83,11 @@ export const fetchProjects = (
 
 export const writeProject = (
   newProject: IProject,
+  userId: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async () => {
   const { id }: { id: Types.ID} = newProject as { id: Types.ID};
   try {
-    await database.ref(`projects/${id}`).set(newProject);
+    await database.ref(`${userId}/projects/${id}`).set(newProject);
   } catch (error) {
     console.log(error);
   }
@@ -93,9 +95,10 @@ export const writeProject = (
 
 export const removeProject = (
   id: Types.ID,
+  userId: string,
 ): MyModels.AsyncDispatch<IProjectState, any> => async () => {
   try {
-    await database.ref(`projects/${id}`).remove();
+    await database.ref(`${userId}/projects/${id}`).remove();
   } catch (error) {
     console.log(error);
   }

@@ -63,7 +63,7 @@ const parseProjects = (
 ): IProjects<IProject> => Object.fromEntries(Object.entries(data)
   .map(([key, value]) => [key, {
     ...value,
-    ...{ deadline: value.deadline ? new Date(value.deadline) : undefined },
+    deadline: value.deadline || undefined,
   }]));
 
 export const fetchProjects = (

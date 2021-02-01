@@ -81,4 +81,12 @@ export const toggleCompleteTask = (task: ITask): Promise<ITask> => {
   );
 };
 
+export const putTask = (task: ITask): Promise<ITask> => {
+  const { id, ...rest } = task;
+  return axios.put(
+    `${url}/tasks/${id}.json`,
+    { ...rest },
+  );
+};
+
 export const deleteTask = (id: Types.ID): Promise<undefined> => axios.delete(`${url}/tasks/${id}.json`);

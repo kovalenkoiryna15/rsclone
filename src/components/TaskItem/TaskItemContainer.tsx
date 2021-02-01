@@ -7,10 +7,12 @@ import TaskItem from './TaskItem';
 
 type OwnProps = {
   task: ITask,
+  onClick: () => void,
 };
 
 const mapStateToProps = (_: Types.RootState, ownProps: OwnProps) => ({
   task: ownProps.task,
+  onClick: ownProps.onClick,
 });
 
 const mapDispatchToProps = {

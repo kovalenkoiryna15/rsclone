@@ -45,12 +45,20 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
                     <TaskItem
                       task={task}
                       key={task.id.toString()}
+                      onClick={() => {
+                        handleShow();
+                        setOpenedTask(task);
+                      }}
                     />
                   ))
                   : tasks.map((task) => (
                     <TaskItem
                       task={task}
                       key={task.id.toString()}
+                      onClick={() => {
+                        handleShow();
+                        setOpenedTask(task);
+                      }}
                     />
                   ))
               }

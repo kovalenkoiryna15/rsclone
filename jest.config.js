@@ -18,9 +18,9 @@ module.exports = {
     '^Store\/(.*)$': '<rootDir>/src/store/$1',
     '^Styles\/(.*)$': '<rootDir>/src/styles/$1'
   },
-  roots: ['<rootDir>/src/', '<rootDir>/test'],
+  roots: ['<rootDir>/src/'],
   setupFilesAfterEnv: [
-    '<rootDir>/test/setupTests.ts',
+    '<rootDir>/src/setupTests.ts',
     'jest-enzyme'
   ],
   testEnvironment: 'enzyme',

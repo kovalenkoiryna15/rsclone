@@ -11,6 +11,7 @@ import {
   getTasks,
   hideLoader,
   postTask,
+  putTask,
   showLoader,
   toggleCompleteTask as putToggleCompleteTask,
 } from '../firebase/actions';
@@ -21,6 +22,7 @@ import {
   REMOVE_TASK,
   SET_NEW_TASK_TITLE,
   TOGGLE_COMPLETE_TASK,
+  UPDATE,
 } from './action-constants';
 
 const JSON_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
@@ -30,15 +32,22 @@ export const setTitle = (title: string): IAction<string> => ({
   payload: title,
 });
 
-export const addTask = (title: string): MyModels.AsyncDispatch<TasksState, any> => async (
+export const update = (task: ITask): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
-  const task: Omit<ITask, 'id'> = {
-    title,
-    timeEntries: [],
-    isCompleted: false,
-  };
+  await putTask(task);
+  dispatch({
+    type: UPDATE,
+    payload: task,
+  });
+  dispatch(hideLoader());
+};
+
+export const add = (task: Omit<ITask, 'id'>): MyModels.AsyncDispatch<TasksState, any> => async (
+  dispatch,
+) => {
+  dispatch(showLoader());
   const { id } = await postTask(task);
   dispatch({
     type: ADD,

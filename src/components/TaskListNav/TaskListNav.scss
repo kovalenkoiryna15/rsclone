@@ -1,6 +1,7 @@
 .nav.sidebar-nav {
   height: 100%;
-  padding: 0 15px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   border-radius: .5em;
 }
 
@@ -9,4 +10,37 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.nav-item .project-link {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-item .project-link,
+.nav-item .project-link:focus,
+.nav-item .project-link:hover,
+.nav-item .project-link:active {
+  text-decoration: none;
+  outline: none;
+}
+
+.project-item:hover {
+  background: #002b36;
+}
+
+.nav-item:hover {
+  .nav-link {
+    font-weight: 900;
+  }
+
+  .nav-link.disabled {
+    font-weight: 400;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

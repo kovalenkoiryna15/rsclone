@@ -10,7 +10,7 @@ export default function SideBar({ children }: {
 
   return (
     <div className={classes}>
-      <Button className="sidebar-btn rounded-circle" size="sm" variant="light" onClick={() => setStatus(!collapseStatus)}>
+      <Button className="sidebar-btn rounded-circle p-0" size="sm" variant="light" onClick={() => setStatus(!collapseStatus)}>
         <i className="material-icons md-dark">{icon}</i>
       </Button>
       {!collapseStatus ? children : null}

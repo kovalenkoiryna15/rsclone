@@ -43,11 +43,17 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
     const { projects } = this.props;
     return projects ? (
       Object.values(projects).map((project: IProject) => {
-        const { id, title } = project;
+        const { id, title, color } = project;
         return (
-          <Nav.Item key={id}>
-            <NavLink to={`/projects/${id}`}>{title}</NavLink>
-            <DropdownCustom project={project} />
+          <Nav.Item key={id} className="w-100 border-0 p-0 m-0 project-item">
+            <Nav.Link
+              style={{ color: `${color || '#2aa198'}` }}
+              className="w-100 project-link border-0"
+              href={`#projects/${id}`}
+            >
+              {title}
+              <DropdownCustom project={project} />
+            </Nav.Link>
           </Nav.Item>
         );
       })
@@ -67,17 +73,18 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
 
     return (
       <SideBar>
-        <Nav className="flex-column sidebar-nav bg-light">
-          <Nav.Item>
-            <Nav.Link href="#all-tasks">Tasks</Nav.Link>
+        <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="tabs">
+          <Nav.Item className="w-100 border-0 p-0 m-0">
+            <Nav.Link href="#all-tasks" className="w-100 border-0">Tasks</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>Projects</Nav.Link>
+          <Nav.Item className="w-100 border-0 px-3 py-2 m-0">
+            <Nav.Link disabled className="w-100 border-0 p-0 disabled">
+              Projects
+            </Nav.Link>
+            <Button onClick={() => this.handleShow()} className="text-uppercase text-nowrap">
+              + Add Project
+            </Button>
           </Nav.Item>
-          <Button onClick={() => this.handleShow()}>
-            Add Project
-          </Button>
-          <br />
           {this.renderProjectList()}
         </Nav>
         <ProjectForm isVisible={isVisible} handleShow={() => this.handleShow()} />

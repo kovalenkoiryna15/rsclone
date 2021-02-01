@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
+import { Container, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Footer from 'Components/Footer';
@@ -17,6 +17,10 @@ export default function App(): JSX.Element {
   const isAuth = useSelector((state: MyModels.RootState) => {
     const { user: { isAuthorized } } = state;
     return isAuthorized;
+  });
+  const isStillLoading = useSelector((state: MyModels.RootState) => {
+    const { projects: { isLoading } } = state;
+    return isLoading;
   });
 
   useEffect(() => {
@@ -37,6 +41,14 @@ export default function App(): JSX.Element {
     }
     dispatch(fetchTasksJSON());
   }, [isAuth, dispatch]);
+
+  if (isAuth && isStillLoading) {
+    return (
+      <div className="vw-100 vh-100 d-flex justify-content-center align-items-center">
+        <Spinner animation="border" role="status" variant="primary" />
+      </div>
+    );
+  }
 
   return (
     <Container fluid className="app-container">

@@ -73,9 +73,9 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
 
     return (
       <SideBar>
-        <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="tabs">
+        <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="pills">
           <Nav.Item className="w-100 border-0 p-0 m-0">
-            <NavLink to="/" className="w-100 border-0 nav-link">Tasks</NavLink>
+            <NavLink to="/tasks" className="w-100 border-0 nav-link">Tasks</NavLink>
           </Nav.Item>
           <Nav.Item className="w-100 border-0 px-3 py-2 m-0">
             <Nav.Link disabled className="w-100 border-0 p-0 disabled">

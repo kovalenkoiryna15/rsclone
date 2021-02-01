@@ -2,7 +2,8 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  border-radius: .5em;
+  border: 4px solid #002b36;
+  border-radius: 0.25rem;
 }
 
 .nav-item {
@@ -27,10 +28,6 @@
   outline: none;
 }
 
-.project-item:hover {
-  background: #002b36;
-}
-
 .nav-item:hover {
   .nav-link {
     font-weight: 900;
@@ -39,6 +36,10 @@
   .nav-link.disabled {
     font-weight: 400;
   }
+}
+
+.nav-pills .nav-item .nav-link {
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar {

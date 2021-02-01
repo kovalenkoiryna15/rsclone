@@ -14,6 +14,7 @@ import {
   DELETE_PROJECT,
 } from './action-constants';
 import { IProjectState } from './action-types';
+import SAMPLE from './localStorage/db.json';
 
 export const addProject = (newProject: IProject): MyModels.IAction<IProject> => ({
   type: ADD_PROJECT,
@@ -73,11 +74,21 @@ export const fetchProjects = (
     dispatch(showLoader());
     const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/${userId}/projects.json?auth=${idToken}`);
     const data = await response.json() as IProjects<IProject>;
+    let parsedData;
     if (data) {
-      const parsedData = parseProjects(data);
+      parsedData = parseProjects(data);
       dispatch(fetchProjectsSuccess(parsedData));
     } else {
-      dispatch(fetchProjectsSuccess({}));
+      const sampleProjects = localStorage.getItem('sampleProjects2021');
+      let dataLocal;
+      if (sampleProjects) {
+        dataLocal = JSON.parse(sampleProjects) as IProjects<IProject>;
+      } else {
+        dataLocal = SAMPLE;
+        localStorage.setItem('sampleProjects2021', JSON.stringify(dataLocal));
+      }
+      parsedData = parseProjects(dataLocal);
+      dispatch(fetchProjectsSuccess(parsedData));
     }
     dispatch(hideLoader());
   } catch (error) {

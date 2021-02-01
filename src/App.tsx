@@ -10,7 +10,7 @@ import MainView from 'Components/MainView';
 import { fetchProjects } from 'Store/project/actions';
 import { fetchTasksJSON } from 'Store/task/actions';
 import * as MyModels from 'Store/types';
-import auth from 'Store/user/src/firebase';
+import { auth } from 'Store/src/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
       }
     }
     dispatch(fetchTasksJSON());
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   return (
     <Container fluid className="app-container">

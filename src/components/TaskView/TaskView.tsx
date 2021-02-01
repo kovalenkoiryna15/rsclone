@@ -8,27 +8,22 @@ import { tasksTypes } from 'Store/task';
 import * as MyModels from 'Store/types';
 
 interface ITaskViewProps {
-  task?: ITask;
+  task: ITask;
   addTask: (task: Omit<ITask, 'id'>) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
   updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
   handleShow: () => void;
   isVisible: boolean;
 }
 
-interface ITaskViewState {
-  task: ITask;
-  isValidated: boolean;
-}
-
-const initialState: Readonly<ITaskViewState> = {
-  task: {} as ITask,
-  isValidated: false,
+type TaskViewState = {
+  task: ITask,
+  isValidated: boolean,
 };
 
 const TaskView = ({
-  task = {} as ITask, addTask, updateTask, isVisible, handleShow,
+  task, addTask, updateTask, isVisible, handleShow,
 }: ITaskViewProps): JSX.Element => {
-  const [state, setState] = useState<ITaskViewState>({ ...initialState, task });
+  const [state, setState] = useState<TaskViewState>({ task, isValidated: false });
   const { isValidated } = state;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

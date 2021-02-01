@@ -6,17 +6,13 @@ import * as Types from 'Entities/types';
 
 interface ITaskItemProps {
   task: ITask;
-<<<<<<< HEAD
   removeTask: (id: Types.ID) => void;
   toggleCompleteTask: (id: Types.ID) => void;
-=======
-  removeTask(id: Types.ID): MyModels.AsyncDispatch<TasksState, any>,
-  toggleCompleteTask(id: Types.ID): MyModels.AsyncDispatch<TasksState, any>,
->>>>>>> refactor: replace interface 'ITaskState' with type 'TasksState'
+  onClick(): void;
 }
 
 function TaskItem({
-  task: { title, id, isCompleted }, removeTask, toggleCompleteTask,
+  task: { title, id, isCompleted }, removeTask, toggleCompleteTask, onClick,
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -29,7 +25,7 @@ function TaskItem({
   if (isCompleted) classes.push('completed');
 
   return (
-    <li className={classes.join(' ')}>
+    <li role="presentation" className={classes.join(' ')} onClick={onClick} onKeyDown={onClick}>
       <div className="custom-control custom-checkbox">
         <input
           type="checkbox"

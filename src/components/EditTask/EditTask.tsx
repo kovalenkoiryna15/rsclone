@@ -1,3 +1,4 @@
+import Calendar from 'Components/Calendar/Calendar';
 import { useState } from 'react';
 import * as React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
@@ -17,14 +18,37 @@ interface IEditTaskProps {
 
 type EditTaskState = {
   task: ITask,
+  dueDate?: number,
   isValidated: boolean,
+  isVisibleDueDateModal: boolean,
 };
 
 const EditTask = ({
   task, addTask, updateTask, isVisible, handleShow,
 }: IEditTaskProps): JSX.Element => {
-  const [state, setState] = useState<EditTaskState>({ task, isValidated: false });
-  const { isValidated } = state;
+  const [state, setState] = useState<EditTaskState>(
+    {
+      task,
+      dueDate: task.deadline,
+      isValidated: false,
+      isVisibleDueDateModal: false,
+    },
+  );
+  const { isValidated, dueDate, isVisibleDueDateModal } = state;
+
+  const handleDueDateChange = (newDueDate?: number) => {
+    setState((prevState) => ({
+      ...prevState,
+      dueDate: newDueDate,
+    }));
+  };
+
+  const handleShowDueDateModal = () => {
+    setState((prevState) => ({
+      ...prevState,
+      isVisibleDueDateModal: !isVisibleDueDateModal,
+    }));
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -64,51 +88,59 @@ const EditTask = ({
   const { title } = task;
 
   return (
-    <Modal
-      animation
-      className="task-modal"
-      onHide={handleShow}
-      show={isVisible}
-    >
-      <Modal.Header closeButton>
-        <Button variant="primary">
-          <EventIcon />
-          Due date
-        </Button>
-      </Modal.Header>
-      <Modal.Body>
-        <Form
-          className="task-form"
-          validated={isValidated}
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
-        >
-          <Form.Group controlId="formTaskName">
-            <Form.Label>Task Name</Form.Label>
-            <Form.Control
-              name="title"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-              placeholder="Task Name"
-              required
-              type="text"
-              value={title}
-            />
-          </Form.Group>
-          <Button
-            variant="secondary"
-            onClick={handleShow}
-          >
-            Cancel
+    <>
+      <Modal
+        animation
+        className="task-modal"
+        onHide={handleShow}
+        show={isVisible}
+      >
+        <Modal.Header closeButton>
+          <Button variant="primary" onClick={handleShowDueDateModal}>
+            <EventIcon />
+            Due date
           </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={(e: React.MouseEvent<HTMLFormElement>) => handleSubmit(e)}
+        </Modal.Header>
+        <Modal.Body>
+          <Form
+            className="task-form"
+            validated={isValidated}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
           >
-            Save
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
+            <Form.Group controlId="formTaskName">
+              <Form.Label>Task Name</Form.Label>
+              <Form.Control
+                name="title"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                placeholder="Task Name"
+                required
+                type="text"
+                value={title}
+              />
+            </Form.Group>
+            <Button
+              variant="secondary"
+              onClick={handleShow}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e: React.MouseEvent<HTMLFormElement>) => handleSubmit(e)}
+            >
+              Save
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+      <Calendar
+        dueDate={dueDate}
+        setDueDate={handleDueDateChange}
+        handleShow={handleShowDueDateModal}
+        isVisible={isVisibleDueDateModal}
+      />
+    </>
   );
 };
 

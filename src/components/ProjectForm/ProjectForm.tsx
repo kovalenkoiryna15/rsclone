@@ -45,7 +45,7 @@ interface IProjectFormState extends Omit<IProject, 'deadline' | 'estimatedTime'>
 const initialState: IProjectFormState = {
   id: '',
   title: '',
-  color: '#000000',
+  color: '#2aa198',
   deadline: '',
   estimatedTime: '00:00',
   validated: false,
@@ -160,7 +160,6 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       <Modal
         show={isVisible}
         onHide={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
-        animation={false}
         className="project-modal"
       >
         <Modal.Header closeButton>
@@ -181,6 +180,8 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
                 required
                 type="text"
                 value={title}
+                minLength={Number(1)}
+                maxLength={Number(15)}
               />
             </Form.Group>
             <Form.Group controlId="formProjectDeadline">

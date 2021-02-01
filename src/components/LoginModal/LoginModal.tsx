@@ -29,8 +29,6 @@ const LoginModal = (): JSX.Element => {
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="text-center">
           RSClone Tracking Time
-          &#8194;
-          <span className="text-uppercase">Tracking Time</span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

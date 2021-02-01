@@ -20,6 +20,6 @@ const app: firebase.app.App = firebase.initializeApp({
   appId: REACT_APP_FIREBASE_APP_ID,
 });
 
-export const database: firebase.database.Database = firebase.database();
+export const database: firebase.database.Database = app.database();
 
 export const auth: firebase.auth.Auth = app.auth();

@@ -9,9 +9,9 @@ interface IProject {
   id: Types.ID;
   title: string;
   color?: string;
-  deadline?: Date;
+  deadline?: Date | null;
   defaultView?: ProjectView;
-  estimatedTime?: number;
+  estimatedTime?: number | null;
 }
 
 export default IProject;

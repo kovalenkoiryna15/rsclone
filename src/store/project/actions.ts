@@ -1,5 +1,7 @@
 import * as MyModels from 'Store/types';
+import { database } from 'Store/src/firebase';
 import IProject from 'Entities/project-entities';
+import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
 import {
   ADD_PROJECT,
@@ -28,7 +30,9 @@ export const deleteProject = (id: Types.ID): MyModels.IAction<Types.ID> => ({
   payload: id,
 });
 
-export const fetchProjectsSuccess = (projects: IProject[]): MyModels.IAction<Array<IProject>> => ({
+export const fetchProjectsSuccess = (
+  projects: IProjects<IProject>,
+): MyModels.IAction<IProjects<IProject>> => ({
   type: FETCH_PROJECTS_SUCCESS,
   payload: projects,
 });
@@ -53,10 +57,13 @@ export const showError = (): MyModels.IAction<undefined> => ({
   payload: undefined,
 });
 
-const parseProject = (data: IProject): IProject => ({
-  ...data,
-  deadline: data.deadline ? new Date(data.deadline) : undefined,
-});
+const parseProjects = (
+  data: IProjects<IProject>,
+): IProjects<IProject> => Object.fromEntries(Object.entries(data)
+  .map(([key, value]) => [key, {
+    ...value,
+    ...{ deadline: value.deadline ? new Date(value.deadline) : undefined },
+  }]));
 
 export const fetchProjects = (
   idToken: string,
@@ -64,11 +71,32 @@ export const fetchProjects = (
   try {
     dispatch(showLoader());
     const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/projects.json?auth=${idToken}`);
-    const data = await response.json() as IProject[];
-    const parsedData = data.map((item: IProject) => parseProject(item));
+    const data = await response.json() as IProjects<IProject>;
+    const parsedData = parseProjects(data);
     dispatch(fetchProjectsSuccess(parsedData));
     dispatch(hideLoader());
   } catch (error) {
     dispatch(fetchProjectsFailure(error));
+  }
+};
+
+export const writeProject = (
+  newProject: IProject,
+): MyModels.AsyncDispatch<IProjectState, any> => async () => {
+  const { id }: { id: Types.ID} = newProject as { id: Types.ID};
+  try {
+    await database.ref(`projects/${id}`).set(newProject);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeProject = (
+  id: Types.ID,
+): MyModels.AsyncDispatch<IProjectState, any> => async () => {
+  try {
+    await database.ref(`projects/${id}`).remove();
+  } catch (error) {
+    console.log(error);
   }
 };

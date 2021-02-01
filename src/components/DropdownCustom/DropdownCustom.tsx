@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './DropdownCustom.scss';
 import { ButtonGroup, Dropdown } from 'react-bootstrap';
-import { deleteProject } from 'Store/project/actions';
+import { deleteProject, removeProject } from 'Store/project/actions';
 import * as Types from 'Entities/types';
 import IProject from 'Entities/project-entities';
 import ProjectForm from 'Components/ProjectForm';
@@ -14,6 +14,7 @@ export default function DropdownCustom({ project }: { project: IProject }): JSX.
   const { id } = project;
   const handleDelete = (projectId: Types.ID) => {
     dispatch(deleteProject(projectId));
+    dispatch(removeProject(projectId));
   };
 
   const handleShow = () => {

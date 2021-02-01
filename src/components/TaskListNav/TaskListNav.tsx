@@ -41,7 +41,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
   renderProjectList() {
     const { projects } = this.props;
     return projects ? (
-      projects.map((project: IProject) => {
+      Object.values(projects).map((project: IProject) => {
         const { id, title } = project;
         return (
           <Nav.Item key={id}>

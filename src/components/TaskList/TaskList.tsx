@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button, Col, Nav } from 'react-bootstrap';
 
 import TaskItem from 'Components/TaskItem';
-import TaskView from 'Components/TaskView';
+import EditTask from 'Components/EditTask';
 import ITask from 'Entities/task-entities';
 
 interface ITaskListProps {
@@ -19,11 +19,11 @@ const defaultTask: ITask = {
 };
 
 const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
-  const [isVisibleTaskView, setVisibleTaskView] = useState(false);
+  const [isVisibleEditTask, setVisibleEditTask] = useState(false);
   const [openedTask, setOpenedTask] = useState(defaultTask);
 
   const handleShow = () => {
-    setVisibleTaskView(!isVisibleTaskView);
+    setVisibleEditTask(!isVisibleEditTask);
   };
 
   return (
@@ -66,9 +66,9 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
           )
           : !isLoading && <p>No tasks!</p>
       }
-      <TaskView
+      <EditTask
         task={openedTask}
-        isVisible={isVisibleTaskView}
+        isVisible={isVisibleEditTask}
         handleShow={handleShow}
       />
     </Col>

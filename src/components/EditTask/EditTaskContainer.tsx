@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { tasksActions } from 'Store/task';
 import * as Types from 'Store/types';
-import TaskView from './TaskView';
+import EditTask from './EditTask';
 
 interface OwnProps {
   task: ITask;
@@ -23,4 +23,4 @@ const mapDispatchToProps = {
 };
 
 // @ts-ignore
-export default connect(mapStateToProps, mapDispatchToProps)(TaskView);
+export default connect(mapStateToProps, mapDispatchToProps)(EditTask);

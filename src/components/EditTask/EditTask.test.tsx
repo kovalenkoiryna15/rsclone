@@ -2,20 +2,20 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 
 import ITask from 'Entities/task-entities';
-import TaskView from './TaskView';
+import EditTask from './EditTask';
 
-test('renders TaskView', () => {
-  let isVisibleTaskView = true;
-  const setVisibleTaskView = jest
+test('renders EditTask', () => {
+  let isVisibleEditTask = true;
+  const setVisibleEditTask = jest
     .fn()
     .mockImplementationOnce(() => {
-      isVisibleTaskView = false;
+      isVisibleEditTask = false;
     })
     .mockImplementationOnce(() => {
-      isVisibleTaskView = true;
+      isVisibleEditTask = true;
     })
     .mockImplementationOnce(() => 'second call')
-    .mockName('setVisibleTaskView');
+    .mockName('setVisibleEditTask');
   const addTask = jest.fn().mockName('addTask');
   const updateTask = jest.fn().mockName('updateTask');
   const newTask: ITask = {
@@ -24,10 +24,10 @@ test('renders TaskView', () => {
     isCompleted: false,
   };
   const { getByText } = render(
-    <TaskView
+    <EditTask
       task={newTask}
-      isVisible={isVisibleTaskView}
-      handleShow={setVisibleTaskView}
+      isVisible={isVisibleEditTask}
+      handleShow={setVisibleEditTask}
       addTask={addTask}
       updateTask={updateTask}
     />,

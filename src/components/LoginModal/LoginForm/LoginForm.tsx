@@ -9,7 +9,8 @@ import { login } from 'Store/user/actions';
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized  );
+    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized,
+  );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [validated, setValidated] = useState<boolean>(false);

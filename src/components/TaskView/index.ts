@@ -1,3 +1,3 @@
-import TaskView from './TaskView';
+import TaskView from './TaskViewContainer';
 
 export default TaskView;

@@ -7,7 +7,7 @@ import ITask from 'Entities/task-entities';
 import { tasksTypes } from 'Store/task';
 import * as MyModels from 'Store/types';
 
-interface ITaskViewProps {
+interface IEditTaskProps {
   task: ITask;
   addTask: (task: Omit<ITask, 'id'>) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
   updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
@@ -15,15 +15,15 @@ interface ITaskViewProps {
   isVisible: boolean;
 }
 
-type TaskViewState = {
+type EditTaskState = {
   task: ITask,
   isValidated: boolean,
 };
 
-const TaskView = ({
+const EditTask = ({
   task, addTask, updateTask, isVisible, handleShow,
-}: ITaskViewProps): JSX.Element => {
-  const [state, setState] = useState<TaskViewState>({ task, isValidated: false });
+}: IEditTaskProps): JSX.Element => {
+  const [state, setState] = useState<EditTaskState>({ task, isValidated: false });
   const { isValidated } = state;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -112,4 +112,4 @@ const TaskView = ({
   );
 };
 
-export default TaskView;
+export default EditTask;

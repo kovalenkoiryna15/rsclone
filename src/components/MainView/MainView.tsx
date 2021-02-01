@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -8,8 +9,15 @@ import TaskList from 'Components/TaskList';
 import TaskListNav from 'Components/TaskListNav';
 import TaskView from 'Components/TaskView';
 import IProject from 'Entities/project-entities';
+import ITask from 'Entities/task-entities';
 
 export default function MainView(): JSX.Element {
+  const [isVisibleTaskView, setVisibleTaskView] = useState(false);
+  const newTask: ITask = {
+    id: '',
+    title: '',
+    isCompleted: false,
+  };
   const allProjects = useSelector((state: MyModels.RootState) => {
     const { projects: { projects } } = state;
     return projects;
@@ -42,7 +50,11 @@ export default function MainView(): JSX.Element {
             <Redirect to="/rsclone/tasks" />
           </Switch>
         </Col>
-        <TaskView />
+        <TaskView
+          task={newTask}
+          isVisible={isVisibleTaskView}
+          handleShow={() => setVisibleTaskView(!isVisibleTaskView)}
+        />
       </Row>
     </Router>
   );

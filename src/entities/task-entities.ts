@@ -4,7 +4,7 @@ import ITimeEntry from './time-entry';
 interface ITask {
   id: Types.ID;
   title: string;
-  deadline?: Date;
+  deadline?: number;
   estimatedTime?: number;
   wastedTime?: number;
   project?: Types.ID;

@@ -1,5 +1,8 @@
 @import "reset";
+@import "~react-datetime/css/react-datetime";
 @import "App";
+@import "components/Calendar/Calendar";
+@import "components/EditTask/EditTask";
 @import "components/Footer/Footer";
 @import "components/Header/Header";
 @import "components/LoginModal/LoginModal";
@@ -8,10 +11,8 @@
 @import "components/SideBar/SideBar";
 @import "components/TaskList/TaskList";
 @import "components/TaskListNav/TaskListNav";
-@import "components/EditTask/EditTask";
 
 // Must be in the end
-@import "~react-datetime/css/react-datetime";
 @import "~bootswatch/dist/solar/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/solar/bootswatch";

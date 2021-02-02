@@ -62,6 +62,13 @@ export const getTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
   return Promise.resolve(tasks);
 };
 
+export const putTask = async (task: ITask, userID: Types.ID): Promise<ITask> => {
+  const { id, ...rest } = task;
+  const taskRef = database.ref(`${userID}/tasks/${id}`);
+  await taskRef.set({ ...rest });
+  return Promise.resolve(task);
+};
+
 export const toggleCompleteTask = (task: ITask): Promise<ITask> => {
   const {
     id,
@@ -71,14 +78,6 @@ export const toggleCompleteTask = (task: ITask): Promise<ITask> => {
   return axios.put(
     `${url}/tasks/${id}.json`,
     { isCompleted: !isCompleted, ...rest },
-  );
-};
-
-export const putTask = (task: ITask): Promise<ITask> => {
-  const { id, ...rest } = task;
-  return axios.put(
-    `${url}/tasks/${id}.json`,
-    { ...rest },
   );
 };
 

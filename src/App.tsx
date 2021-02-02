@@ -8,7 +8,7 @@ import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import MainView from 'Components/MainView';
 import { fetchProjects } from 'Store/project/actions';
-import { fetchTasks } from 'Store/task/actions';
+import { tasksActions } from 'Store/task';
 import * as MyModels from 'Store/types';
 import { auth } from 'Store/src/firebase';
 
@@ -30,7 +30,7 @@ export default function App(): JSX.Element {
           .then((idToken) => {
             if (auth.currentUser) {
               dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
-              dispatch(fetchTasks(String(auth.currentUser.uid)));
+              dispatch(tasksActions.fetchTasks(String(auth.currentUser.uid)));
             }
           })
           .catch(() => {});

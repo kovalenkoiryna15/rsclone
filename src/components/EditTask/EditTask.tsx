@@ -29,8 +29,8 @@ interface IEditTaskProps {
   // eslint-disable-next-line react/require-default-props
   task?: ITask;
   isVisible: boolean;
-  userID: Types.ID,
-  addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
+  userID: Types.ID;
+  addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => void;
   deselectTask: () => void;
   hideEdit: () => void;
   updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;

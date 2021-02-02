@@ -3,5 +3,5 @@ export interface IFirebaseState {
 }
 
 export interface FirebaseData<T> {
-  [key: string]: Omit<T, 'id'>
+  [key: string]: Omit<T, 'id'>;
 }

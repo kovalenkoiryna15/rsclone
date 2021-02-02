@@ -10,23 +10,30 @@ import * as Types from 'Entities/types';
 import { tasksTypes } from 'Store/task';
 import * as MyModels from 'Store/types';
 
-const parseStringToTime = (stringTime?: string /* '99:99' */): number | undefined /* min */ => {
-  if (!stringTime) return undefined;
-  const arr = stringTime.split(':').reverse();
-  if (arr.length === 2 && arr.every((v) => !Number.isNaN(+v))) {
-    return arr.map((v, i) => +v * 60 ** i).reduce((a, v) => a + v) * 1000;
+const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number | undefined /* ms */ => {
+  if (!HHmm) return undefined;
+  const arr = HHmm.split(':').reverse();
+  let minutes;
+  if (arr.length <= 2 && arr.every((v) => !Number.isNaN(+v))) {
+    minutes = arr.map((v, i) => +v * 60 ** i).reduce((a, v) => a + v);
   }
-  return undefined;
+  return minutes || undefined;
+};
+
+const parseMinutesToHHmm = (minutes?: number /* min */): string /* HH:mm */ => {
+  if (!minutes) return '00:00';
+  return `${Math.round(minutes / 60)}:${minutes % 60}`;
 };
 
 interface IEditTaskProps {
   // eslint-disable-next-line react/require-default-props
   task?: ITask;
-  addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
-  updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
-  handleShow: () => void;
   isVisible: boolean;
   userID: Types.ID,
+  addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
+  deselectTask: () => void;
+  hideEdit: () => void;
+  updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
 }
 
 interface IEditTaskState extends Omit<ITask, 'estimatedTime'> {
@@ -45,13 +52,13 @@ const defaultTask: ITask = {
 };
 
 const EditTask = ({
-  userID, task, addTask, updateTask, isVisible, handleShow,
+  userID, task, addTask, updateTask, isVisible, hideEdit, deselectTask,
 }: IEditTaskProps): JSX.Element => {
   const [taskState, setTaskState] = useState<IEditTaskState>(
     {
       ...(task || defaultTask),
-      estimatedTime: task && task.estimatedTime
-        ? (new Date(task.estimatedTime)).toTimeString()
+      estimatedTime: task
+        ? parseMinutesToHHmm(task.estimatedTime)
         : '00:00',
     },
   );
@@ -60,6 +67,11 @@ const EditTask = ({
     isValidated: false,
     isVisibleDueDateModal: false,
   });
+
+  const onHide = () => {
+    deselectTask();
+    hideEdit();
+  };
 
   const handleDeadlineChange = (deadline?: number) => {
     setTaskState((prevState) => ({
@@ -112,15 +124,16 @@ const EditTask = ({
     if (taskState.id) {
       updateTask({
         ...taskState,
-        estimatedTime: parseStringToTime(taskState.estimatedTime),
+        estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
       });
     } else {
+      delete taskState.id;
       addTask({
         ...taskState,
-        estimatedTime: parseStringToTime(taskState.estimatedTime),
+        estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
       }, userID);
     }
-    handleShow();
+    onHide();
   };
 
   return (
@@ -128,7 +141,7 @@ const EditTask = ({
       <Modal
         animation
         className="task-modal"
-        onHide={handleShow}
+        onHide={onHide}
         show={isVisible}
       >
         <Modal.Header closeButton>
@@ -173,7 +186,7 @@ const EditTask = ({
                 value={taskState.estimatedTime}
               />
             </Form.Group>
-            <Button variant="link" onClick={handleShow}>
+            <Button variant="link" onClick={onHide}>
               Cancel
             </Button>
             <Button

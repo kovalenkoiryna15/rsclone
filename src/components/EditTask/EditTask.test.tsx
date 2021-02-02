@@ -7,36 +7,37 @@ import ITask from 'Entities/task-entities';
 import EditTask from './EditTask';
 
 test('renders EditTask', () => {
-  let isVisibleEditTask = true;
-  const setVisibleEditTask = jest
+  const TASK_TITLE = 'TASK_TITLE';
+  let isVisibleEdit = true;
+  const hideEdit = jest
     .fn()
     .mockImplementationOnce(() => {
-      isVisibleEditTask = false;
-    })
-    .mockImplementationOnce(() => {
-      isVisibleEditTask = true;
+      isVisibleEdit = false;
     })
     .mockImplementationOnce(() => 'second call')
-    .mockName('setVisibleEditTask');
+    .mockName('hideEdit');
+  const deselectTask = jest.fn().mockName('deselectTask');
   const addTask = jest.fn().mockName('addTask');
   const updateTask = jest.fn().mockName('updateTask');
   const newTask: ITask = {
     id: '',
-    title: '',
+    title: TASK_TITLE,
     isCompleted: false,
   };
   const { getByText } = render(
     <Provider store={store}>
       <EditTask
         task={newTask}
+        isVisible={isVisibleEdit}
         userID=""
-        isVisible={isVisibleEditTask}
-        handleShow={setVisibleEditTask}
         addTask={addTask}
+        deselectTask={deselectTask}
+        hideEdit={hideEdit}
         updateTask={updateTask}
       />
     </Provider>,
   );
 
   expect(getByText(/Task Name/i)).toBeInTheDocument();
+  expect(getByText(/TASK_TITLE}/i)).toBeInTheDocument();
 });

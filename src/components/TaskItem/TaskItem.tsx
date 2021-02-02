@@ -7,12 +7,13 @@ import * as Types from 'Entities/types';
 interface ITaskItemProps {
   task: ITask;
   removeTask: (id: Types.ID) => void;
+  selectTask: (task: ITask) => void,
+  showEdit: () => void,
   toggleCompleteTask: (id: Types.ID) => void;
-  onClick(): void;
 }
 
 function TaskItem({
-  task: { title, id, isCompleted }, removeTask, toggleCompleteTask, onClick,
+  task, removeTask, toggleCompleteTask, selectTask, showEdit,
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -22,10 +23,24 @@ function TaskItem({
     'align-items-center',
   ];
 
+  const { title, id, isCompleted } = task;
+
   if (isCompleted) classes.push('completed');
 
+  const editTask = () => {
+    selectTask(task);
+    showEdit();
+  };
+
   return (
-    <li role="presentation" className={classes.join(' ')} onClick={onClick} onKeyDown={onClick}>
+    <li
+      className={classes.join(' ')}
+      onClick={editTask}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') editTask();
+      }}
+      role="presentation"
+    >
       <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
@@ -40,8 +55,8 @@ function TaskItem({
         type="button"
         className="btn btn-outline-danger btn-sm"
         onClick={() => removeTask(id)}
-        onKeyUp={(ev) => {
-          if (ev.key === 'Enter') removeTask(id);
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') removeTask(id);
         }}
       >
         &times;

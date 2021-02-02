@@ -3,10 +3,11 @@ import axios from 'axios';
 import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
 import * as Types from 'Entities/types';
+import firebase from 'firebase';
 import { database } from 'Store/src/firebase';
-import { FirebaseData } from 'Store/firebase/action-types';
 import * as MyModels from 'Store/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
+import DataSnapshot = firebase.database.DataSnapshot;
 
 const url: string = process.env.REACT_APP_DB_URL!;
 
@@ -26,43 +27,39 @@ export const pushTask = async (
   const taskListRef = database.ref(`${userID}/tasks`);
   const newTaskRef = await taskListRef.push();
   await newTaskRef.set(task);
-  return Promise.resolve({ ...task, id: newTaskRef.key! });
+  return newTaskRef.key
+    ? Promise.resolve({ ...task, id: newTaskRef.key })
+    : Promise.reject(Error("I can't get task ref!"));
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-const parseTask = (data: FirebaseData<ITask>) => Object.entries(data)
-  .map(([
-    key, {
-      deadline,
+const parseTasksSnapshot = (tasksSnapshot: DataSnapshot) => {
+  const tasks = [] as Array<ITask>;
+  tasksSnapshot.forEach((taskSnapshot) => {
+    const timeEntries = [] as Array<ITimeEntry>;
+    if (taskSnapshot.hasChild('timeEntries')) {
+      taskSnapshot.child('timeEntries').forEach((timeEntry) => {
+        timeEntries.push({
+          ...timeEntry.val(),
+          id: timeEntry.key,
+        });
+      });
+    }
+    tasks.push({
+      ...taskSnapshot.val(),
+      id: taskSnapshot.key,
       timeEntries,
-      ...rest
-    },
-  ]) => ({
-    id: key,
-    deadline,
-    timeEntries: timeEntries
-      ? timeEntries.map(
-        ({
-          startDate,
-          ...timeEntryRest
-        }: ITimeEntry) => ({
-          startDate: new Date(startDate),
-          ...timeEntryRest,
-        }),
-      )
-      : [],
-    ...rest,
-  }));
-
-export const getTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
-  const ref = database.ref(`${userID}/tasks`);
-  const result: Array<ITask> = [] as Array<ITask>;
-  await ref.once('value', (snapshot) => {
-    snapshot.forEach((childSnapshot) => {
-      result.push({ id: childSnapshot.key, ...childSnapshot.val() });
     });
   });
-  return Promise.resolve(result);
+  return tasks;
+};
+
+export const getTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
+  const taskListRef = database.ref(`${userID}/tasks`);
+  const tasks: Array<ITask> = [] as Array<ITask>;
+  await taskListRef.once('value', (tasksSnapshot) => {
+    tasks.push(...parseTasksSnapshot(tasksSnapshot));
+  });
+  return Promise.resolve(tasks);
 };
 
 export const toggleCompleteTask = (task: ITask): Promise<ITask> => {

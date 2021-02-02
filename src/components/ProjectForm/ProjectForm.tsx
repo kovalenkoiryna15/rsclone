@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
 import IProject from 'Entities/project-entities';
-import { addProject, updateProject, writeProject } from 'Store/project/actions';
-import IUser from 'Entities/user-entities';
-import { IUserState } from 'Store/user/action-types';
-import * as MyModels from 'Store/types';
 
 const MILLISECONDS_IN_HOUR = 3.6E6;
 const MILLISECONDS_IN_MINUTE = 60E3;
@@ -79,7 +74,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     this.handleClose = this.handleClose.bind(this);
   }
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget;
@@ -88,8 +83,8 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       event.stopPropagation();
     }
 
-    this.setState((state) => ({
-      ...state,
+    this.setState((prevState) => ({
+      ...prevState,
       validated: true,
     }));
 
@@ -104,15 +99,13 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : null,
       color,
     };
+
     const {
-      updateProject: updateCurrentProject,
-      writeProject: writeNewProject,
-      addProject: addNewProject,
-      userID: uid,
+      addProject, writeProject, updateProject, userID,
     } = this.props;
     if (id) {
-      updateCurrentProject(newProject);
-      writeNewProject(newProject, uid);
+      updateProject(newProject);
+      writeProject(newProject, userID);
     } else {
       const createdID = Date.now().toString();
       this.setState((state) => ({
@@ -120,14 +113,12 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         id: createdID,
       }));
       newProject.id = createdID;
-      addNewProject(newProject);
-      writeNewProject(newProject, uid);
+      addProject(newProject);
+      writeProject(newProject, userID);
     }
   };
 
-  handleClose(
-    event: React.MouseEvent<HTMLElement>,
-  ) {
+  handleClose(event: React.MouseEvent<HTMLElement>): void {
     const { projectData } = this.props;
     if (!projectData) {
       this.setState((state) => ({
@@ -144,9 +135,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     handleShow(event);
   }
 
-  handleTitleChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) {
+  handleTitleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     event.persist();
     this.setState((state) => {
       const { name, value } = event.target;
@@ -165,9 +154,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     });
   }
 
-  handleChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) {
+  handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     event.persist();
     this.setState((state) => {
       const { name, value } = event.target;
@@ -178,7 +165,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     });
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       title,
       deadline,
@@ -264,17 +251,4 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
   }
 }
 
-const mapStateToProps = (state: MyModels.RootState) => {
-  const { user: userState }: { user: IUserState } = state as { user: IUserState};
-  const { user }: { user: IUser } = userState as { user: IUser };
-  const { id: userID }: { id: string } = user as { id: string };
-  return { userID };
-};
-
-const mapDispatchToProps = {
-  addProject,
-  updateProject,
-  writeProject,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectForm);
+export default ProjectForm;

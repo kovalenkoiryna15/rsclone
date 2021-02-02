@@ -1,17 +1,19 @@
-import * as MyModels from 'Store/types';
-import { database } from 'Store/src/firebase';
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
+import { database } from 'Store/src/firebase';
+import * as MyModels from 'Store/types';
 import {
   ADD_PROJECT,
-  HIDE_LOADER,
-  SHOW_LOADER,
-  FETCH_PROJECTS_SUCCESS,
-  FETCH_PROJECTS_FAILURE,
-  SHOW_ERROR,
-  UPDATE_PROJECT,
   DELETE_PROJECT,
+  FETCH_PROJECTS_FAILURE,
+  FETCH_PROJECTS_SUCCESS,
+  HIDE_LOADER,
+  REMOVE_PROJECT_FAILURE,
+  SHOW_ERROR,
+  SHOW_LOADER,
+  UPDATE_PROJECT,
+  WRITE_PROJECT_FAILURE,
 } from './action-constants';
 import { IProjectState } from './action-types';
 import SAMPLE from './localStorage';
@@ -97,30 +99,33 @@ export const fetchProjects = (
 };
 
 export const writeProject = (
-  newProject: IProject,
-  userId: string,
-): MyModels.AsyncDispatch<IProjectState, any> => async () => {
-  const { id, deadline }: {
-    id: Types.ID, deadline: Date | null,
-  } = newProject as { id: Types.ID, deadline: Date | null};
+  newProject: IProject, userId: string,
+): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
+  const { id, deadline } = newProject;
   const parsedProject = {
     ...newProject,
-    deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
+    deadline: deadline ? deadline.toISOString().substring(0, 10) : '',
   };
   try {
     await database.ref(`${userId}/projects/${id}`).set(parsedProject);
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: WRITE_PROJECT_FAILURE,
+      payload: error as Error,
+    });
   }
 };
 
 export const removeProject = (
   id: Types.ID,
   userId: string,
-): MyModels.AsyncDispatch<IProjectState, any> => async () => {
+): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     await database.ref(`${userId}/projects/${id}`).remove();
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: REMOVE_PROJECT_FAILURE,
+      payload: error as Error,
+    });
   }
 };

@@ -6,9 +6,10 @@ import store from 'Store/store';
 import TaskListNav from './TaskListNav';
 
 test('renders TaskListNav', () => {
+  const fakeProjects = { key: { id: 'id', title: 'title' } };
   const { getByText } = render(
     <Provider store={store}>
-      <TaskListNav />
+      <TaskListNav projects={fakeProjects} isLoading={false} />
     </Provider>,
   );
 

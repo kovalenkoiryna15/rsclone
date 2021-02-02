@@ -6,7 +6,10 @@ import SelectProject from './SelectProject';
 
 type OwnProps = {
   defaultValue?: Types.ID;
-  onChange: (value: string, action: string) => void;
+  onChange: (
+    project: {value: Types.ID, label: string},
+    options: { action: string, name: string, option: any },
+  ) => void;
 };
 
 const mapStateToProps = (state: MyModels.RootState, ownProps: OwnProps) => ({

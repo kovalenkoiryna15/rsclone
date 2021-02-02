@@ -2,13 +2,14 @@ import * as MyModels from 'Store/types';
 import * as Types from 'Entities/types';
 import IUser from 'Entities/user-entities';
 import { IUserState } from 'Store/user/action-types';
-import { ALERT_SUCCESS, ALERT_ERROR } from './alert-action-constants';
+import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
   LOGIN_REQUEST,
   REGISTER_REQUEST,
   SET_USER_ID,
+  LOGOUT,
 } from './action-constants';
 
 const initialState: IUserState = {
@@ -28,6 +29,10 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     alertMessage: message,
   }),
   [ALERT_ERROR]: (state, { payload: message }: MyModels.IAction<string>) => ({
+    ...state,
+    alertMessage: message,
+  }),
+  [ALERT_CLEAR]: (state, { payload: message }: MyModels.IAction<string>) => ({
     ...state,
     alertMessage: message,
   }),
@@ -60,6 +65,10 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     ...state,
     user,
     isAuthorized: true,
+  }),
+  [LOGOUT]: (state) => ({
+    ...state,
+    isAuthorized: false,
   }),
   DEFAULT: (state) => state,
 };

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import * as MyModels from 'Store/types';
+import { alertClear } from 'Store/user/alert-action-creators';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
 const LoginModal = (): JSX.Element => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(
     ({ user: { isAuthorized } }: MyModels.RootState) => isAuthorized,
   );
@@ -17,6 +19,7 @@ const LoginModal = (): JSX.Element => {
   ) => {
     event.preventDefault();
     setRegistered((prev) => !prev);
+    dispatch(alertClear());
   };
 
   return (
@@ -25,6 +28,7 @@ const LoginModal = (): JSX.Element => {
       className="login-modal"
       centered
       aria-labelledby="contained-modal-title-vcenter"
+      onHide={() => null}
     >
       <Modal.Header>
         <Modal.Title id="contained-modal-title-vcenter" className="text-center">

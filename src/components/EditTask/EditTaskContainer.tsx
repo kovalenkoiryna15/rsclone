@@ -6,7 +6,7 @@ import * as Types from 'Store/types';
 import EditTask from './EditTask';
 
 interface OwnProps {
-  task: ITask;
+  task?: ITask;
   handleShow: () => void;
   isVisible: boolean;
 }
@@ -23,5 +23,6 @@ const mapDispatchToProps = {
   updateTask: tasksActions.update,
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(EditTask);

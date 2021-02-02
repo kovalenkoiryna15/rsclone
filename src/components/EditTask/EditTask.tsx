@@ -20,9 +20,11 @@ const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number | undefined /
   return minutes || undefined;
 };
 
+const addLeadingZero = (n: number): string => `${n < 10 ? '0' : ''}${n}`;
+
 const parseMinutesToHHmm = (minutes?: number /* min */): string /* HH:mm */ => {
   if (!minutes) return '00:00';
-  return `${Math.round(minutes / 60)}:${minutes % 60}`;
+  return `${addLeadingZero(Math.floor(minutes / 60))}:${addLeadingZero(minutes % 60)}`;
 };
 
 interface IEditTaskProps {

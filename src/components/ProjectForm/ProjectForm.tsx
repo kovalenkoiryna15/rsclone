@@ -66,7 +66,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
         estimatedTime: estimatedTime ? parseToTime(estimatedTime) : '',
         userID,
-        isValid: false,
+        isValid: true,
       };
     } else {
       this.state = {
@@ -150,7 +150,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     event.persist();
     this.setState((state) => {
       const { name, value } = event.target;
-      if (/\S/.exec(value)) {
+      if (/\S/.exec(value) && !/^$/.exec(value)) {
         return {
           ...state,
           [name]: value,
@@ -160,6 +160,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       return {
         ...state,
         [name]: '',
+        isValid: false,
       };
     });
   }

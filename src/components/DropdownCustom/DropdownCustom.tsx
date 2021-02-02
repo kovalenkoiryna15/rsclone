@@ -1,23 +1,16 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './DropdownCustom.scss';
 import { ButtonGroup, Dropdown } from 'react-bootstrap';
-import { deleteProject, removeProject } from 'Store/project/actions';
-import * as Types from 'Entities/types';
-import IProject from 'Entities/project-entities';
+import { useDispatch, useSelector } from 'react-redux';
+
 import ProjectForm from 'Components/ProjectForm';
-import IUser from 'Entities/user-entities';
-import { IUserState } from 'Store/user/action-types';
+import IProject from 'Entities/project-entities';
+import * as Types from 'Entities/types';
+import { deleteProject, removeProject } from 'Store/project/actions';
 import * as MyModels from 'Store/types';
 
 export default function DropdownCustom({ project }: { project: IProject }): JSX.Element {
-  const userID = useSelector((state: MyModels.RootState) => {
-    const { user: userState }: { user: IUserState } = state as { user: IUserState};
-    const { user }: { user: IUser } = userState as { user: IUser };
-    const { id }: { id: string } = user as { id: string };
-    return id;
-  });
+  const userID: Types.ID = useSelector((state: MyModels.RootState) => state.user.user.id);
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const { id } = project;

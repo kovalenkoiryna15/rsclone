@@ -4,5 +4,5 @@ import IProjects from 'Entities/projects-entity';
 export interface IProjectState {
   projects: IProjects<IProject>;
   isLoading: boolean;
-  error?: Error;
+  error?: typeof Error;
 }

@@ -7,9 +7,11 @@ import {
   DELETE_PROJECT,
   FETCH_PROJECTS_SUCCESS,
   HIDE_LOADER,
+  REMOVE_PROJECT_FAILURE,
   SHOW_ERROR,
   SHOW_LOADER,
   UPDATE_PROJECT,
+  WRITE_PROJECT_FAILURE,
 } from './action-constants';
 import { IProjectState } from './action-types';
 
@@ -43,7 +45,7 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     isLoading: true,
   }),
-  [SHOW_ERROR]: (state, { payload: error }: MyModels.IAction<Error>) => ({
+  [SHOW_ERROR]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
@@ -61,6 +63,14 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
         }
         return [key, value];
       })),
+  }),
+  [WRITE_PROJECT_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
+  }),
+  [REMOVE_PROJECT_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
   }),
   DEFAULT: (state) => state,
 };

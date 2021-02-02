@@ -2,13 +2,14 @@ import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
 import ITask from 'Entities/task-entities';
 import {
-  ADD, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE,
+  ADD, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE, PUSH_TASK_FAILURE,
 } from './action-constants';
 import { TasksState } from './action-types';
 
 const initialState: TasksState = {
   tasks: [],
   newTaskTitle: '',
+  error: undefined,
 };
 
 const handlers: MyModels.IHandlers<TasksState, any> = {
@@ -32,7 +33,14 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
       return task;
     }),
   }),
-  [FETCH_TASKS_FAILURE]: (state) => state,
+  [FETCH_TASKS_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
+  }),
+  [PUSH_TASK_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
+  }),
   DEFAULT: (state) => state,
 };
 

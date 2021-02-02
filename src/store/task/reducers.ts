@@ -20,14 +20,30 @@ const initialState: TasksState = {
 };
 
 const handlers: MyModels.IHandlers<TasksState, any> = {
-  [ADD]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
-    ...state,
-    tasks: [...state.tasks, task],
-  }),
-  [UPDATE]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
-    ...state,
-    tasks: [...state.tasks, task],
-  }),
+  [ADD]: (state, { payload: task }: MyModels.IAction<ITask>) => {
+    const tasks = [...state.tasks];
+    tasks.splice(
+      state.tasks.findIndex((t) => t.id === task.id),
+      1,
+      task,
+    );
+    return {
+      ...state,
+      tasks,
+    };
+  },
+  [UPDATE]: (state, { payload: task }: MyModels.IAction<ITask>) => {
+    const tasks = [...state.tasks];
+    tasks.splice(
+      state.tasks.findIndex((t) => t.id === task.id),
+      1,
+      task,
+    );
+    return {
+      ...state,
+      tasks,
+    };
+  },
   [FETCH_TASKS]: (state, { payload: tasks }: MyModels.IAction<Array<ITask>>) => ({
     ...state,
     tasks,

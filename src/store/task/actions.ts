@@ -17,9 +17,9 @@ import {
 } from '../firebase/actions';
 import {
   ADD,
+  ADD_FAILURE,
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
-  PUSH_TASK_FAILURE,
   REMOVE_TASK,
   SET_NEW_TASK_TITLE,
   TOGGLE_COMPLETE_TASK,
@@ -70,7 +70,7 @@ export const add = (
     });
   } catch (error) {
     dispatch({
-      type: PUSH_TASK_FAILURE,
+      type: ADD_FAILURE,
       payload: error as Error,
     });
   }

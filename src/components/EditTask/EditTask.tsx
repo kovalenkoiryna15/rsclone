@@ -20,7 +20,8 @@ const parseStringToTime = (stringTime?: string /* '99:99' */): number | undefine
 };
 
 interface IEditTaskProps {
-  task: ITask;
+  // eslint-disable-next-line react/require-default-props
+  task?: ITask;
   addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
   updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
   handleShow: () => void;
@@ -37,13 +38,19 @@ type FormState = {
   isVisibleDueDateModal: boolean,
 };
 
+const defaultTask: ITask = {
+  id: '',
+  title: '',
+  isCompleted: false,
+};
+
 const EditTask = ({
   userID, task, addTask, updateTask, isVisible, handleShow,
 }: IEditTaskProps): JSX.Element => {
   const [taskState, setTaskState] = useState<IEditTaskState>(
     {
-      ...task,
-      estimatedTime: task.estimatedTime
+      ...(task || defaultTask),
+      estimatedTime: task && task.estimatedTime
         ? (new Date(task.estimatedTime)).toTimeString()
         : '00:00',
     },

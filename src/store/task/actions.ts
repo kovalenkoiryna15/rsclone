@@ -123,15 +123,14 @@ export const onChange = (e: React.ChangeEvent<HTMLInputElement>): IAction<string
 export const fetchTasksJSON = (): MyModels.AsyncDispatch<IProjectState, any> => async (
   dispatch,
 ) => {
+  dispatch(showLoader());
   try {
-    dispatch(showLoader());
     const response: Response = await fetch(JSON_URL);
     const { tasks } = await response.json() as IRSCloneTrackingTime;
     dispatch({
       type: FETCH_TASKS,
       payload: tasks,
     });
-    dispatch(hideLoader());
   } catch (error) {
     dispatch({
       type: FETCH_TASKS_FAILURE,
@@ -139,4 +138,5 @@ export const fetchTasksJSON = (): MyModels.AsyncDispatch<IProjectState, any> => 
       payload: error,
     });
   }
+  dispatch(hideLoader());
 };

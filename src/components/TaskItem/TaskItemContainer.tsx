@@ -10,5 +10,4 @@ const mapDispatchToProps = {
   toggleCompleteTask,
 };
 
-// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);

@@ -14,7 +14,7 @@ import {
   DELETE_PROJECT,
 } from './action-constants';
 import { IProjectState } from './action-types';
-import SAMPLE from './localStorage/db.json';
+import SAMPLE from './localStorage';
 
 export const addProject = (newProject: IProject): MyModels.IAction<IProject> => ({
   type: ADD_PROJECT,

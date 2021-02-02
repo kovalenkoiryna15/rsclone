@@ -100,9 +100,15 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : null,
       color,
     };
+    const {
+      updateProject: updateCurrentProject,
+      writeProject: writeNewProject,
+      addProject: addNewProject,
+      userID: uid,
+    } = this.props;
     if (id) {
-      this.props.updateProject(newProject);
-      this.props.writeProject(newProject, this.props.userID);
+      updateCurrentProject(newProject);
+      writeNewProject(newProject, uid);
     } else {
       const createdID = Date.now().toString();
       this.setState((state) => ({
@@ -110,8 +116,8 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         id: createdID,
       }));
       newProject.id = createdID;
-      this.props.addProject(newProject);
-      this.props.writeProject(newProject, this.props.userID);
+      addNewProject(newProject);
+      writeNewProject(newProject, uid);
     }
   };
 

@@ -40,6 +40,7 @@ interface IProjectFormState extends Omit<IProject, 'deadline' | 'estimatedTime'>
   estimatedTime?: string;
   validated: boolean;
   userID: string;
+  isValid: boolean;
 }
 
 const initialState: IProjectFormState = {
@@ -50,6 +51,7 @@ const initialState: IProjectFormState = {
   estimatedTime: '00:00',
   validated: false,
   userID: '',
+  isValid: false,
 };
 
 class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> {
@@ -64,6 +66,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         deadline: deadline ? new Date(deadline).toISOString().substring(0, 10) : '',
         estimatedTime: estimatedTime ? parseToTime(estimatedTime) : '',
         userID,
+        isValid: false,
       };
     } else {
       this.state = {
@@ -72,6 +75,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       };
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -95,7 +99,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
 
     const newProject = {
       id,
-      title,
+      title: String(title).trim(),
       deadline: deadline ? new Date(deadline) : null,
       estimatedTime: estimatedTime ? parseToNumberOfMS(estimatedTime) : null,
       color,
@@ -140,6 +144,26 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     handleShow(event);
   }
 
+  handleTitleChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    event.persist();
+    this.setState((state) => {
+      const { name, value } = event.target;
+      if (/\S/.exec(value)) {
+        return {
+          ...state,
+          [name]: value,
+          isValid: true,
+        };
+      }
+      return {
+        ...state,
+        [name]: '',
+      };
+    });
+  }
+
   handleChange(
     event: React.ChangeEvent<HTMLInputElement>,
   ) {
@@ -160,6 +184,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       estimatedTime,
       color,
       validated,
+      isValid,
     } = this.state;
     const { isVisible } = this.props;
     return (
@@ -181,13 +206,13 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               <Form.Label>Title</Form.Label>
               <Form.Control
                 name="title"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleTitleChange(e)}
                 placeholder="Title"
                 required
                 type="text"
                 value={title}
                 minLength={Number(1)}
-                maxLength={Number(15)}
+                maxLength={Number(40)}
               />
             </Form.Group>
             <Form.Group controlId="formProjectDeadline">
@@ -227,6 +252,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               variant="primary"
               type="submit"
               onClick={(e: React.MouseEvent<HTMLFormElement>) => this.handleSubmit(e)}
+              disabled={!isValid}
             >
               Save
             </Button>

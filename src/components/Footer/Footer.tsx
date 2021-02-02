@@ -3,12 +3,12 @@ import { Row, Col } from 'react-bootstrap';
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="footer bg-light text-center row">
+    <footer className="footer bg-dark text-center row">
       <Col sm={12} md={3} className="footer-col">
         RSClone Tracking Time, 2021 (JS2020Q3)
       </Col>
       <Col sm={12} md={7} className="footer-col">
-        <Row>
+        <Row className="flex-grow-1">
           <Col>
             <a className="collaborator" href="https://github.com/aplatkouski" target="blank">
               &copy; Artsiom Platkouski

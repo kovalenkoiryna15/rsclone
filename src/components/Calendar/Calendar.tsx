@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 import Datetime from 'react-datetime';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import moment from 'moment';
 
 interface ICalendarProps {
@@ -21,9 +21,7 @@ const Calendar = ({
     setSelectedDate(dueDate ? new Date(dueDate) : new Date());
   }, [dueDate]);
 
-  const handleSubmit = (
-    event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLElement>,
-  ) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
     setDueDate(moment(selectedDate).valueOf());
@@ -60,25 +58,17 @@ const Calendar = ({
         </Button>
       </Modal.Header>
       <Modal.Body className="p-0">
-        <Form
-          className="calendar-form"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <Form.Group controlId="formDatePicker">
-            <Datetime
-              className="p-0 border-0 bg-dark"
-              initialViewMode="days"
-              input={false}
-              onChange={(newDate) => {
-                setSelectedDate(moment(newDate).toDate());
-              }}
-              open
-              ref={refDatePicker}
-              timeFormat={false}
-              value={selectedDate}
-            />
-          </Form.Group>
-        </Form>
+        <Datetime
+          initialViewMode="days"
+          input={false}
+          onChange={(newDate) => {
+            setSelectedDate(moment(newDate).toDate());
+          }}
+          open
+          ref={refDatePicker}
+          timeFormat={false}
+          value={selectedDate}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button className={buttonClasses} onClick={handleShow} variant="link">

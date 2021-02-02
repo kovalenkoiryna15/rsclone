@@ -1,6 +1,6 @@
-import ITask from 'Entities/task-entities';
 import { connect } from 'react-redux';
 
+import ITask from 'Entities/task-entities';
 import { tasksActions } from 'Store/task';
 import * as Types from 'Store/types';
 import EditTask from './EditTask';
@@ -11,10 +11,11 @@ interface OwnProps {
   isVisible: boolean;
 }
 
-const mapStateToProps = (_: Types.RootState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
   task: ownProps.task,
   handleShow: ownProps.handleShow,
   isVisible: ownProps.isVisible,
+  userID: state.user.user.id,
 });
 
 const mapDispatchToProps = {

@@ -46,8 +46,8 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
                       task={task}
                       key={task.id.toString()}
                       onClick={() => {
-                        handleShow();
                         setOpenedTask(task);
+                        setVisibleEditTask(true);
                       }}
                     />
                   ))
@@ -56,8 +56,8 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
                       task={task}
                       key={task.id.toString()}
                       onClick={() => {
-                        handleShow();
                         setOpenedTask(task);
+                        setVisibleEditTask(true);
                       }}
                     />
                   ))

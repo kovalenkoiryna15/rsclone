@@ -5,14 +5,14 @@ import * as MyModels from 'Store/types';
 import SelectProject from './SelectProject';
 
 type OwnProps = {
-  onChange: (value: string, action: string) => void;
   defaultValue?: Types.ID;
+  onChange: (value: string, action: string) => void;
 };
 
 const mapStateToProps = (state: MyModels.RootState, ownProps: OwnProps) => ({
-  projects: state.projects.projects,
-  onChange: ownProps.onChange,
   defaultValue: ownProps.defaultValue,
+  onChange: ownProps.onChange,
+  projects: state.projects.projects,
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

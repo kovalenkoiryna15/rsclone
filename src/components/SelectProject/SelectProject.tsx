@@ -40,7 +40,7 @@ const SelectProject = ({ projects, onChange, defaultValue }: ISelectProjectProps
       classNamePrefix="select"
       defaultValue={
         defaultValue
-          ? customOptions.find(({ value }) => value === defaultValue)
+          ? customOptions.find(({ value: id }) => id === defaultValue)
           : customOptions[0]
       }
       filterOption={filterOptions}

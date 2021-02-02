@@ -1,3 +1,4 @@
+import IProject from 'Entities/project-entities';
 import { connect } from 'react-redux';
 
 import ITask from 'Entities/task-entities';
@@ -10,8 +11,11 @@ type OwnProps = {
   task: ITask,
 };
 
-const mapStateToProps = (_: Types.RootState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
   task: ownProps.task,
+  project: Object
+    .values(state.projects.projects)
+    .find(({ id }) => id === ownProps.task.project),
 });
 
 const mapDispatchToProps = {

@@ -1,19 +1,23 @@
 import * as React from 'react';
+import { Badge } from 'react-bootstrap';
+
 import ITask from 'Entities/task-entities';
+import * as Types from 'Entities/types';
 import { TasksState } from 'Store/task/action-types';
 import * as MyModels from 'Store/types';
-import * as Types from 'Entities/types';
 
 interface ITaskItemProps {
   task: ITask;
+  // eslint-disable-next-line react/require-default-props
+  project?: IProject;
   removeTask: (id: Types.ID) => void;
-  selectTask: (task: ITask) => void,
-  showEdit: () => void,
+  selectTask: (task: ITask) => void;
+  showEdit: () => void;
   toggleCompleteTask: (id: Types.ID) => void;
 }
 
 function TaskItem({
-  task, removeTask, toggleCompleteTask, selectTask, showEdit,
+  task, project, removeTask, toggleCompleteTask, selectTask, showEdit,
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -50,6 +54,7 @@ function TaskItem({
           id={`customCheck${id}`}
         />
         <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
+        {project ? <Badge className="ml-2" variant="secondary">{project.title}</Badge> : null}
       </div>
       <button
         type="button"

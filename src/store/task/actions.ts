@@ -24,6 +24,7 @@ import {
   SET_NEW_TASK_TITLE,
   TOGGLE_COMPLETE_TASK,
   UPDATE,
+  UPDATE_FAILURE,
 } from './action-constants';
 
 const JSON_URL = 'https://kovalenkoiryna15.github.io/fake-projects/db.json';
@@ -33,15 +34,23 @@ export const setTitle = (title: string): IAction<string> => ({
   payload: title,
 });
 
-export const update = (task: ITask): MyModels.AsyncDispatch<TasksState, any> => async (
-  dispatch,
-) => {
+export const update = (
+  task: ITask,
+  userID: Types.ID,
+): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   dispatch(showLoader());
-  await putTask(task);
-  dispatch({
-    type: UPDATE,
-    payload: task,
-  });
+  try {
+    await putTask(task, userID);
+    dispatch({
+      type: UPDATE,
+      payload: task,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_FAILURE,
+      payload: error as Error,
+    });
+  }
   dispatch(hideLoader());
 };
 

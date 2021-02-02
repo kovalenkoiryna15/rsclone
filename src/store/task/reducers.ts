@@ -3,6 +3,7 @@ import * as MyModels from 'Store/types';
 import ITask from 'Entities/task-entities';
 import {
   ADD, TOGGLE_COMPLETE_TASK, FETCH_TASKS, REMOVE_TASK, FETCH_TASKS_FAILURE, PUSH_TASK_FAILURE,
+  UPDATE_FAILURE,
 } from './action-constants';
 import { TasksState } from './action-types';
 
@@ -14,6 +15,10 @@ const initialState: TasksState = {
 
 const handlers: MyModels.IHandlers<TasksState, any> = {
   [ADD]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
+    ...state,
+    tasks: [...state.tasks, task],
+  }),
+  [UPDATE]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
   }),
@@ -38,6 +43,10 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
     error,
   }),
   [PUSH_TASK_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
+  }),
+  [UPDATE_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
     ...state,
     error,
   }),

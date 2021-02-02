@@ -9,12 +9,12 @@ import App from './App';
 import './index.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Container fluid className="app-container">
-        <App />
-      </Container>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <Container fluid className="app-container">
+      <App />
+    </Container>
+  </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root'),
 );

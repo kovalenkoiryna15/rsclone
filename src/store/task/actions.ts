@@ -54,9 +54,10 @@ export const update = (
   dispatch(hideLoader());
 };
 
-export const add = (task: Omit<ITask, 'id'>, userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
-  dispatch,
-) => {
+export const add = (
+  task: Omit<ITask, 'id'>,
+  userID: Types.ID,
+): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   dispatch(showLoader());
   try {
     const { id } = await pushTask(task, userID);
@@ -76,7 +77,7 @@ export const add = (task: Omit<ITask, 'id'>, userID: Types.ID): MyModels.AsyncDi
   dispatch(hideLoader());
 };
 
-export const fetchTasks = (userID: string): MyModels.AsyncDispatch<TasksState, any> => async (
+export const fetchTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());

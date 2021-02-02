@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { Button, Nav, Spinner } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
-import * as MyModels from 'Store/types';
 import DropdownCustom from 'Components/DropdownCustom/index';
 import ProjectForm from 'Components/ProjectForm';
 import SideBar from 'Components/SideBar';
@@ -29,7 +26,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
     this.handleShow = this.handleShow.bind(this);
   }
 
-  handleShow() {
+  handleShow(): void {
     this.setState((state) => {
       const { isVisible } = this.state;
       return {
@@ -39,7 +36,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
     });
   }
 
-  renderProjectList() {
+  renderProjectList(): Array<JSX.Element> | JSX.Element {
     const { projects } = this.props;
     return projects ? (
       Object.values(projects).map((project: IProject) => {
@@ -62,7 +59,7 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
     );
   }
 
-  render() {
+  render(): JSX.Element {
     const { isVisible } = this.state;
     const { isLoading } = this.props;
     if (isLoading) {
@@ -93,9 +90,4 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
   }
 }
 
-function mapStateToProps(state: MyModels.RootState) {
-  const { projects: { projects, isLoading, error } } = state;
-  return { projects, isLoading, error };
-}
-
-export default connect(mapStateToProps)(TaskListNav);
+export default TaskListNav;

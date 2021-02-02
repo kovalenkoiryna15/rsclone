@@ -1,1 +1,3 @@
-export { default } from './TaskListNav';
+import TaskListNav from './TaskListNavContainer';
+
+export default TaskListNav;

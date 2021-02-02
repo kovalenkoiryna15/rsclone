@@ -1,11 +1,18 @@
 import { connect } from 'react-redux';
-import { RootState } from 'Store/types';
 
+import { taskListActions } from 'Store/task-list';
+import * as Types from 'Store/types';
 import TaskList from './TaskList';
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: Types.RootState) => ({
   isLoading: state.firebase.isLoading,
+  isVisibleEdit: state.taskList.isVisibleEdit,
   tasks: state.tasks.tasks,
 });
 
-export default connect(mapStateToProps)(TaskList);
+const mapDispatchToProps = {
+  deselectTask: taskListActions.deselectTask,
+  showEdit: taskListActions.showEdit,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

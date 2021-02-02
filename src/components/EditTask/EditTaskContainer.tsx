@@ -1,25 +1,20 @@
 import { connect } from 'react-redux';
 
-import ITask from 'Entities/task-entities';
 import { tasksActions } from 'Store/task';
+import { taskListActions } from 'Store/task-list';
 import * as Types from 'Store/types';
 import EditTask from './EditTask';
 
-interface OwnProps {
-  task?: ITask;
-  handleShow: () => void;
-  isVisible: boolean;
-}
-
-const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
-  task: ownProps.task,
-  handleShow: ownProps.handleShow,
-  isVisible: ownProps.isVisible,
+const mapStateToProps = (state: Types.RootState) => ({
+  task: state.taskList.selectedTask,
+  isVisible: state.taskList.isVisibleEdit,
   userID: state.user.user.id,
 });
 
 const mapDispatchToProps = {
   addTask: tasksActions.add,
+  deselectTask: taskListActions.deselectTask,
+  hideEdit: taskListActions.hideEdit,
   updateTask: tasksActions.update,
 };
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Button, Col, Nav } from 'react-bootstrap';
 
 import TaskItem from 'Components/TaskItem';
@@ -7,30 +6,32 @@ import EditTask from 'Components/EditTask';
 import ITask from 'Entities/task-entities';
 
 interface ITaskListProps {
-  tasks: Array<ITask>;
   isLoading: boolean;
+  isVisibleEdit: boolean;
+  tasks: Array<ITask>;
+  deselectTask: () => void;
+  showEdit: () => void;
   id: string;
 }
 
-const defaultTask: ITask = {
-  id: '',
-  title: '',
-  isCompleted: false,
-};
-
-const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
-  const [isVisibleEditTask, setVisibleEditTask] = useState(false);
-  const [openedTask, setOpenedTask] = useState(defaultTask);
-
-  const handleShow = () => {
-    setVisibleEditTask(!isVisibleEditTask);
+const TaskList = ({
+  isLoading,
+  isVisibleEdit,
+  tasks,
+  deselectTask,
+  showEdit,
+  id,
+}: ITaskListProps): JSX.Element => {
+  const addNewTask = () => {
+    deselectTask();
+    showEdit();
   };
 
   return (
     <Col className="task-list">
       <Nav className="justify-content-end" activeKey="/home">
         <Nav.Item>
-          <Button onClick={handleShow} className="text-uppercase text-nowrap">
+          <Button onClick={addNewTask} className="text-uppercase text-nowrap">
             + Task
           </Button>
         </Nav.Item>
@@ -45,20 +46,12 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
                     <TaskItem
                       task={task}
                       key={task.id.toString()}
-                      onClick={() => {
-                        setOpenedTask(task);
-                        setVisibleEditTask(true);
-                      }}
                     />
                   ))
                   : tasks.map((task) => (
                     <TaskItem
                       task={task}
                       key={task.id.toString()}
-                      onClick={() => {
-                        setOpenedTask(task);
-                        setVisibleEditTask(true);
-                      }}
                     />
                   ))
               }
@@ -66,11 +59,7 @@ const TaskList = ({ tasks, isLoading, id }: ITaskListProps): JSX.Element => {
           )
           : !isLoading && <p>No tasks!</p>
       }
-      <EditTask
-        task={openedTask}
-        isVisible={isVisibleEditTask}
-        handleShow={handleShow}
-      />
+      {isVisibleEdit ? <EditTask /> : <></>}
     </Col>
   );
 };

@@ -7,8 +7,6 @@ import Calendar from 'Components/Calendar/Calendar';
 import SelectProject from 'Components/SelectProject';
 import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
-import { tasksTypes } from 'Store/task';
-import * as MyModels from 'Store/types';
 
 const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number | undefined /* ms */ => {
   if (!HHmm) return undefined;
@@ -35,7 +33,7 @@ interface IEditTaskProps {
   addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => void;
   deselectTask: () => void;
   hideEdit: () => void;
-  updateTask: (task: ITask) => MyModels.AsyncDispatch<tasksTypes.TasksState, any>;
+  updateTask: (task: ITask, userID: Types.ID) => void;
 }
 
 interface IEditTaskState extends Omit<ITask, 'estimatedTime'> {
@@ -127,7 +125,7 @@ const EditTask = ({
       updateTask({
         ...taskState,
         estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
-      });
+      }, userID);
     } else {
       delete taskState.id;
       addTask({

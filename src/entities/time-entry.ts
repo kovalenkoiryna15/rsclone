@@ -1,5 +1,5 @@
 interface ITimeEntry {
-  startDate: Date;
+  startDate: number;
   comment?: string;
   duration?: number;
 }

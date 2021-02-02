@@ -6,8 +6,8 @@ import * as Types from 'Entities/types';
 
 interface ITaskItemProps {
   task: ITask;
-  removeTask(id: Types.ID): MyModels.AsyncDispatch<ITaskState, any>,
-  toggleCompleteTask(id: Types.ID): MyModels.AsyncDispatch<ITaskState, any>,
+  removeTask: (id: Types.ID) => void;
+  toggleCompleteTask: (id: Types.ID) => void;
 }
 
 function TaskItem({

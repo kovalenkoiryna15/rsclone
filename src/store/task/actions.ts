@@ -10,7 +10,7 @@ import {
   deleteTask,
   getTasks,
   hideLoader,
-  postTask,
+  pushTask,
   putTask,
   showLoader,
   toggleCompleteTask as putToggleCompleteTask,
@@ -19,6 +19,7 @@ import {
   ADD,
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
+  PUSH_TASK_FAILURE,
   REMOVE_TASK,
   SET_NEW_TASK_TITLE,
   TOGGLE_COMPLETE_TASK,
@@ -44,30 +45,44 @@ export const update = (task: ITask): MyModels.AsyncDispatch<TasksState, any> => 
   dispatch(hideLoader());
 };
 
-export const add = (task: Omit<ITask, 'id'>): MyModels.AsyncDispatch<TasksState, any> => async (
+export const add = (task: Omit<ITask, 'id'>, userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
-  const { id } = await postTask(task);
-  dispatch({
-    type: ADD,
-    payload: {
-      ...task,
-      id,
-    },
-  });
+  try {
+    const { id } = await pushTask(task, userID);
+    dispatch({
+      type: ADD,
+      payload: {
+        ...task,
+        id,
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: PUSH_TASK_FAILURE,
+      payload: error as Error,
+    });
+  }
   dispatch(hideLoader());
 };
 
-export const fetchTasksFirebase = (): MyModels.AsyncDispatch<TasksState, any> => async (
+export const fetchTasks = (userID: string): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
-  await getTasks()
-    .then((tasks) => dispatch({
-      type: FETCH_TASKS,
-      payload: tasks,
-    }));
+  try {
+    await getTasks(userID)
+      .then((tasks) => dispatch({
+        type: FETCH_TASKS,
+        payload: tasks,
+      }));
+  } catch (error) {
+    dispatch({
+      type: FETCH_TASKS_FAILURE,
+      payload: error as Error,
+    });
+  }
   dispatch(hideLoader());
 };
 

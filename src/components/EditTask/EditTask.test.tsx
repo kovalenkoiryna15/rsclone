@@ -1,5 +1,7 @@
-import * as React from 'react';
 import { render } from '@testing-library/react';
+import * as React from 'react';
+import { Provider } from 'react-redux';
+import store from 'Store/store';
 
 import ITask from 'Entities/task-entities';
 import EditTask from './EditTask';
@@ -24,13 +26,16 @@ test('renders EditTask', () => {
     isCompleted: false,
   };
   const { getByText } = render(
-    <EditTask
-      task={newTask}
-      isVisible={isVisibleEditTask}
-      handleShow={setVisibleEditTask}
-      addTask={addTask}
-      updateTask={updateTask}
-    />,
+    <Provider store={store}>
+      <EditTask
+        task={newTask}
+        userID=""
+        isVisible={isVisibleEditTask}
+        handleShow={setVisibleEditTask}
+        addTask={addTask}
+        updateTask={updateTask}
+      />
+    </Provider>,
   );
 
   expect(getByText(/Task Name/i)).toBeInTheDocument();

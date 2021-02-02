@@ -80,11 +80,14 @@ const EditTask = ({
     }));
   };
 
-  const handleProjectChange = (project: Types.ID, action: string) => {
-    if (project && action === 'select-option') {
+  const handleProjectChange = (
+    project: {value: Types.ID, label: string},
+    options: { action: string, name: string, option: any },
+  ) => {
+    if (project && options.action === 'select-option') {
       setTaskState((prevState) => ({
         ...prevState,
-        project,
+        project: project.value,
       }));
     }
   };

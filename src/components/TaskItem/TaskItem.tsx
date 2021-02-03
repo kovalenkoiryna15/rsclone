@@ -10,14 +10,14 @@ interface ITaskItemProps {
   // eslint-disable-next-line react/require-default-props
   project?: IProject;
   userID: Types.ID;
-  removeTask: (id: Types.ID) => void;
+  removeTask: (task: ITask, userID: Types.ID) => void;
   selectTask: (task: ITask) => void;
   showEdit: () => void;
   updateTask: (task: ITask, userID: Types.ID) => void;
 }
 
 function TaskItem({
-  task, project, removeTask, updateTask, selectTask, showEdit, userID
+  task, project, removeTask, updateTask, selectTask, showEdit, userID,
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -55,6 +55,18 @@ function TaskItem({
     }
   };
 
+  const handleRemoveTask = (
+    event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (event.target.name === 'removeTask') {
+      event.preventDefault();
+      event.stopPropagation();
+      removeTask(task, userID);
+    }
+  };
+
   return (
     <li
       className={classes.join(' ')}
@@ -78,10 +90,11 @@ function TaskItem({
       </div>
       <button
         type="button"
+        name="removeTask"
         className="btn btn-outline-danger btn-sm"
-        onClick={() => removeTask(id)}
+        onClick={(e) => handleRemoveTask(e)}
         onKeyUp={(e) => {
-          if (e.key === 'Enter') removeTask(id);
+          if (e.key === 'Enter') handleRemoveTask(e);
         }}
       >
         &times;

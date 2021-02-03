@@ -69,4 +69,6 @@ export const putTask = async (task: ITask, userID: Types.ID): Promise<ITask> => 
   return Promise.resolve(task);
 };
 
-export const deleteTask = (id: Types.ID): Promise<undefined> => axios.delete(`${url}/tasks/${id}.json`);
+export const deleteTask = async (id: Types.ID, userID: Types.ID): Promise<any> => (
+  database.ref(`${userID}/tasks/${id}`).remove()
+);

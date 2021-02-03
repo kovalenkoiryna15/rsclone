@@ -15,7 +15,7 @@ import {
   ADD_FAILURE,
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
-  REMOVE_TASK,
+  REMOVE,
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
@@ -88,7 +88,7 @@ export const removeTask = (id: Types.ID): MyModels.AsyncDispatch<TasksState, any
   dispatch(showLoader());
   await deleteTask(id);
   dispatch({
-    type: REMOVE_TASK,
+    type: REMOVE,
     payload: id,
   });
   dispatch(hideLoader());

@@ -6,7 +6,7 @@ import {
   ADD_FAILURE,
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
-  REMOVE_TASK,
+  REMOVE,
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
@@ -47,7 +47,7 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
     ...state,
     tasks,
   }),
-  [REMOVE_TASK]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
+  [REMOVE]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,
     tasks: state.tasks.filter((task) => task.id !== id),
   }),

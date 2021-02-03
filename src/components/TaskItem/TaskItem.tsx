@@ -1,5 +1,7 @@
+import EventIcon from '@material-ui/icons/Event';
 import * as React from 'react';
-import { Badge } from 'react-bootstrap';
+import { Badge, Row, Col } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 import IProject from 'Entities/project-entities';
 import ITask from 'Entities/task-entities';
@@ -36,7 +38,7 @@ function TaskItem({
   ) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (event.target.nodeName === 'LI') {
+    if (event.target.nodeName === 'DIV') {
       event.preventDefault();
       event.stopPropagation();
       selectTask(task);
@@ -76,29 +78,48 @@ function TaskItem({
       }}
       role="presentation"
     >
-      <div className="custom-control custom-checkbox">
-        <input
-          type="checkbox"
-          name="isCompleted"
-          className="custom-control-input"
-          checked={isCompleted}
-          onChange={(e) => handleCompleteTask(e)}
-          id={`customCheck${id}`}
-        />
-        <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
-        {project ? <Badge className="ml-2" variant="secondary">{project.title}</Badge> : null}
-      </div>
-      <button
-        type="button"
-        name="removeTask"
-        className="btn btn-outline-danger btn-sm"
-        onClick={(e) => handleRemoveTask(e)}
-        onKeyUp={(e) => {
-          if (e.key === 'Enter') handleRemoveTask(e);
-        }}
-      >
-        &times;
-      </button>
+      <Container className="m-0 p-0">
+        <Row>
+          <Col>
+            <div className="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                name="isCompleted"
+                className="custom-control-input"
+                checked={isCompleted}
+                onChange={(e) => handleCompleteTask(e)}
+                id={`customCheck${id}`}
+              />
+              <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
+              {project ? <Badge style={{ backgroundColor: project.color }} className="ml-2" variant="secondary">{project.title}</Badge> : null}
+            </div>
+          </Col>
+          {task.deadline
+            ? (
+              <Col md="auto" sm="auto" lg="auto">
+                <Badge className="mr-2" variant={task.deadline < Date.now() ? 'warning' : 'dark'}>
+                  {(new Date(task.deadline)).toLocaleDateString('en-GB', {
+                    day: 'numeric', month: 'short', year: 'numeric',
+                  })}
+                </Badge>
+              </Col>
+            )
+            : null}
+          <Col md="auto" sm="auto" lg="auto">
+            <button
+              type="button"
+              name="removeTask"
+              className="btn btn-outline-danger btn-sm"
+              onClick={(e) => handleRemoveTask(e)}
+              onKeyUp={(e) => {
+                if (e.key === 'Enter') handleRemoveTask(e);
+              }}
+            >
+              &times;
+            </button>
+          </Col>
+        </Row>
+      </Container>
     </li>
   );
 }

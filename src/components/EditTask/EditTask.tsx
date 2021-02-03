@@ -8,14 +8,14 @@ import SelectProject from 'Components/SelectProject';
 import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
 
-const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number | undefined /* ms */ => {
-  if (!HHmm) return undefined;
+const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number /* ms */ => {
+  if (!HHmm) return 0;
   const arr = HHmm.split(':').reverse();
   let minutes;
   if (arr.length <= 2 && arr.every((v) => !Number.isNaN(+v))) {
     minutes = arr.map((v, i) => +v * 60 ** i).reduce((a, v) => a + v);
   }
-  return minutes || undefined;
+  return minutes || 0;
 };
 
 const addLeadingZero = (n: number): string => `${n < 10 ? '0' : ''}${n}`;

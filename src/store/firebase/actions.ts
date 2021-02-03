@@ -53,7 +53,7 @@ const parseTasksSnapshot = (tasksSnapshot: DataSnapshot) => {
   return tasks;
 };
 
-export const getTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
+export const fetchTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
   const taskListRef = database.ref(`${userID}/tasks`);
   const tasks: Array<ITask> = [] as Array<ITask>;
   await taskListRef.once('value', (tasksSnapshot) => {

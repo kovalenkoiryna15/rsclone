@@ -2,7 +2,7 @@ import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
 import {
   deleteTask,
-  getTasks,
+  fetchTasks,
   hideLoader,
   pushTask,
   putTask,
@@ -63,12 +63,12 @@ export const add = (
   dispatch(hideLoader());
 };
 
-export const fetchTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
+export const getTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
   dispatch,
 ) => {
   dispatch(showLoader());
   try {
-    await getTasks(userID)
+    await fetchTasks(userID)
       .then((tasks) => dispatch({
         type: FETCH_TASKS,
         payload: tasks,

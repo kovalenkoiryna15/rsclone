@@ -37,7 +37,7 @@ function TaskItem({
   ) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (event.target.nodeName === 'DIV') {
+    if (event.target.nodeName === 'LI') {
       event.preventDefault();
       event.stopPropagation();
       selectTask(task);

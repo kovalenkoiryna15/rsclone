@@ -5,7 +5,7 @@ export default function SideBar({ children }: {
   children: React.ReactNode;
 }): JSX.Element {
   const [collapseStatus, setStatus] = React.useState(false);
-  const classes = `sidebar ${!collapseStatus ? 'sidebar-uncollapsed' : 'sidebar-collapsed'}`;
+  const classes = `sidebar ${!collapseStatus ? 'sidebar-uncollapsed' : 'sidebar-collapsed mr-0'}`;
   const icon = !collapseStatus ? 'keyboard_arrow_left' : 'keyboard_arrow_right';
 
   return (

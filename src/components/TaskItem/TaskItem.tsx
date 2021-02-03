@@ -77,48 +77,40 @@ function TaskItem({
       }}
       role="presentation"
     >
-      <Container className="m-0 p-0">
-        <Row>
-          <Col>
-            <div className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                name="isCompleted"
-                className="custom-control-input"
-                checked={isCompleted}
-                onChange={(e) => handleCompleteTask(e)}
-                id={`customCheck${id}`}
-              />
-              <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
-              {project ? <Badge style={{ backgroundColor: project.color }} className="ml-2" variant="secondary">{project.title}</Badge> : null}
-            </div>
-          </Col>
-          {task.deadline
-            ? (
-              <Col md="auto" sm="auto" lg="auto">
-                <Badge className="mr-2" variant={task.deadline < Date.now() ? 'warning' : 'dark'}>
-                  {(new Date(task.deadline)).toLocaleDateString('en-GB', {
-                    day: 'numeric', month: 'short', year: 'numeric',
-                  })}
-                </Badge>
-              </Col>
-            )
-            : null}
-          <Col md="auto" sm="auto" lg="auto">
-            <button
-              type="button"
-              name="removeTask"
-              className="btn btn-outline-danger btn-sm"
-              onClick={(e) => handleRemoveTask(e)}
-              onKeyUp={(e) => {
-                if (e.key === 'Enter') handleRemoveTask(e);
-              }}
-            >
-              &times;
-            </button>
-          </Col>
-        </Row>
-      </Container>
+      <div className="custom-control custom-checkbox">
+        <input
+          type="checkbox"
+          name="isCompleted"
+          className="custom-control-input"
+          checked={isCompleted}
+          onChange={(e) => handleCompleteTask(e)}
+          id={`customCheck${id}`}
+        />
+        <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
+        {project ? <Badge style={{ backgroundColor: project.color }} className="ml-2" variant="secondary">{project.title}</Badge> : null}
+      </div>
+      <div className="d-inline-flex justify-content-end m-sm-1">
+        {task.deadline
+          ? (
+            <Badge className="mr-2" variant={task.deadline < Date.now() ? 'warning' : 'dark'}>
+              {(new Date(task.deadline)).toLocaleDateString('en-GB', {
+                day: 'numeric', month: 'short', year: 'numeric',
+              })}
+            </Badge>
+          )
+          : null}
+        <button
+          type="button"
+          name="removeTask"
+          className="btn btn-outline-danger btn-sm"
+          onClick={(e) => handleRemoveTask(e)}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') handleRemoveTask(e);
+          }}
+        >
+          &times;
+        </button>
+      </div>
     </li>
   );
 }

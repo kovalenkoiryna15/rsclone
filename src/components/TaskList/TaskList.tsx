@@ -29,7 +29,7 @@ const TaskList = ({
 
   return (
     <Col className="task-list">
-      <Nav className="justify-content-end" activeKey="/home">
+      <Nav className="justify-content-end p-1" activeKey="/home">
         <Nav.Item>
           <Button onClick={addNewTask} className="text-uppercase text-nowrap">
             + Task

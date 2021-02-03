@@ -48,15 +48,13 @@ const MainView = ({ isLoading, isAuth }: IMainViewProps): JSX.Element => {
               />
             )
             : (
-              <Col className="task-list">
-                <Switch>
-                  <Route exact path="/rsclone/tasks">
-                    <TaskList id="" />
-                  </Route>
-                  {renderTaskListPages()}
-                  <Redirect to="/rsclone/tasks" />
-                </Switch>
-              </Col>
+              <Switch>
+                <Route exact path="/rsclone/tasks">
+                  <TaskList id="" />
+                </Route>
+                {renderTaskListPages()}
+                <Redirect to="/rsclone/tasks" />
+              </Switch>
             )
         }
       </Row>

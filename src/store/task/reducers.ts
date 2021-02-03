@@ -7,7 +7,6 @@ import {
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
   REMOVE_TASK,
-  TOGGLE_COMPLETE_TASK,
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
@@ -51,14 +50,6 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
   [REMOVE_TASK]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,
     tasks: state.tasks.filter((task) => task.id !== id),
-  }),
-  [TOGGLE_COMPLETE_TASK]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
-    ...state,
-    tasks: state.tasks.map((task) => {
-      // eslint-disable-next-line no-param-reassign
-      if (task.id === id) task.isCompleted = !task.isCompleted;
-      return task;
-    }),
   }),
   [FETCH_TASKS_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
     ...state,

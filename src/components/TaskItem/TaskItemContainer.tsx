@@ -16,13 +16,14 @@ const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
   project: Object
     .values(state.projects.projects)
     .find(({ id }) => id === ownProps.task.project),
+  userID: state.user.user.id,
 });
 
 const mapDispatchToProps = {
   removeTask: tasksActions.removeTask,
   selectTask: taskListActions.selectTask,
   showEdit: taskListActions.showEdit,
-  toggleCompleteTask: tasksActions.toggleCompleteTask,
+  updateTask: tasksActions.update,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

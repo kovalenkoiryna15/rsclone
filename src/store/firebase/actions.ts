@@ -1,15 +1,12 @@
-import axios from 'axios';
+import firebase from 'firebase';
 
 import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
 import * as Types from 'Entities/types';
-import firebase from 'firebase';
 import { database } from 'Store/src/firebase';
 import * as MyModels from 'Store/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 import DataSnapshot = firebase.database.DataSnapshot;
-
-const url: string = process.env.REACT_APP_DB_URL!;
 
 export const showLoader = (): MyModels.IAction<undefined> => ({
   type: SHOW_LOADER,

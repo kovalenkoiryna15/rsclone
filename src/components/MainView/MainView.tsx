@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col, Spinner } from 'react-bootstrap';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
 
 import * as MyModels from 'Store/types';
 import TaskList from 'Components/TaskList';
@@ -45,19 +47,21 @@ const MainView = ({ isLoading, isAuth }: IMainViewProps): JSX.Element => {
                 variant="info"
               />
             )
-            : <Col className="task-list">
-	          <Switch>
-	            <Route exact path="/rsclone/tasks">
-	              <TaskList id="" />
-	            </Route>
-	            {renderTaskListPages()}
-	            <Redirect to="/rsclone/tasks" />
-	          </Switch>
-	        </Col>
+            : (
+              <Col className="task-list">
+                <Switch>
+                  <Route exact path="/rsclone/tasks">
+                    <TaskList id="" />
+                  </Route>
+                  {renderTaskListPages()}
+                  <Redirect to="/rsclone/tasks" />
+                </Switch>
+              </Col>
+            )
         }
       </Row>
     </Router>
   );
-}
+};
 
 export default MainView;

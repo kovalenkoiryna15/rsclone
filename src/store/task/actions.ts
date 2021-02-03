@@ -25,7 +25,6 @@ export const update = (
   task: ITask,
   userID: Types.ID,
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
-  dispatch(showLoader());
   try {
     await putTask(task, userID);
     dispatch({
@@ -38,14 +37,12 @@ export const update = (
       payload: error as Error,
     });
   }
-  dispatch(hideLoader());
 };
 
 export const add = (
   task: Omit<ITask, 'id'>,
   userID: Types.ID,
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
-  dispatch(showLoader());
   try {
     const { id } = await pushTask(task, userID);
     dispatch({
@@ -61,7 +58,6 @@ export const add = (
       payload: error as Error,
     });
   }
-  dispatch(hideLoader());
 };
 
 export const getTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
@@ -87,7 +83,6 @@ export const removeTask = (
   task: ITask,
   userID: Types.ID,
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
-  dispatch(showLoader());
   const { id } = task;
   try {
     await deleteTask(id, userID);
@@ -101,5 +96,4 @@ export const removeTask = (
       payload: error as Error,
     });
   }
-  dispatch(hideLoader());
 };

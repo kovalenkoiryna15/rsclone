@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { tasksActions } from 'Store/task';
+import { taskActions } from 'Store/task';
 import { taskListActions } from 'Store/task-list';
 import * as Types from 'Store/types';
 import EditTask from './EditTask';
@@ -12,10 +12,10 @@ const mapStateToProps = (state: Types.RootState) => ({
 });
 
 const mapDispatchToProps = {
-  addTask: tasksActions.add,
+  addTask: taskActions.add,
   deselectTask: taskListActions.deselectTask,
   hideEdit: taskListActions.hideEdit,
-  updateTask: tasksActions.update,
+  updateTask: taskActions.update,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

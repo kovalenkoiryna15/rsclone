@@ -1,9 +1,8 @@
-import IProject from 'Entities/project-entities';
 import { connect } from 'react-redux';
 
 import ITask from 'Entities/task-entities';
 import { taskListActions } from 'Store/task-list';
-import { tasksActions } from 'Store/task';
+import { taskActions } from 'Store/task';
 import * as Types from 'Store/types';
 import TaskItem from './TaskItem';
 
@@ -20,10 +19,10 @@ const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
 });
 
 const mapDispatchToProps = {
-  removeTask: tasksActions.removeTask,
+  removeTask: taskActions.removeTask,
   selectTask: taskListActions.selectTask,
   showEdit: taskListActions.showEdit,
-  updateTask: tasksActions.update,
+  updateTask: taskActions.update,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

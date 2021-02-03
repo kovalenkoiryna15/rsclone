@@ -1,11 +1,11 @@
-import * as tasksActions from './actions';
-import * as tasksConstants from './action-constants';
-import * as tasksTypes from './action-types';
-import tasksReducer from './reducers';
+import * as taskActions from './actions';
+import * as taskConstants from './action-constants';
+import * as taskTypes from './action-types';
+import taskReducer from './reducers';
 
 export {
-  tasksActions,
-  tasksConstants,
-  tasksReducer,
-  tasksTypes,
+  taskActions,
+  taskConstants,
+  taskReducer,
+  taskTypes,
 };

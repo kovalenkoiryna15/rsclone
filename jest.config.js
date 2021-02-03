@@ -19,12 +19,7 @@ module.exports = {
     '^Styles\/(.*)$': '<rootDir>/src/styles/$1'
   },
   roots: ['<rootDir>/src/'],
-  setupFilesAfterEnv: [
-    '<rootDir>/src/setupTests.ts',
-    'jest-enzyme'
-  ],
-  testEnvironment: 'enzyme',
-  testEnvironmentOptions: { enzymeAdapter: 'react16' },
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testMatch: ['./**/*.{spec,test}.{ts,tsx,js,jsx}'],
   verbose: true,
 };

@@ -7,6 +7,7 @@ import {
   FETCH_TASKS,
   FETCH_TASKS_FAILURE,
   REMOVE,
+  REMOVE_FAILURE,
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
@@ -60,6 +61,10 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
     error,
   }),
   [UPDATE_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+    ...state,
+    error,
+  }),
+  [REMOVE_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
     ...state,
     error,
   }),

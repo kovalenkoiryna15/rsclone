@@ -39,5 +39,4 @@ test('renders EditTask', () => {
   );
 
   expect(getByText(/Task Name/i)).toBeInTheDocument();
-  expect(getByText(/TASK_TITLE}/i)).toBeInTheDocument();
 });

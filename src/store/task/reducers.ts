@@ -1,6 +1,6 @@
+import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
 import * as MyModels from 'Store/types';
-import ITask from 'Entities/task-entities';
 import {
   ADD,
   ADD_FAILURE,

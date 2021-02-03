@@ -69,6 +69,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
   [LOGOUT]: (state) => ({
     ...state,
     isAuthorized: false,
+    alertMessage: undefined,
   }),
   DEFAULT: (state) => state,
 };

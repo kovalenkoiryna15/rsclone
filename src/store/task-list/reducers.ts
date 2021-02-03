@@ -34,9 +34,9 @@ const handlers: MyModels.IHandlers<TaskListState, any> = {
   DEFAULT: (state) => state,
 };
 
-const tasksReducer: MyModels.Reducer<TaskListState, any> = (state = initialState, action) => {
+const taskListReducer: MyModels.Reducer<TaskListState, any> = (state = initialState, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };
 
-export default tasksReducer;
+export default taskListReducer;

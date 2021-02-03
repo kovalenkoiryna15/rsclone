@@ -1,3 +1,3 @@
-import MainView from './MainView';
+import MainView from './MainViewContainer';
 
 export default MainView;

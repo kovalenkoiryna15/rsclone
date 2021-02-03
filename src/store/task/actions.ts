@@ -1,7 +1,5 @@
 import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
-import { TasksState } from 'Store/task/action-types';
-import * as MyModels from 'Store/types';
 import {
   deleteTask,
   getTasks,
@@ -9,7 +7,9 @@ import {
   pushTask,
   putTask,
   showLoader,
-} from '../firebase/actions';
+} from 'Store/firebase/actions';
+import { TasksState } from 'Store/task/action-types';
+import * as MyModels from 'Store/types';
 import {
   ADD,
   ADD_FAILURE,

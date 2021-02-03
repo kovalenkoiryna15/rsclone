@@ -1,4 +1,3 @@
-import EventIcon from '@material-ui/icons/Event';
 import * as React from 'react';
 import { Badge, Row, Col } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';

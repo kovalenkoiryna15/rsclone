@@ -13,7 +13,6 @@ import {
   pushTask,
   putTask,
   showLoader,
-  toggleCompleteTask as putToggleCompleteTask,
 } from '../firebase/actions';
 import {
   ADD,
@@ -22,7 +21,6 @@ import {
   FETCH_TASKS_FAILURE,
   REMOVE_TASK,
   SET_NEW_TASK_TITLE,
-  TOGGLE_COMPLETE_TASK,
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
@@ -94,23 +92,6 @@ export const fetchTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState,
     });
   }
   dispatch(hideLoader());
-};
-
-export const toggleCompleteTask = (id: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
-  dispatch, getState,
-) => {
-  dispatch(showLoader());
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  const { tasks: { tasks } } = getState();
-  const task = tasks.find((t) => t.id === id);
-  if (task) {
-    await putToggleCompleteTask(task);
-    dispatch({
-      type: TOGGLE_COMPLETE_TASK,
-      payload: id,
-    });
-    dispatch(hideLoader());
-  }
 };
 
 export const removeTask = (id: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (

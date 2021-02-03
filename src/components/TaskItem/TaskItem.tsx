@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { Badge } from 'react-bootstrap';
 
+import IProject from 'Entities/project-entities';
 import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
-import { TasksState } from 'Store/task/action-types';
-import * as MyModels from 'Store/types';
 
 interface ITaskItemProps {
   task: ITask;
   // eslint-disable-next-line react/require-default-props
   project?: IProject;
+  userID: Types.ID;
   removeTask: (id: Types.ID) => void;
   selectTask: (task: ITask) => void;
   showEdit: () => void;
-  toggleCompleteTask: (id: Types.ID) => void;
+  updateTask: (task: ITask, userID: Types.ID) => void;
 }
 
 function TaskItem({
-  task, project, removeTask, toggleCompleteTask, selectTask, showEdit,
+  task, project, removeTask, updateTask, selectTask, showEdit, userID
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -31,26 +31,46 @@ function TaskItem({
 
   if (isCompleted) classes.push('completed');
 
-  const editTask = () => {
-    selectTask(task);
-    showEdit();
+  const editTask = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent> | React.KeyboardEvent<HTMLLIElement>,
+  ) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (event.target.nodeName === 'LI') {
+      event.preventDefault();
+      event.stopPropagation();
+      selectTask(task);
+      showEdit();
+    }
+  };
+
+  const handleCompleteTask = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === 'isCompleted') {
+      event.preventDefault();
+      event.stopPropagation();
+      updateTask({
+        ...task,
+        isCompleted: !isCompleted,
+      }, userID);
+    }
   };
 
   return (
     <li
       className={classes.join(' ')}
-      onClick={editTask}
+      onClick={(e) => editTask(e)}
       onKeyDown={(e) => {
-        if (e.key === 'Enter') editTask();
+        if (e.key === 'Enter') editTask(e);
       }}
       role="presentation"
     >
       <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
+          name="isCompleted"
           className="custom-control-input"
           checked={isCompleted}
-          onChange={() => toggleCompleteTask(id)}
+          onChange={(e) => handleCompleteTask(e)}
           id={`customCheck${id}`}
         />
         <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>

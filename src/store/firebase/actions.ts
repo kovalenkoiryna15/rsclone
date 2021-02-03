@@ -69,16 +69,4 @@ export const putTask = async (task: ITask, userID: Types.ID): Promise<ITask> => 
   return Promise.resolve(task);
 };
 
-export const toggleCompleteTask = (task: ITask): Promise<ITask> => {
-  const {
-    id,
-    isCompleted,
-    ...rest
-  } = task;
-  return axios.put(
-    `${url}/tasks/${id}.json`,
-    { isCompleted: !isCompleted, ...rest },
-  );
-};
-
 export const deleteTask = (id: Types.ID): Promise<undefined> => axios.delete(`${url}/tasks/${id}.json`);

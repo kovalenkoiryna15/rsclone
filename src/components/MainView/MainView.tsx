@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { Row, Col, Spinner } from 'react-bootstrap';
+import { Row, Spinner } from 'react-bootstrap';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';

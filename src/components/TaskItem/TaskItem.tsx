@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Badge, Row, Col } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import { Badge } from 'react-bootstrap';
 
 import IProject from 'Entities/project-entities';
 import ITask from 'Entities/task-entities';

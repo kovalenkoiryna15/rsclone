@@ -6,5 +6,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run markdownlint
+npm run stylelint
 npm lint
 npm test

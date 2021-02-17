@@ -81,7 +81,7 @@ const EditTask = ({
   };
 
   const handleProjectChange = (
-    project: {value: Types.ID, label: string},
+    project: { value: Types.ID, label: string },
     options: { action: string, name: string, option: any },
   ) => {
     if (project && options.action === 'select-option') {
@@ -130,10 +130,10 @@ const EditTask = ({
         estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
       }, userID);
     } else {
-      delete taskState.id;
+      const { id, ...taskWithOutID } = taskState;
       addTask({
-        ...taskState,
-        estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
+        ...taskWithOutID,
+        estimatedTime: parseHHmmStringToMin(taskWithOutID.estimatedTime),
       }, userID);
     }
     handleHide();

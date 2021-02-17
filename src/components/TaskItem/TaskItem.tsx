@@ -86,14 +86,22 @@ function TaskItem({
           type="checkbox"
         />
         <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
-        {project ? <Badge style={{ backgroundColor: project.color }} className="ml-2" variant="secondary">{project.title}</Badge> : null}
+        {project
+          ? (
+            <Badge className="ml-2" style={{ backgroundColor: project.color }} variant="secondary">
+              {project.title}
+            </Badge>
+          )
+          : null}
       </div>
       <div className="d-inline-flex justify-content-end m-sm-1">
         {task.deadline
           ? (
             <Badge className="mr-2" variant={task.deadline < Date.now() ? 'warning' : 'dark'}>
               {(new Date(task.deadline)).toLocaleDateString('en-GB', {
-                day: 'numeric', month: 'short', year: 'numeric',
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
               })}
             </Badge>
           )

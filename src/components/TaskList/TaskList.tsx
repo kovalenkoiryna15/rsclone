@@ -59,7 +59,7 @@ const TaskList = ({
           )
           : !isLoading && <p>No tasks!</p>
       }
-      {isVisibleEdit ? <EditTask /> : <></>}
+      {isVisibleEdit ? <EditTask /> : null}
     </Col>
   );
 };

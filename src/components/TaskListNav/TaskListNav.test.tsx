@@ -11,7 +11,7 @@ test('renders TaskListNav', () => {
   const { getByText } = render(
     <Provider store={store}>
       <Router>
-        <TaskListNav projects={fakeProjects} isLoading={false} />
+        <TaskListNav isLoading={false} projects={fakeProjects} />
       </Router>
     </Provider>,
   );

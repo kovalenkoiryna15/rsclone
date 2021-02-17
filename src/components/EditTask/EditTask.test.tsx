@@ -27,13 +27,13 @@ test('renders EditTask', () => {
   const { getByText } = render(
     <Provider store={store}>
       <EditTask
-        task={newTask}
-        isVisible={isVisibleEdit}
-        userID=""
         addTask={addTask}
         deselectTask={deselectTask}
         hideEdit={hideEdit}
+        isVisible={isVisibleEdit}
+        task={newTask}
         updateTask={updateTask}
+        userID=""
       />
     </Provider>,
   );

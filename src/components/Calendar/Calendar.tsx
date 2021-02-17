@@ -50,22 +50,22 @@ const Calendar = ({
       show={isVisible}
     >
       <Modal.Header>
-        <Button variant="link" onClick={handleToday} className={buttonClasses}>
+        <Button className={buttonClasses} onClick={handleToday} variant="link">
           Today
         </Button>
-        <Button variant="link" onClick={handleClearDate} className={buttonClasses}>
+        <Button className={buttonClasses} onClick={handleClearDate} variant="link">
           Clear Date
         </Button>
       </Modal.Header>
       <Modal.Body className="p-0">
         <Datetime
+          ref={refDatePicker}
           initialViewMode="days"
           input={false}
           onChange={(newDate) => {
             setSelectedDate(moment(newDate).toDate());
           }}
           open
-          ref={refDatePicker}
           timeFormat={false}
           value={selectedDate}
         />

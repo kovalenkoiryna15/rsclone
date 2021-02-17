@@ -11,7 +11,7 @@ import './index.scss';
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <Container fluid className="app-container">
+    <Container className="app-container" fluid>
       <App />
     </Container>
   </Provider>,

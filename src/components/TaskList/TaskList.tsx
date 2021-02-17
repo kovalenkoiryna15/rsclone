@@ -29,9 +29,9 @@ const TaskList = ({
 
   return (
     <Col className="task-list">
-      <Nav className="justify-content-end p-1" activeKey="/home">
+      <Nav activeKey="/home" className="justify-content-end p-1">
         <Nav.Item>
-          <Button onClick={addNewTask} className="text-uppercase text-nowrap">
+          <Button className="text-uppercase text-nowrap" onClick={addNewTask}>
             + Task
           </Button>
         </Nav.Item>
@@ -44,14 +44,14 @@ const TaskList = ({
                 id
                   ? tasks.filter((task) => task.project === id).map((task) => (
                     <TaskItem
-                      task={task}
                       key={task.id.toString()}
+                      task={task}
                     />
                   ))
                   : tasks.map((task) => (
                     <TaskItem
-                      task={task}
                       key={task.id.toString()}
+                      task={task}
                     />
                   ))
               }

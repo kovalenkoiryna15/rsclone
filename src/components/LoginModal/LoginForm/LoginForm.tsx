@@ -41,16 +41,16 @@ const LoginForm = (): JSX.Element => {
   return (
     <>
       {alert ? <Alert className="text-warning text-center">{alert}</Alert> : null}
-      <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form className="login-form" noValidate onSubmit={handleSubmit} validated={validated}>
         <Form.Group controlId="formBasicEmail">
           <Form.Control
-            value={email}
+            autoComplete="off"
+            name="email"
             onChange={handleEmailChange}
-            type="email"
             placeholder="Email"
             required
-            name="email"
-            autoComplete="off"
+            type="email"
+            value={email}
           />
           {
             submitted && !email
@@ -59,17 +59,17 @@ const LoginForm = (): JSX.Element => {
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
-            value={password}
-            type="password"
-            placeholder="Password"
             aria-describedby="passwordHelpBlock"
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
-            minLength={Number(6)}
-            maxLength={Number(15)}
-            onChange={handlePasswordChange}
-            name="password"
             autoComplete="off"
+            maxLength={Number(15)}
+            minLength={Number(6)}
+            name="password"
+            onChange={handlePasswordChange}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
+            placeholder="Password"
+            required
+            type="password"
+            value={password}
           />
           {
             submitted && !password
@@ -77,10 +77,10 @@ const LoginForm = (): JSX.Element => {
           }
         </Form.Group>
         <Button
-          disabled={isSignedIn}
-          variant="primary"
-          type="submit"
           className="text-uppercase"
+          disabled={isSignedIn}
+          type="submit"
+          variant="primary"
         >
           Login
         </Button>

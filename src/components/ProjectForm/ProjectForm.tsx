@@ -177,9 +177,9 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
     const { isVisible } = this.props;
     return (
       <Modal
-        show={isVisible}
-        onHide={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
         className="project-modal"
+        onHide={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
+        show={isVisible}
       >
         <Modal.Header closeButton>
           <Modal.Title>Project</Modal.Title>
@@ -187,20 +187,20 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         <Modal.Body>
           <Form
             className="project-form"
-            validated={validated}
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => this.handleSubmit(e)}
+            validated={validated}
           >
             <Form.Group controlId="formProjectName">
               <Form.Label>Title</Form.Label>
               <Form.Control
+                maxLength={Number(40)}
+                minLength={Number(1)}
                 name="title"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleTitleChange(e)}
                 placeholder="Title"
                 required
                 type="text"
                 value={title}
-                minLength={Number(1)}
-                maxLength={Number(40)}
               />
             </Form.Group>
             <Form.Group controlId="formProjectDeadline">
@@ -231,16 +231,16 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               />
             </Form.Group>
             <Button
-              variant="secondary"
               onClick={(e: React.MouseEvent<HTMLElement>) => this.handleClose(e)}
+              variant="secondary"
             >
               Close
             </Button>
             <Button
-              variant="primary"
-              type="submit"
-              onClick={(e: React.MouseEvent<HTMLFormElement>) => this.handleSubmit(e)}
               disabled={!isValid}
+              onClick={(e: React.MouseEvent<HTMLFormElement>) => this.handleSubmit(e)}
+              type="submit"
+              variant="primary"
             >
               Save
             </Button>

@@ -26,7 +26,7 @@ const MainView = ({ isLoading, isAuth }: IMainViewProps): JSX.Element => {
       Object.values(allProjects).map((project: IProject) => {
         const { id } = project;
         return (
-          <Route path={`/rsclone/project/${id}`} key={id}>
+          <Route key={id} path={`/rsclone/project/${id}`}>
             <TaskList id={id} />
           </Route>
         );
@@ -42,8 +42,8 @@ const MainView = ({ isLoading, isAuth }: IMainViewProps): JSX.Element => {
           isAuth && isLoading
             ? (
               <Spinner
-                className="d-flex align-items-center m-2 justify-content-around text-primary"
                 animation="border"
+                className="d-flex align-items-center m-2 justify-content-around text-primary"
                 variant="info"
               />
             )

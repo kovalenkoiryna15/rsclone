@@ -24,17 +24,17 @@ export default function App(): JSX.Element {
   });
 
   useEffect(() => {
-    if (isAuth) {
-      if (auth.currentUser) {
-        auth.currentUser.getIdToken(/* forceRefresh */ true)
-          .then((idToken) => {
-            if (auth.currentUser) {
-              dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
-              dispatch(taskActions.getTasks(String(auth.currentUser.uid)));
-            }
-          })
-          .catch(() => {});
-      }
+    if (isAuth && auth.currentUser) {
+      auth.currentUser.getIdToken(true)
+        .then((idToken) => {
+          if (auth.currentUser) {
+            dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
+            dispatch(taskActions.getTasks(String(auth.currentUser.uid)));
+          }
+          return true;
+        })
+        .catch(() => {
+        });
     }
   }, [isAuth, dispatch]);
 

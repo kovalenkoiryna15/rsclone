@@ -4,10 +4,10 @@ import { Row, Col } from 'react-bootstrap';
 export default function Footer(): JSX.Element {
   return (
     <footer className="footer bg-dark text-center row">
-      <Col sm={12} md={3} className="footer-col">
+      <Col className="footer-col" md={3} sm={12}>
         RSClone Tracking Time, 2021 (JS2020Q3)
       </Col>
-      <Col sm={12} md={7} className="footer-col">
+      <Col className="footer-col" md={7} sm={12}>
         <Row className="flex-grow-1">
           <Col>
             <a className="collaborator" href="https://github.com/aplatkouski" target="blank">
@@ -38,7 +38,7 @@ export default function Footer(): JSX.Element {
           </Col>
         </Row>
       </Col>
-      <Col sm={12} md={2} className="footer-col">
+      <Col className="footer-col" md={2} sm={12}>
         <a className="rsschool-logo" href="https://rs.school/js/" target="blank">
           <svg className="rsschool-logo-svg" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 552.8 205.3">
             <title>rs_school_js</title>

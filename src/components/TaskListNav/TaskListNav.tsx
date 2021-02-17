@@ -45,9 +45,9 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
         return (
           <Nav.Item key={id} className="w-100 border-0 p-0 m-0 project-item">
             <NavLink
-              to={`/rsclone/project/${id}`}
-              style={{ color: `${color || '#2aa198'}` }}
               className="w-100 project-link border-0  nav-link"
+              style={{ color: `${color || '#2aa198'}` }}
+              to={`/rsclone/project/${id}`}
             >
               {title}
             </NavLink>
@@ -73,13 +73,13 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
       <SideBar>
         <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="pills">
           <Nav.Item className="w-100 border-0 p-0 m-0">
-            <NavLink to="/rsclone/tasks" className="w-100 border-0 nav-link">Tasks</NavLink>
+            <NavLink className="w-100 border-0 nav-link" to="/rsclone/tasks">Tasks</NavLink>
           </Nav.Item>
           <Nav.Item className="w-100 border-0 px-3 py-2 m-0">
-            <Nav.Link disabled className="w-100 border-0 p-0 disabled">
+            <Nav.Link className="w-100 border-0 p-0 disabled" disabled>
               Projects
             </Nav.Link>
-            <Button onClick={() => this.handleShow()} className="text-uppercase text-nowrap">
+            <Button className="text-uppercase text-nowrap" onClick={() => this.handleShow()}>
               + Project
             </Button>
           </Nav.Item>

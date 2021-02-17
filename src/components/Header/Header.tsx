@@ -16,14 +16,14 @@ export default function Header(): JSX.Element {
   return (
     <Row className="header">
       <Navbar className="navbar-expand-lg navbar-light bg-light justify-content-between">
-        <Navbar.Brand className="navbar-brand" href="https://kovalenkoiryna15.github.io/rsclone/" data-testid="header-title">
+        <Navbar.Brand className="navbar-brand" data-testid="header-title" href="https://kovalenkoiryna15.github.io/rsclone/">
           RSClone Tracking Time
         </Navbar.Brand>
         <Button
-          variant="primary"
-          type="button"
           className="text-uppercase"
           onClick={handleLogout}
+          type="button"
+          variant="primary"
         >
           Logout
         </Button>

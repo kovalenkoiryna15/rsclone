@@ -78,12 +78,12 @@ function TaskItem({
     >
       <div className="custom-control custom-checkbox">
         <input
-          type="checkbox"
-          name="isCompleted"
-          className="custom-control-input"
           checked={isCompleted}
-          onChange={(e) => handleCompleteTask(e)}
+          className="custom-control-input"
           id={`customCheck${id}`}
+          name="isCompleted"
+          onChange={(e) => handleCompleteTask(e)}
+          type="checkbox"
         />
         <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
         {project ? <Badge style={{ backgroundColor: project.color }} className="ml-2" variant="secondary">{project.title}</Badge> : null}
@@ -99,13 +99,13 @@ function TaskItem({
           )
           : null}
         <button
-          type="button"
-          name="removeTask"
           className="btn btn-outline-danger btn-sm"
+          name="removeTask"
           onClick={(e) => handleRemoveTask(e)}
           onKeyUp={(e) => {
             if (e.key === 'Enter') handleRemoveTask(e);
           }}
+          type="button"
         >
           &times;
         </button>

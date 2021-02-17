@@ -24,14 +24,14 @@ const LoginModal = (): JSX.Element => {
 
   return (
     <Modal
-      show={!isAuth}
-      className="login-modal"
-      centered
       aria-labelledby="contained-modal-title-vcenter"
+      centered
+      className="login-modal"
       onHide={() => null}
+      show={!isAuth}
     >
       <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter" className="text-center">
+        <Modal.Title className="text-center" id="contained-modal-title-vcenter">
           RSClone Tracking Time
         </Modal.Title>
       </Modal.Header>
@@ -49,12 +49,12 @@ const LoginModal = (): JSX.Element => {
               <div className="block-signup block-login">
                 <h6 className="pt-2">Don’t have an account?</h6>
                 <span
-                  role="button"
+                  aria-labelledby="move-to-register-form"
                   className="text-uppercase btn-signup btn-login"
                   onClick={handleRegistered}
-                  tabIndex={0}
-                  aria-labelledby="move-to-register-form"
                   onKeyDown={handleRegistered}
+                  role="button"
+                  tabIndex={0}
                 >
                   Sign up
                 </span>
@@ -63,12 +63,12 @@ const LoginModal = (): JSX.Element => {
             : (
               <div className="block-signup">
                 <span
-                  role="button"
+                  aria-labelledby="move-to-register-form"
                   className="text-uppercase btn-signup"
                   onClick={handleRegistered}
-                  tabIndex={0}
-                  aria-labelledby="move-to-register-form"
                   onKeyDown={handleRegistered}
+                  role="button"
+                  tabIndex={0}
                 >
                   Back to login
                 </span>

@@ -148,7 +148,7 @@ const EditTask = ({
         show={isVisible}
       >
         <Modal.Header closeButton>
-          <Button variant="primary" onClick={handleShowDueDateModal}>
+          <Button onClick={handleShowDueDateModal} variant="primary">
             <EventIcon />
             {taskState.deadline
               ? (new Date(taskState.deadline)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -158,19 +158,19 @@ const EditTask = ({
         <Modal.Body>
           <Form
             className="task-form"
-            validated={formState.isValidated}
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
+            validated={formState.isValidated}
           >
             <Form.Group controlId="formTaskName">
               <Form.Label>Task Name</Form.Label>
               <Form.Control
+                minLength={Number(1)}
                 name="title"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                 placeholder="Task Name"
                 required
                 type="text"
                 value={taskState.title}
-                minLength={Number(1)}
               />
             </Form.Group>
             <Form.Group controlId="formProject">
@@ -193,9 +193,9 @@ const EditTask = ({
               Cancel
             </Button>
             <Button
-              variant="primary"
-              type="submit"
               onClick={(e: React.MouseEvent<HTMLFormElement>) => handleSubmit(e)}
+              type="submit"
+              variant="primary"
             >
               Save
             </Button>
@@ -204,9 +204,9 @@ const EditTask = ({
       </Modal>
       <Calendar
         dueDate={taskState.deadline}
-        setDueDate={handleDeadlineChange}
-        handleShow={handleShowDueDateModal}
         isVisible={formState.isVisibleDueDateModal}
+        onChangeDueDate={handleDeadlineChange}
+        onShow={handleShowDueDateModal}
       />
     </>
   );

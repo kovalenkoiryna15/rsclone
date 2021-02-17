@@ -46,16 +46,16 @@ const RegisterForm = (): JSX.Element => {
   return (
     <>
       {alert ? <Alert className="text-warning text-center">{alert}</Alert> : null}
-      <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form className="login-form" noValidate onSubmit={handleSubmit} validated={validated}>
         <Form.Group controlId="formBasicEmail">
           <Form.Control
-            value={email}
+            autoComplete="off"
+            name="email"
             onChange={handleEmailChange}
-            type="email"
             placeholder="Email"
             required
-            name="email"
-            autoComplete="off"
+            type="email"
+            value={email}
           />
           {
             submitted && !email
@@ -64,17 +64,17 @@ const RegisterForm = (): JSX.Element => {
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
-            value={password}
-            onChange={handlePasswordChange}
-            type="password"
-            placeholder="Password"
             aria-describedby="passwordHelpBlock"
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
-            minLength={Number(6)}
-            maxLength={Number(15)}
-            name="password"
             autoComplete="off"
+            maxLength={Number(15)}
+            minLength={Number(6)}
+            name="password"
+            onChange={handlePasswordChange}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}"
+            placeholder="Password"
+            required
+            type="password"
+            value={password}
           />
           {
             submitted && !password
@@ -85,7 +85,9 @@ const RegisterForm = (): JSX.Element => {
             and contain at least one number and one uppercase letter.
           </Form.Text>
         </Form.Group>
-        <Button disabled={isSignedUp} variant="primary" type="submit" className="text-uppercase">Sign up</Button>
+        <Button className="text-uppercase" disabled={isSignedUp} type="submit" variant="primary">
+          Sign up
+        </Button>
       </Form>
     </>
   );

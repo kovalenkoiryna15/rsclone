@@ -35,7 +35,6 @@ const SelectProject = ({ projects, onChange, defaultValue }: ISelectProjectProps
 
   return (
     <Select
-      id="formProject"
       className="basic-single"
       classNamePrefix="select"
       defaultValue={
@@ -44,11 +43,12 @@ const SelectProject = ({ projects, onChange, defaultValue }: ISelectProjectProps
           : customOptions[0]
       }
       filterOption={filterOptions}
+      id="formProject"
       isClearable={false}
       isSearchable
       name="project"
-      options={customOptions}
       onChange={onChange}
+      options={customOptions}
     />
   );
 };

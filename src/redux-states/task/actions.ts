@@ -1,4 +1,4 @@
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 import * as AppTypes from 'Entities/types';
 import {
   deleteTask,

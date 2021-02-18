@@ -1,5 +1,5 @@
-import IProject from 'Entities/project-entities';
-import IProjects from 'Entities/projects-entity';
+import IProject from 'Entities/project';
+import IProjects from 'Entities/projects';
 import * as React from 'react';
 import Select from 'react-select';
 

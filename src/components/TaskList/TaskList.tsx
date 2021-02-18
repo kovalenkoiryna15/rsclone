@@ -3,7 +3,7 @@ import { Button, Col, Nav } from 'react-bootstrap';
 
 import TaskItem from 'Components/TaskItem';
 import EditTask from 'Components/EditTask';
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 
 interface ITaskListProps {
   isLoading: boolean;

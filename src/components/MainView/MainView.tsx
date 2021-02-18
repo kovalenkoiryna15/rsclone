@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import * as StateTypes from 'States/types';
 import TaskList from 'Components/TaskList';
 import TaskListNav from 'Components/TaskListNav';
-import IProject from 'Entities/project-entities';
+import IProject from 'Entities/project';
 
 interface IMainViewProps {
   isLoading: boolean;

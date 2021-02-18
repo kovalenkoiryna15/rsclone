@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
-import IProject from 'Entities/project-entities';
+import IProject from 'Entities/project';
 
 const MILLISECONDS_IN_HOUR = 3.6e6;
 const MILLISECONDS_IN_MINUTE = 60e3;

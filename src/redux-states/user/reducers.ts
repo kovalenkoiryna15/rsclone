@@ -1,5 +1,5 @@
 import * as AppTypes from 'Entities/types';
-import IUser from 'Entities/user-entities';
+import IUser from 'Entities/user';
 import * as StateTypes from 'States/types';
 import { IUserState } from 'States/user/action-types';
 import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';

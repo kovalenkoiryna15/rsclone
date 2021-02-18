@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 import { taskListActions } from 'States/task-list';
 import { taskActions } from 'States/task';
 import * as StateTypes from 'States/types';

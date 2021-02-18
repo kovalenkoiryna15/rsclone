@@ -1,4 +1,4 @@
-import IProject from 'Entities/project-entities';
+import IProject from 'Entities/project';
 import * as React from 'react';
 import { connect } from 'react-redux';
 

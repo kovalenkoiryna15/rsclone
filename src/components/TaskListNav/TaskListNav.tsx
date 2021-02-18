@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 import DropdownCustom from 'Components/DropdownCustom/index';
 import ProjectForm from 'Components/ProjectForm';
 import SideBar from 'Components/SideBar';
-import IProject from 'Entities/project-entities';
-import IProjects from 'Entities/projects-entity';
+import IProject from 'Entities/project';
+import IProjects from 'Entities/projects';
 
 interface ITaskListNavState {
   isVisible: boolean;

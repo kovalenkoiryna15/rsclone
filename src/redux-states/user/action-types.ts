@@ -1,4 +1,4 @@
-import IUser from 'Entities/user-entities';
+import IUser from 'Entities/user';
 
 export interface IUserState {
   user: IUser;

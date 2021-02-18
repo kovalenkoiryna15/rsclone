@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 import ITimeEntry from 'Entities/time-entry';
 import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'States/types';

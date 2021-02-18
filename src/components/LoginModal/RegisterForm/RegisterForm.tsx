@@ -10,10 +10,10 @@ import { register } from 'Store/user/actions';
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedUp = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized,
+    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized
   );
   const alert = useSelector(
-    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage,
+    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage
   );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -46,7 +46,12 @@ const RegisterForm = (): JSX.Element => {
   return (
     <>
       {alert ? <Alert className="text-warning text-center">{alert}</Alert> : null}
-      <Form className="login-form" noValidate onSubmit={handleSubmit} validated={validated}>
+      <Form
+        className="login-form"
+        noValidate
+        onSubmit={handleSubmit}
+        validated={validated}
+      >
         <Form.Group controlId="formBasicEmail">
           <Form.Control
             autoComplete="off"
@@ -57,10 +62,9 @@ const RegisterForm = (): JSX.Element => {
             type="email"
             value={email}
           />
-          {
-            submitted && !email
-            && <div className="invalid-feedback">Email is required or not valid.</div>
-          }
+          {submitted && !email && (
+            <div className="invalid-feedback">Email is required or not valid.</div>
+          )}
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
@@ -76,16 +80,20 @@ const RegisterForm = (): JSX.Element => {
             type="password"
             value={password}
           />
-          {
-            submitted && !password
-            && <div className="invalid-feedback">Password is required</div>
-          }
+          {submitted && !password && (
+            <div className="invalid-feedback">Password is required</div>
+          )}
           <Form.Text className="text-muted" id="passwordHelpBlock">
-            Password must be at least 6 characters
-            and contain at least one number and one uppercase letter.
+            Password must be at least 6 characters and contain at least one number and one
+            uppercase letter.
           </Form.Text>
         </Form.Group>
-        <Button className="text-uppercase" disabled={isSignedUp} type="submit" variant="primary">
+        <Button
+          className="text-uppercase"
+          disabled={isSignedUp}
+          type="submit"
+          variant="primary"
+        >
           Sign up
         </Button>
       </Form>

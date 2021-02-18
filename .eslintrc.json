@@ -27,9 +27,7 @@
       "jsx": true
     },
     "ecmaVersion": 12,
-    "project": [
-      "tsconfig.json"
-    ],
+    "project": ["tsconfig.json"],
     "sourceType": "module"
   },
   "plugins": [
@@ -69,10 +67,7 @@
         "indentLogicalExpressions": true
       }
     ],
-    "react/jsx-indent-props": [
-      "error",
-      2
-    ],
+    "react/jsx-indent-props": ["error", 2],
     "react/jsx-max-props-per-line": [
       "error",
       {
@@ -93,10 +88,7 @@
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".jsx",
-          ".tsx"
-        ]
+        "extensions": [".jsx", ".tsx"]
       }
     ],
     "react/jsx-sort-props": [
@@ -138,14 +130,7 @@
       "pragma": "React",
       "version": "detect"
     },
-    "propWrapperFunctions": [
-      "forbidExtraProps",
-      "exact",
-      "Object.freeze"
-    ],
-    "import/ignore": [
-      "node_modules",
-      "\\.(scss|css|svg|json)$"
-    ]
+    "propWrapperFunctions": ["forbidExtraProps", "exact", "Object.freeze"],
+    "import/ignore": ["node_modules", "\\.(scss|css|svg|json)$"]
   }
 }

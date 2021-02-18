@@ -34,7 +34,7 @@ export const deleteProject = (id: Types.ID): MyModels.IAction<Types.ID> => ({
 });
 
 export const fetchProjectsSuccess = (
-  projects: IProjects<IProject>,
+  projects: IProjects<IProject>
 ): MyModels.IAction<IProjects<IProject>> => ({
   type: FETCH_PROJECTS_SUCCESS,
   payload: projects,
@@ -60,22 +60,27 @@ export const showError = (): MyModels.IAction<undefined> => ({
   payload: undefined,
 });
 
-const parseProjects = (
-  data: IProjects<IProject>,
-): IProjects<IProject> => Object.fromEntries(Object.entries(data)
-  .map(([key, value]) => [key, {
-    ...value,
-    deadline: value.deadline || undefined,
-  }]));
+const parseProjects = (data: IProjects<IProject>): IProjects<IProject> =>
+  Object.fromEntries(
+    Object.entries(data).map(([key, value]) => [
+      key,
+      {
+        ...value,
+        deadline: value.deadline || undefined,
+      },
+    ])
+  );
 
 export const fetchProjects = (
   idToken: string,
-  userId: string,
+  userId: string
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
-    const response: Response = await fetch(`https://fake-9d604-default-rtdb.firebaseio.com/${userId}/projects.json?auth=${idToken}`);
-    const data = await response.json() as IProjects<IProject>;
+    const response: Response = await fetch(
+      `https://fake-9d604-default-rtdb.firebaseio.com/${userId}/projects.json?auth=${idToken}`
+    );
+    const data = (await response.json()) as IProjects<IProject>;
     let parsedData;
     if (data) {
       parsedData = parseProjects(data);
@@ -99,7 +104,8 @@ export const fetchProjects = (
 };
 
 export const writeProject = (
-  newProject: IProject, userId: string,
+  newProject: IProject,
+  userId: string
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   const { id, deadline } = newProject;
   const parsedProject = {
@@ -118,7 +124,7 @@ export const writeProject = (
 
 export const removeProject = (
   id: Types.ID,
-  userId: string,
+  userId: string
 ): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     await database.ref(`${userId}/projects/${id}`).remove();

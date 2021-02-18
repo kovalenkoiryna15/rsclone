@@ -13,8 +13,8 @@ interface ISelectProjectProps {
 }
 
 type Option = {
-  value: string,
-  label: string,
+  value: string;
+  label: string;
 };
 
 const SelectProject = ({

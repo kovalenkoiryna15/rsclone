@@ -10,12 +10,12 @@ import RegisterForm from './RegisterForm';
 const LoginModal = (): JSX.Element => {
   const dispatch = useDispatch();
   const isAuth = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState) => isAuthorized,
+    ({ user: { isAuthorized } }: MyModels.RootState) => isAuthorized
   );
   const [registered, setRegistered] = React.useState<boolean>(true);
 
   const handleRegistered = (
-    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLSpanElement>,
+    event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLSpanElement>
   ) => {
     event.preventDefault();
     setRegistered((prev) => !prev);
@@ -35,46 +35,36 @@ const LoginModal = (): JSX.Element => {
           RSClone Tracking Time
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {
-          registered
-            ? <LoginForm />
-            : <RegisterForm />
-        }
-      </Modal.Body>
+      <Modal.Body>{registered ? <LoginForm /> : <RegisterForm />}</Modal.Body>
       <Modal.Footer className="pt-0 pb-0">
-        {
-          registered
-            ? (
-              <div className="block-signup block-login">
-                <h6 className="pt-2">Don’t have an account?</h6>
-                <span
-                  aria-labelledby="move-to-register-form"
-                  className="text-uppercase btn-signup btn-login"
-                  onClick={handleRegistered}
-                  onKeyDown={handleRegistered}
-                  role="button"
-                  tabIndex={0}
-                >
-                  Sign up
-                </span>
-              </div>
-            )
-            : (
-              <div className="block-signup">
-                <span
-                  aria-labelledby="move-to-register-form"
-                  className="text-uppercase btn-signup"
-                  onClick={handleRegistered}
-                  onKeyDown={handleRegistered}
-                  role="button"
-                  tabIndex={0}
-                >
-                  Back to login
-                </span>
-              </div>
-            )
-        }
+        {registered ? (
+          <div className="block-signup block-login">
+            <h6 className="pt-2">Don’t have an account?</h6>
+            <span
+              aria-labelledby="move-to-register-form"
+              className="text-uppercase btn-signup btn-login"
+              onClick={handleRegistered}
+              onKeyDown={handleRegistered}
+              role="button"
+              tabIndex={0}
+            >
+              Sign up
+            </span>
+          </div>
+        ) : (
+          <div className="block-signup">
+            <span
+              aria-labelledby="move-to-register-form"
+              className="text-uppercase btn-signup"
+              onClick={handleRegistered}
+              onKeyDown={handleRegistered}
+              role="button"
+              tabIndex={0}
+            >
+              Back to login
+            </span>
+          </div>
+        )}
       </Modal.Footer>
     </Modal>
   );

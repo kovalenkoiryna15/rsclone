@@ -7,8 +7,8 @@ import SelectProject from './SelectProject';
 type OwnProps = {
   defaultValue?: Types.ID;
   onChange: (
-    project: { value: Types.ID, label: string },
-    options: { action: string, name: string, option: any },
+    project: { value: Types.ID; label: string },
+    options: { action: string; name: string; option: any }
   ) => void;
 };
 

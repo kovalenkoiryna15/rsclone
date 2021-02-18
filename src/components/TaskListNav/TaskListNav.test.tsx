@@ -13,7 +13,7 @@ test('renders TaskListNav', () => {
       <Router>
         <TaskListNav isLoading={false} projects={fakeProjects} />
       </Router>
-    </Provider>,
+    </Provider>
   );
 
   expect(getByText(/Projects/i)).toBeInTheDocument();

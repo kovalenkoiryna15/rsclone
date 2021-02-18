@@ -19,7 +19,8 @@ export const hideLoader = (): MyModels.IAction<undefined> => ({
 });
 
 export const pushTask = async (
-  task: Omit<ITask, 'id'>, userID: Types.ID,
+  task: Omit<ITask, 'id'>,
+  userID: Types.ID
 ): Promise<ITask> => {
   const taskListRef = database.ref(`${userID}/tasks`);
   const newTaskRef = await taskListRef.push();
@@ -66,6 +67,5 @@ export const putTask = async (task: ITask, userID: Types.ID): Promise<ITask> => 
   return Promise.resolve(task);
 };
 
-export const deleteTask = async (id: Types.ID, userID: Types.ID): Promise<any> => (
-  database.ref(`${userID}/tasks/${id}`).remove()
-);
+export const deleteTask = async (id: Types.ID, userID: Types.ID): Promise<any> =>
+  database.ref(`${userID}/tasks/${id}`).remove();

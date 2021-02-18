@@ -64,22 +64,25 @@ class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> 
     const { isVisible } = this.state;
     const { isLoading } = this.props;
     if (isLoading) {
-      return (
-        <Spinner animation="border" role="status" variant="primary" />
-      );
+      return <Spinner animation="border" role="status" variant="primary" />;
     }
 
     return (
       <SideBar>
         <Nav className="flex-column sidebar-nav bg-light w-100 p-0" variant="pills">
           <Nav.Item className="w-100 border-0 p-0 m-0">
-            <NavLink className="w-100 border-0 nav-link" to="/rsclone/tasks">Tasks</NavLink>
+            <NavLink className="w-100 border-0 nav-link" to="/rsclone/tasks">
+              Tasks
+            </NavLink>
           </Nav.Item>
           <Nav.Item className="w-100 border-0 px-3 py-2 m-0">
             <Nav.Link className="w-100 border-0 p-0 disabled" disabled>
               Projects
             </Nav.Link>
-            <Button className="text-uppercase text-nowrap" onClick={() => this.handleShow()}>
+            <Button
+              className="text-uppercase text-nowrap"
+              onClick={() => this.handleShow()}
+            >
               + Project
             </Button>
           </Nav.Item>

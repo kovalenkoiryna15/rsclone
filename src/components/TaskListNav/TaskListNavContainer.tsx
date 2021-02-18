@@ -4,7 +4,9 @@ import * as MyModels from 'Store/types';
 import TaskListNav from './TaskListNav';
 
 function mapStateToProps(state: MyModels.RootState) {
-  const { projects: { projects, isLoading, error } } = state;
+  const {
+    projects: { projects, isLoading, error },
+  } = state;
   return { projects, isLoading, error };
 }
 

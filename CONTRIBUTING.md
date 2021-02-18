@@ -26,11 +26,11 @@ tests and checks will be merged.
 
 ### [Fork and clone][github docs fork-a-repo] this repository
 
-1. Go to ``https://github.com/kovalenkoiryna15/rsclone`` and click the
-     "fork" to create own copy of the project.
+1. Go to `https://github.com/kovalenkoiryna15/rsclone` and click the
+   "fork" to create own copy of the project.
 
 2. Using [git][] clone the project to local computer and add the upstream
-     repository:
+   repository:
 
    ```shell script
    git clone https://github.com/your-username/covid-dashboard.git
@@ -41,8 +41,8 @@ tests and checks will be merged.
 
 ## During development
 
-- Pull the last changes from ``upstream`` and create own
-    branch for the feature:
+- Pull the last changes from `upstream` and create own
+  branch for the feature:
 
   ```shell script
   git checkout develop
@@ -103,7 +103,7 @@ git push origin new-feature
 
 ### Open pull request
 
-On ``https://github.com/your-username/covid-dashboard`` click
+On `https://github.com/your-username/covid-dashboard` click
 **Open pull request**.
 
 For details see [GitHub.com Help Documentation][github.com help documentation]

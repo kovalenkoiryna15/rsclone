@@ -46,12 +46,7 @@ const Calendar = ({
   const buttonClasses = 'text-uppercase font-weight-bold';
 
   return (
-    <Modal
-      animation
-      className="calendar-modal"
-      onHide={handleShow}
-      show={isVisible}
-    >
+    <Modal animation className="calendar-modal" onHide={handleShow} show={isVisible}>
       <Modal.Header>
         <Button className={buttonClasses} onClick={handleToday} variant="link">
           Today

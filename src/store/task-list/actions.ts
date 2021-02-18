@@ -1,8 +1,6 @@
 import ITask from 'Entities/task-entities';
 import * as MyModels from 'Store/types';
-import {
-  DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT,
-} from './action-constants';
+import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-constants';
 
 export const deselectTask = (): MyModels.IAction<undefined> => ({
   type: DESELECT_TASK,

@@ -35,7 +35,7 @@ test('renders EditTask', () => {
         updateTask={updateTask}
         userID=""
       />
-    </Provider>,
+    </Provider>
   );
 
   expect(getByText(/Task Name/i)).toBeInTheDocument();

@@ -28,11 +28,13 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   }),
   [DELETE_PROJECT]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
     ...state,
-    projects: Object.fromEntries(Object.entries(state.projects)
-      .filter((project) => project[0] !== id)),
+    projects: Object.fromEntries(
+      Object.entries(state.projects).filter((project) => project[0] !== id)
+    ),
   }),
   [FETCH_PROJECTS_SUCCESS]: (
-    state, { payload: projects }: MyModels.IAction<IProjects<IProject>>,
+    state,
+    { payload: projects }: MyModels.IAction<IProjects<IProject>>
   ) => ({
     ...state,
     projects,
@@ -51,24 +53,32 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   }),
   [UPDATE_PROJECT]: (state, { payload }: MyModels.IAction<IProject>) => ({
     ...state,
-    projects: Object.fromEntries(Object.entries(state.projects)
-      .map(([key, value]) => {
+    projects: Object.fromEntries(
+      Object.entries(state.projects).map(([key, value]) => {
         if (key === payload.id) {
           return [
-            key, {
+            key,
+            {
               ...value,
               ...payload,
             },
           ];
         }
         return [key, value];
-      })),
+      })
+    ),
   }),
-  [WRITE_PROJECT_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [WRITE_PROJECT_FAILURE]: (
+    state,
+    { payload: error }: MyModels.IAction<typeof Error>
+  ) => ({
     ...state,
     error,
   }),
-  [REMOVE_PROJECT_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [REMOVE_PROJECT_FAILURE]: (
+    state,
+    { payload: error }: MyModels.IAction<typeof Error>
+  ) => ({
     ...state,
     error,
   }),
@@ -76,7 +86,8 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
 };
 
 const projectsReducer: MyModels.Reducer<IProjectState, any> = (
-  state = initialState, action,
+  state = initialState,
+  action
 ) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);

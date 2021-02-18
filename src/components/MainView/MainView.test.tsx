@@ -9,7 +9,7 @@ test('renders MainView', () => {
   const { getByText } = render(
     <Provider store={store}>
       <MainView isAuth={false} isLoading={false} />
-    </Provider>,
+    </Provider>
   );
 
   expect(getByText(/Tasks/i)).toBeInTheDocument();

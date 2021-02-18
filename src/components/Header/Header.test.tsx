@@ -9,7 +9,7 @@ test('renders Header', () => {
   const { getByText } = render(
     <Provider store={store}>
       <Header />
-    </Provider>,
+    </Provider>
   );
 
   expect(getByText(/RSClone Tracking Time/i)).toBeInTheDocument();

@@ -36,29 +36,17 @@ const TaskList = ({
           </Button>
         </Nav.Item>
       </Nav>
-      {
-        tasks.length
-          ? (
-            <ul className="list-group">
-              {
-                id
-                  ? tasks.filter((task) => task.project === id).map((task) => (
-                    <TaskItem
-                      key={task.id.toString()}
-                      task={task}
-                    />
-                  ))
-                  : tasks.map((task) => (
-                    <TaskItem
-                      key={task.id.toString()}
-                      task={task}
-                    />
-                  ))
-              }
-            </ul>
-          )
-          : !isLoading && <p>No tasks!</p>
-      }
+      {tasks.length ? (
+        <ul className="list-group">
+          {id
+            ? tasks
+                .filter((task) => task.project === id)
+                .map((task) => <TaskItem key={task.id.toString()} task={task} />)
+            : tasks.map((task) => <TaskItem key={task.id.toString()} task={task} />)}
+        </ul>
+      ) : (
+        !isLoading && <p>No tasks!</p>
+      )}
       {isVisibleEdit ? <EditTask /> : null}
     </Col>
   );

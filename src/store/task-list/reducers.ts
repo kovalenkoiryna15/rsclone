@@ -1,11 +1,6 @@
 import ITask from 'Entities/task-entities';
 import * as MyModels from 'Store/types';
-import {
-  DESELECT_TASK,
-  HIDE_EDIT,
-  SELECT_TASK,
-  SHOW_EDIT,
-} from './action-constants';
+import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-constants';
 import { TaskListState } from './action-types';
 
 const initialState: TaskListState = {
@@ -34,7 +29,10 @@ const handlers: MyModels.IHandlers<TaskListState, any> = {
   DEFAULT: (state) => state,
 };
 
-const taskListReducer: MyModels.Reducer<TaskListState, any> = (state = initialState, action) => {
+const taskListReducer: MyModels.Reducer<TaskListState, any> = (
+  state = initialState,
+  action
+) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

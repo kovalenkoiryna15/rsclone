@@ -19,8 +19,8 @@ export interface IHandlers<S, P> {
 export type AsyncDispatch<T, P> = (
   dispatch: ThunkDispatch<T, any, IAction<P>>,
   getState: () => {
-    [key: string]: T,
-  },
+    [key: string]: T;
+  }
 ) => Promise<void>;
 
 export interface RootState {

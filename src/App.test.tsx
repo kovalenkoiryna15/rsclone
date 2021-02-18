@@ -9,7 +9,7 @@ test('renders App', () => {
   const { getAllByText } = render(
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
   );
 
   expect(getAllByText(/RSClone Tracking Time/i)).toHaveLength(3);

@@ -7,13 +7,13 @@ Deadline: 2021.02.03 23:59
 - [x] [webpack](https://webpack.js.org/)
 - [x] [Typescript](https://www.typescriptlang.org/)
 - [x] [React](https://reactjs.org/) + [Redux](https://redux.js.org/) +
-    [Thunk](https://github.com/reduxjs/redux-thunk)
+      [Thunk](https://github.com/reduxjs/redux-thunk)
 - [x] [Jest](https://jestjs.io/)
-    (+ [React Testing Library](https://testing-library.com/docs/reac-testing-library/intro/))
+      (+ [React Testing Library](https://testing-library.com/docs/reac-testing-library/intro/))
 - [x] [Bootstrap](https://getbootstrap.com/) (+ [Bootswatch](https://bootswatch.com/))
 - [x] [sass](https://sass-lang.com/)
 - [x] [ESLint](https://eslint.org/), [Stylelint](https://stylelint.io/),
-    [Prettier](https://prettier.io/), [EditorConfig](https://editorconfig.org/)
+      [Prettier](https://prettier.io/), [EditorConfig](https://editorconfig.org/)
 - [x] [TravisCI](https://travis-ci.org/)
 - [x] [firebase realtime database](https://firebase.google.com/)
 

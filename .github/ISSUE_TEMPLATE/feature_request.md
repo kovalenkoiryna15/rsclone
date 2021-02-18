@@ -4,7 +4,6 @@ about: Suggest an idea for this project
 title: ''
 labels: requires triage
 assignees: ''
-
 ---
 
 ### Is your feature request related to a problem? Please describe.
@@ -25,4 +24,4 @@ you've considered.
 
 Add any other context or screenshots about the feature request here.
 
-*Have a nice day!*
+_Have a nice day!_

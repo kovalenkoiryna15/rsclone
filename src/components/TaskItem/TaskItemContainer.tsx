@@ -7,14 +7,14 @@ import * as Types from 'Store/types';
 import TaskItem from './TaskItem';
 
 type OwnProps = {
-  task: ITask,
+  task: ITask;
 };
 
 const mapStateToProps = (state: Types.RootState, ownProps: OwnProps) => ({
   task: ownProps.task,
-  project: Object
-    .values(state.projects.projects)
-    .find(({ id }) => id === ownProps.task.project),
+  project: Object.values(state.projects.projects).find(
+    ({ id }) => id === ownProps.task.project
+  ),
   userID: state.user.user.id,
 });
 

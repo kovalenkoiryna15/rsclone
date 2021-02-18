@@ -23,7 +23,7 @@ import {
 
 export const update = (
   task: ITask,
-  userID: Types.ID,
+  userID: Types.ID
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     await putTask(task, userID);
@@ -41,7 +41,7 @@ export const update = (
 
 export const add = (
   task: Omit<ITask, 'id'>,
-  userID: Types.ID,
+  userID: Types.ID
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     const { id } = await pushTask(task, userID);
@@ -60,16 +60,17 @@ export const add = (
   }
 };
 
-export const getTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, any> => async (
-  dispatch,
-) => {
+export const getTasks = (
+  userID: Types.ID
+): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   dispatch(showLoader());
   try {
-    await fetchTasks(userID)
-      .then((tasks) => dispatch({
+    await fetchTasks(userID).then((tasks) =>
+      dispatch({
         type: FETCH_TASKS,
         payload: tasks,
-      }));
+      })
+    );
   } catch (error) {
     dispatch({
       type: FETCH_TASKS_FAILURE,
@@ -81,7 +82,7 @@ export const getTasks = (userID: Types.ID): MyModels.AsyncDispatch<TasksState, a
 
 export const removeTask = (
   task: ITask,
-  userID: Types.ID,
+  userID: Types.ID
 ): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
   const { id } = task;
   try {

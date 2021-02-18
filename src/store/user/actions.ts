@@ -39,9 +39,9 @@ export const loginFailure = (errorMessage: string): MyModels.IAction<string> => 
   payload: errorMessage,
 });
 
-export const login = (
-  userData: IUser,
-): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
+export const login = (userData: IUser): MyModels.AsyncDispatch<IUserState, any> => async (
+  dispatch
+) => {
   dispatch(loginRequest(userData));
   try {
     const { email, password } = userData;
@@ -74,7 +74,7 @@ export const registerFailure = (errorMessage: string): MyModels.IAction<string> 
 });
 
 export const register = (
-  newUser: IUser,
+  newUser: IUser
 ): MyModels.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(registerRequest(newUser));
   try {
@@ -95,8 +95,7 @@ export const register = (
   }
 };
 
-export const logout = (
-): MyModels.IAction<undefined> => ({
+export const logout = (): MyModels.IAction<undefined> => ({
   type: LOGOUT,
   payload: undefined,
 });

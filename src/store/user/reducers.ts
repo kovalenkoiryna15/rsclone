@@ -74,9 +74,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
   DEFAULT: (state) => state,
 };
 
-const userReducer: MyModels.Reducer<IUserState, any> = (
-  state = initialState, action,
-) => {
+const userReducer: MyModels.Reducer<IUserState, any> = (state = initialState, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

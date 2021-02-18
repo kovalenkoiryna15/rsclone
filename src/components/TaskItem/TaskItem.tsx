@@ -17,7 +17,13 @@ interface ITaskItemProps {
 }
 
 function TaskItem({
-  task, project, removeTask, updateTask, selectTask, showEdit, userID,
+  task,
+  project,
+  removeTask,
+  updateTask,
+  selectTask,
+  showEdit,
+  userID,
 }: ITaskItemProps): JSX.Element {
   const classes = [
     'list-group-item',
@@ -32,7 +38,9 @@ function TaskItem({
   if (isCompleted) classes.push('completed');
 
   const editTask = (
-    event: React.MouseEvent<HTMLLIElement, MouseEvent> | React.KeyboardEvent<HTMLLIElement>,
+    event:
+      | React.MouseEvent<HTMLLIElement, MouseEvent>
+      | React.KeyboardEvent<HTMLLIElement>
   ) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -48,15 +56,18 @@ function TaskItem({
     if (event.target.name === 'isCompleted') {
       event.preventDefault();
       event.stopPropagation();
-      updateTask({
-        ...task,
-        isCompleted: !isCompleted,
-      }, userID);
+      updateTask(
+        {
+          ...task,
+          isCompleted: !isCompleted,
+        },
+        userID
+      );
     }
   };
 
   const handleRemoveTask = (
-    event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+    event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
   ) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -85,27 +96,32 @@ function TaskItem({
           onChange={(e) => handleCompleteTask(e)}
           type="checkbox"
         />
-        <label className="custom-control-label" htmlFor={`customCheck${id}`}>{title}</label>
-        {project
-          ? (
-            <Badge className="ml-2" style={{ backgroundColor: project.color }} variant="secondary">
-              {project.title}
-            </Badge>
-          )
-          : null}
+        <label className="custom-control-label" htmlFor={`customCheck${id}`}>
+          {title}
+        </label>
+        {project ? (
+          <Badge
+            className="ml-2"
+            style={{ backgroundColor: project.color }}
+            variant="secondary"
+          >
+            {project.title}
+          </Badge>
+        ) : null}
       </div>
       <div className="d-inline-flex justify-content-end m-sm-1">
-        {task.deadline
-          ? (
-            <Badge className="mr-2" variant={task.deadline < Date.now() ? 'warning' : 'dark'}>
-              {(new Date(task.deadline)).toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-              })}
-            </Badge>
-          )
-          : null}
+        {task.deadline ? (
+          <Badge
+            className="mr-2"
+            variant={task.deadline < Date.now() ? 'warning' : 'dark'}
+          >
+            {new Date(task.deadline).toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            })}
+          </Badge>
+        ) : null}
         <button
           className="btn btn-outline-danger btn-sm"
           name="removeTask"

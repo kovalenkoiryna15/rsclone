@@ -9,10 +9,10 @@ import { login } from 'Store/user/actions';
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized,
+    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized
   );
   const alert = useSelector(
-    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage,
+    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage
   );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -41,7 +41,12 @@ const LoginForm = (): JSX.Element => {
   return (
     <>
       {alert ? <Alert className="text-warning text-center">{alert}</Alert> : null}
-      <Form className="login-form" noValidate onSubmit={handleSubmit} validated={validated}>
+      <Form
+        className="login-form"
+        noValidate
+        onSubmit={handleSubmit}
+        validated={validated}
+      >
         <Form.Group controlId="formBasicEmail">
           <Form.Control
             autoComplete="off"
@@ -52,10 +57,9 @@ const LoginForm = (): JSX.Element => {
             type="email"
             value={email}
           />
-          {
-            submitted && !email
-            && <div className="invalid-feedback">Email is required</div>
-          }
+          {submitted && !email && (
+            <div className="invalid-feedback">Email is required</div>
+          )}
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Control
@@ -71,10 +75,9 @@ const LoginForm = (): JSX.Element => {
             type="password"
             value={password}
           />
-          {
-            submitted && !password
-            && <div className="invalid-feedback">Password is required</div>
-          }
+          {submitted && !password && (
+            <div className="invalid-feedback">Password is required</div>
+          )}
         </Form.Group>
         <Button
           className="text-uppercase"

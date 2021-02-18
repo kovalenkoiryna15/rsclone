@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: ''
 labels: requires triage
 assignees: ''
-
 ---
 
 ### Describe the bug
@@ -31,13 +30,13 @@ Please try to provide a [Minimal, Complete, and Verifiable][] example.
 
 ### Versions
 
-  - OS:
-  - RSClone Tracking Time:
+- OS:
+- RSClone Tracking Time:
 
 ### Additional context
 
 <!-- Add any other context about the problem here. -->
 
-*Have a nice day!*
+_Have a nice day!_
 
-[Minimal, Complete, and Verifiable]: http://stackoverflow.com/help/mcve
+[minimal, complete, and verifiable]: http://stackoverflow.com/help/mcve

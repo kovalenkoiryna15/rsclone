@@ -19,7 +19,8 @@ const handlers: MyModels.IHandlers<IFirebaseState, undefined> = {
 };
 
 const firebaseReducer: MyModels.Reducer<IFirebaseState, undefined> = (
-  state = initialState, action,
+  state = initialState,
+  action
 ) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);

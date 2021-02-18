@@ -3,8 +3,8 @@ import { Button, Form, Modal } from 'react-bootstrap';
 
 import IProject from 'Entities/project-entities';
 
-const MILLISECONDS_IN_HOUR = 3.6E6;
-const MILLISECONDS_IN_MINUTE = 60E3;
+const MILLISECONDS_IN_HOUR = 3.6e6;
+const MILLISECONDS_IN_MINUTE = 60e3;
 
 const addLeadingZero = (value: number): string => `${value < 10 ? '0' : ''}${value}`;
 
@@ -16,7 +16,9 @@ function parseToNumberOfMS(/* hh:mm */ time: string) {
 
 function parseToTime(/* ms */ time: number) {
   const hours = Math.trunc(time / MILLISECONDS_IN_HOUR);
-  const minutes = Math.trunc((time - hours * MILLISECONDS_IN_HOUR) / MILLISECONDS_IN_MINUTE);
+  const minutes = Math.trunc(
+    (time - hours * MILLISECONDS_IN_HOUR) / MILLISECONDS_IN_MINUTE
+  );
   return `${addLeadingZero(hours)}:${addLeadingZero(minutes)}`;
 }
 
@@ -88,9 +90,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       validated: true,
     }));
 
-    const {
-      id, title, deadline, estimatedTime, color,
-    } = this.state;
+    const { id, title, deadline, estimatedTime, color } = this.state;
 
     const newProject = {
       id,
@@ -100,9 +100,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
       color,
     };
 
-    const {
-      addProject, writeProject, updateProject, userID,
-    } = this.props;
+    const { addProject, writeProject, updateProject, userID } = this.props;
     if (id) {
       updateProject(newProject);
       writeProject(newProject, userID);
@@ -166,14 +164,7 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
   }
 
   render(): JSX.Element {
-    const {
-      title,
-      deadline,
-      estimatedTime,
-      color,
-      validated,
-      isValid,
-    } = this.state;
+    const { title, deadline, estimatedTime, color, validated, isValid } = this.state;
     const { isVisible } = this.props;
     return (
       <Modal
@@ -196,7 +187,9 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
                 maxLength={Number(40)}
                 minLength={Number(1)}
                 name="title"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleTitleChange(e)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  this.handleTitleChange(e)
+                }
                 placeholder="Title"
                 required
                 type="text"
@@ -207,7 +200,9 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               <Form.Label>Due date</Form.Label>
               <Form.Control
                 name="deadline"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  this.handleChange(e)
+                }
                 type="date"
                 value={deadline}
               />
@@ -216,7 +211,9 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               <Form.Label>Estimated Time</Form.Label>
               <Form.Control
                 name="estimatedTime"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  this.handleChange(e)
+                }
                 type="time"
                 value={estimatedTime}
               />
@@ -225,7 +222,9 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
               <Form.Label>Color</Form.Label>
               <Form.Control
                 name="color"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  this.handleChange(e)
+                }
                 type="color"
                 value={color}
               />

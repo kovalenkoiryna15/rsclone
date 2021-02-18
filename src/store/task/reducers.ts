@@ -29,7 +29,7 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
     tasks.splice(
       state.tasks.findIndex((t) => t.id === task.id),
       1,
-      task,
+      task
     );
     return {
       ...state,

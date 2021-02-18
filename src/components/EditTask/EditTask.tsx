@@ -41,8 +41,8 @@ interface IEditTaskState extends Omit<ITask, 'estimatedTime'> {
 }
 
 type FormState = {
-  isValidated: boolean,
-  isVisibleDueDateModal: boolean,
+  isValidated: boolean;
+  isVisibleDueDateModal: boolean;
 };
 
 const defaultTask: ITask = {
@@ -52,16 +52,18 @@ const defaultTask: ITask = {
 };
 
 const EditTask = ({
-  userID, task, addTask, updateTask, isVisible, hideEdit, deselectTask,
+  userID,
+  task,
+  addTask,
+  updateTask,
+  isVisible,
+  hideEdit,
+  deselectTask,
 }: IEditTaskProps): JSX.Element => {
-  const [taskState, setTaskState] = useState<IEditTaskState>(
-    {
-      ...(task || defaultTask),
-      estimatedTime: task
-        ? parseMinutesToHHmm(task.estimatedTime)
-        : '00:00',
-    },
-  );
+  const [taskState, setTaskState] = useState<IEditTaskState>({
+    ...(task || defaultTask),
+    estimatedTime: task ? parseMinutesToHHmm(task.estimatedTime) : '00:00',
+  });
 
   const [formState, setFormState] = useState<FormState>({
     isValidated: false,
@@ -81,8 +83,8 @@ const EditTask = ({
   };
 
   const handleProjectChange = (
-    project: { value: Types.ID, label: string },
-    options: { action: string, name: string, option: any },
+    project: { value: Types.ID; label: string },
+    options: { action: string; name: string; option: any }
   ) => {
     if (project && options.action === 'select-option') {
       setTaskState((prevState) => ({
@@ -125,33 +127,38 @@ const EditTask = ({
     }));
 
     if (taskState.id) {
-      updateTask({
-        ...taskState,
-        estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
-      }, userID);
+      updateTask(
+        {
+          ...taskState,
+          estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
+        },
+        userID
+      );
     } else {
       const { id, ...taskWithOutID } = taskState;
-      addTask({
-        ...taskWithOutID,
-        estimatedTime: parseHHmmStringToMin(taskWithOutID.estimatedTime),
-      }, userID);
+      addTask(
+        {
+          ...taskWithOutID,
+          estimatedTime: parseHHmmStringToMin(taskWithOutID.estimatedTime),
+        },
+        userID
+      );
     }
     handleHide();
   };
 
   return (
     <>
-      <Modal
-        animation
-        className="task-modal"
-        onHide={handleHide}
-        show={isVisible}
-      >
+      <Modal animation className="task-modal" onHide={handleHide} show={isVisible}>
         <Modal.Header closeButton>
           <Button onClick={handleShowDueDateModal} variant="primary">
             <EventIcon />
             {taskState.deadline
-              ? (new Date(taskState.deadline)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+              ? new Date(taskState.deadline).toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })
               : 'Due date'}
           </Button>
         </Modal.Header>

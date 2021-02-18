@@ -15,17 +15,22 @@ import { auth } from 'Store/src/firebase';
 export default function App(): JSX.Element {
   const dispatch = useDispatch();
   const isAuth = useSelector((state: MyModels.RootState) => {
-    const { user: { isAuthorized } } = state;
+    const {
+      user: { isAuthorized },
+    } = state;
     return isAuthorized;
   });
   const isStillLoading = useSelector((state: MyModels.RootState) => {
-    const { projects: { isLoading } } = state;
+    const {
+      projects: { isLoading },
+    } = state;
     return isLoading;
   });
 
   useEffect(() => {
     if (isAuth && auth.currentUser) {
-      auth.currentUser.getIdToken(true)
+      auth.currentUser
+        .getIdToken(true)
         .then((idToken) => {
           if (auth.currentUser) {
             dispatch(fetchProjects(idToken, String(auth.currentUser.uid)));
@@ -33,8 +38,7 @@ export default function App(): JSX.Element {
           }
           return true;
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     }
   }, [isAuth, dispatch]);
 

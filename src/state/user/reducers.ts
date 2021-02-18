@@ -1,7 +1,7 @@
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 import * as Types from 'Entities/types';
 import IUser from 'Entities/user-entities';
-import { IUserState } from 'Store/user/action-types';
+import { IUserState } from 'State/user/action-types';
 import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
 import {
   REGISTER_SUCCESS,

@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import store from 'Store/store';
+import store from 'State/store';
 import App from './App';
 
 import './index.scss';

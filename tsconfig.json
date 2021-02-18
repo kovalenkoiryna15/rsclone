@@ -17,8 +17,9 @@
       "Data/*": ["assets/data/*"],
       "Entities/*": ["entities/*"],
       "Images/*": ["assets/images/*"],
-      "Store/*": ["store/*"],
-      "Styles/*": ["styles/*"]
+      "State/*": ["state/*"],
+      "Styles/*": ["styles/*"],
+      "Utils/*": ["utils/*"]
     },
     "plugins": [
       {

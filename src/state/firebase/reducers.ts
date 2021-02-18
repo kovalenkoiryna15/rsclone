@@ -1,5 +1,5 @@
-import { IFirebaseState } from 'Store/firebase/action-types';
-import * as MyModels from 'Store/types';
+import { IFirebaseState } from 'State/firebase/action-types';
+import * as MyModels from 'State/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 
 const initialState: IFirebaseState = {

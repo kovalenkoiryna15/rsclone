@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import store from 'Store/store';
+import store from 'State/store';
 import TaskListNav from './TaskListNav';
 
 test('renders TaskListNav', () => {

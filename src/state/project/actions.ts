@@ -1,8 +1,8 @@
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
-import { database } from 'Store/src/firebase';
-import * as MyModels from 'Store/types';
+import { database } from 'Utils/firebase';
+import * as MyModels from 'State/types';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,

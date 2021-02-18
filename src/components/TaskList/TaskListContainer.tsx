@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { taskListActions } from 'Store/task-list';
-import * as Types from 'Store/types';
+import { taskListActions } from 'State/task-list';
+import * as Types from 'State/types';
 import TaskList from './TaskList';
 
 const mapStateToProps = (state: Types.RootState) => ({

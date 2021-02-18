@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectForm from 'Components/ProjectForm';
 import IProject from 'Entities/project-entities';
 import * as Types from 'Entities/types';
-import { deleteProject, removeProject } from 'Store/project/actions';
-import * as MyModels from 'Store/types';
+import { deleteProject, removeProject } from 'State/project/actions';
+import * as MyModels from 'State/types';
 
 export default function DropdownCustom({ project }: { project: IProject }): JSX.Element {
   const userID: Types.ID = useSelector((state: MyModels.RootState) => state.user.user.id);

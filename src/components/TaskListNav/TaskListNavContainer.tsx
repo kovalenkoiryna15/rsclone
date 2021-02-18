@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 
 import TaskListNav from './TaskListNav';
 
-function mapStateToProps(state: MyModels.RootState) {
+function mapStateToProps(state: StateTypes.RootState) {
   const {
     projects: { projects, isLoading, error },
   } = state;

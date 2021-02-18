@@ -1,5 +1,5 @@
 import ITask from 'Entities/task-entities';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-constants';
 import { TaskListState } from './action-types';
 
@@ -9,7 +9,7 @@ const initialState: TaskListState = {
   error: undefined,
 };
 
-const handlers: MyModels.IHandlers<TaskListState, any> = {
+const handlers: StateTypes.IHandlers<TaskListState, any> = {
   [HIDE_EDIT]: (state) => ({
     ...state,
     isVisibleEdit: false,
@@ -18,7 +18,7 @@ const handlers: MyModels.IHandlers<TaskListState, any> = {
     ...state,
     isVisibleEdit: true,
   }),
-  [SELECT_TASK]: (state, { payload: selectedTask }: MyModels.IAction<ITask>) => ({
+  [SELECT_TASK]: (state, { payload: selectedTask }: StateTypes.IAction<ITask>) => ({
     ...state,
     selectedTask,
   }),
@@ -29,7 +29,7 @@ const handlers: MyModels.IHandlers<TaskListState, any> = {
   DEFAULT: (state) => state,
 };
 
-const taskListReducer: MyModels.Reducer<TaskListState, any> = (
+const taskListReducer: StateTypes.Reducer<TaskListState, any> = (
   state = initialState,
   action
 ) => {

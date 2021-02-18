@@ -3,16 +3,16 @@ import { useState } from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { login } from 'State/user/actions';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedIn = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized
+    ({ user: { isAuthorized } }: StateTypes.RootState): boolean => isAuthorized
   );
   const alert = useSelector(
-    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage
+    ({ user: { alertMessage } }: StateTypes.RootState): string | undefined => alertMessage
   );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

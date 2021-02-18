@@ -9,7 +9,7 @@ import {
   showLoader,
 } from 'State/firebase/actions';
 import { TasksState } from 'State/task/action-types';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import {
   ADD,
   ADD_FAILURE,
@@ -24,7 +24,7 @@ import {
 export const update = (
   task: ITask,
   userID: Types.ID
-): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     await putTask(task, userID);
     dispatch({
@@ -42,7 +42,7 @@ export const update = (
 export const add = (
   task: Omit<ITask, 'id'>,
   userID: Types.ID
-): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     const { id } = await pushTask(task, userID);
     dispatch({
@@ -62,7 +62,7 @@ export const add = (
 
 export const getTasks = (
   userID: Types.ID
-): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   dispatch(showLoader());
   try {
     await fetchTasks(userID).then((tasks) =>
@@ -83,7 +83,7 @@ export const getTasks = (
 export const removeTask = (
   task: ITask,
   userID: Types.ID
-): MyModels.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   const { id } = task;
   try {
     await deleteTask(id, userID);

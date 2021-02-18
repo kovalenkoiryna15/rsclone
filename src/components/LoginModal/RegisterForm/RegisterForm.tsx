@@ -4,16 +4,16 @@ import { Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import IUser from 'Entities/user-entities';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { register } from 'State/user/actions';
 
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();
   const isSignedUp = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState): boolean => isAuthorized
+    ({ user: { isAuthorized } }: StateTypes.RootState): boolean => isAuthorized
   );
   const alert = useSelector(
-    ({ user: { alertMessage } }: MyModels.RootState): string | undefined => alertMessage
+    ({ user: { alertMessage } }: StateTypes.RootState): string | undefined => alertMessage
   );
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

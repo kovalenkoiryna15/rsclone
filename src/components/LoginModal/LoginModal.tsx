@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { alertClear } from 'State/user/alert-action-creators';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -10,7 +10,7 @@ import RegisterForm from './RegisterForm';
 const LoginModal = (): JSX.Element => {
   const dispatch = useDispatch();
   const isAuth = useSelector(
-    ({ user: { isAuthorized } }: MyModels.RootState) => isAuthorized
+    ({ user: { isAuthorized } }: StateTypes.RootState) => isAuthorized
   );
   const [registered, setRegistered] = React.useState<boolean>(true);
 

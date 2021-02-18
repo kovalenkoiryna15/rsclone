@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Row, Spinner } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import TaskList from 'Components/TaskList';
 import TaskListNav from 'Components/TaskListNav';
 import IProject from 'Entities/project-entities';
@@ -14,7 +14,7 @@ interface IMainViewProps {
 }
 
 const MainView = ({ isLoading, isAuth }: IMainViewProps): JSX.Element => {
-  const allProjects = useSelector((state: MyModels.RootState) => {
+  const allProjects = useSelector((state: StateTypes.RootState) => {
     const {
       projects: { projects },
     } = state;

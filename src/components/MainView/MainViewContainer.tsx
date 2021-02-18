@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import * as Types from 'State/types';
+import * as StateTypes from 'State/types';
 import MainView from './MainView';
 
-const mapStateToProps = (state: Types.RootState) => ({
+const mapStateToProps = (state: StateTypes.RootState) => ({
   isLoading: state.firebase.isLoading,
   isAuth: state.user.isAuthorized,
 });

@@ -1,6 +1,6 @@
 import ITask from 'Entities/task-entities';
 import * as Types from 'Entities/types';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import {
   ADD,
   ADD_FAILURE,
@@ -19,12 +19,12 @@ const initialState: TasksState = {
   error: undefined,
 };
 
-const handlers: MyModels.IHandlers<TasksState, any> = {
-  [ADD]: (state, { payload: task }: MyModels.IAction<ITask>) => ({
+const handlers: StateTypes.IHandlers<TasksState, any> = {
+  [ADD]: (state, { payload: task }: StateTypes.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
   }),
-  [UPDATE]: (state, { payload: task }: MyModels.IAction<ITask>) => {
+  [UPDATE]: (state, { payload: task }: StateTypes.IAction<ITask>) => {
     const tasks = [...state.tasks];
     tasks.splice(
       state.tasks.findIndex((t) => t.id === task.id),
@@ -36,34 +36,34 @@ const handlers: MyModels.IHandlers<TasksState, any> = {
       tasks,
     };
   },
-  [FETCH_TASKS]: (state, { payload: tasks }: MyModels.IAction<Array<ITask>>) => ({
+  [FETCH_TASKS]: (state, { payload: tasks }: StateTypes.IAction<Array<ITask>>) => ({
     ...state,
     tasks,
   }),
-  [REMOVE]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
+  [REMOVE]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => ({
     ...state,
     tasks: state.tasks.filter((task) => task.id !== id),
   }),
-  [FETCH_TASKS_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [FETCH_TASKS_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [ADD_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [ADD_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [UPDATE_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [UPDATE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [REMOVE_FAILURE]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [REMOVE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
   DEFAULT: (state) => state,
 };
 
-const taskReducer: MyModels.Reducer<TasksState, any> = (state = initialState, action) => {
+const taskReducer: StateTypes.Reducer<TasksState, any> = (state = initialState, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

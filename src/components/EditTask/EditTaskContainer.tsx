@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 
 import { taskActions } from 'State/task';
 import { taskListActions } from 'State/task-list';
-import * as Types from 'State/types';
+import * as StateTypes from 'State/types';
 import EditTask from './EditTask';
 
-const mapStateToProps = (state: Types.RootState) => ({
+const mapStateToProps = (state: StateTypes.RootState) => ({
   task: state.taskList.selectedTask,
   isVisible: state.taskList.isVisibleEdit,
   userID: state.user.user.id,

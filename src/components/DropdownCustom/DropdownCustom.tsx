@@ -32,7 +32,7 @@ export default function DropdownCustom({ project }: { project: IProject }): JSX.
           <Dropdown.Item onClick={() => handleDelete(id, userID)}>Delete</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <ProjectForm isVisible={isVisible} handleShow={() => handleShow()} projectData={project} />
+      <ProjectForm isVisible={isVisible} onShow={() => handleShow()} projectData={project} />
     </>
   );
 }

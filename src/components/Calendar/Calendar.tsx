@@ -7,13 +7,16 @@ import moment from 'moment';
 interface ICalendarProps {
   // eslint-disable-next-line react/require-default-props
   dueDate?: number;
-  setDueDate: (selectedDate?: number) => void;
-  handleShow: () => void;
   isVisible: boolean;
+  onChangeDueDate: (selectedDate?: number) => void;
+  onShow: () => void;
 }
 
 const Calendar = ({
-  dueDate, setDueDate, handleShow, isVisible,
+  dueDate,
+  isVisible,
+  onChangeDueDate: handleChangeDueDate,
+  onShow: handleShow,
 }: ICalendarProps): JSX.Element => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -24,17 +27,17 @@ const Calendar = ({
   const handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    setDueDate(moment(selectedDate).valueOf());
+    handleChangeDueDate(moment(selectedDate).valueOf());
     handleShow();
   };
 
   const handleToday = () => {
-    setDueDate(Date.now());
+    handleChangeDueDate(Date.now());
     handleShow();
   };
 
   const handleClearDate = () => {
-    setDueDate();
+    handleChangeDueDate();
     handleShow();
   };
 

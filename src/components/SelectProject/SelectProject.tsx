@@ -17,7 +17,11 @@ type Option = {
   label: string,
 };
 
-const SelectProject = ({ projects, onChange, defaultValue }: ISelectProjectProps): JSX.Element => {
+const SelectProject = ({
+  projects,
+  onChange: handleChange,
+  defaultValue,
+}: ISelectProjectProps): JSX.Element => {
   const customOptions: Array<Option> = [
     {
       value: '',
@@ -47,7 +51,7 @@ const SelectProject = ({ projects, onChange, defaultValue }: ISelectProjectProps
       isClearable={false}
       isSearchable
       name="project"
-      onChange={onChange}
+      onChange={handleChange}
       options={customOptions}
     />
   );

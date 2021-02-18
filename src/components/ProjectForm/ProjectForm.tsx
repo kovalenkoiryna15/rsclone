@@ -23,7 +23,7 @@ function parseToTime(/* ms */ time: number) {
 interface IProjectFormProps {
   projectData?: IProject;
   isVisible: boolean;
-  handleShow: (event: React.MouseEvent<HTMLElement>) => void;
+  onShow: (event: React.MouseEvent<HTMLElement>) => void;
   addProject: (newProject: IProject) => void;
   updateProject: (newProject: IProject) => void;
   writeProject: (newProject: IProject, uid: string) => void;
@@ -131,8 +131,8 @@ class ProjectForm extends React.Component<IProjectFormProps, IProjectFormState> 
         validated: false,
       }));
     }
-    const { handleShow } = this.props;
-    handleShow(event);
+    const { onShow } = this.props;
+    onShow(event);
   }
 
   handleTitleChange(event: React.ChangeEvent<HTMLInputElement>): void {

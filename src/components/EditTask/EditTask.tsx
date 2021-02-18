@@ -68,7 +68,7 @@ const EditTask = ({
     isVisibleDueDateModal: false,
   });
 
-  const onHide = () => {
+  const handleHide = () => {
     deselectTask();
     hideEdit();
   };
@@ -136,7 +136,7 @@ const EditTask = ({
         estimatedTime: parseHHmmStringToMin(taskState.estimatedTime),
       }, userID);
     }
-    onHide();
+    handleHide();
   };
 
   return (
@@ -144,7 +144,7 @@ const EditTask = ({
       <Modal
         animation
         className="task-modal"
-        onHide={onHide}
+        onHide={handleHide}
         show={isVisible}
       >
         <Modal.Header closeButton>
@@ -189,7 +189,7 @@ const EditTask = ({
                 value={taskState.estimatedTime}
               />
             </Form.Group>
-            <Button variant="link" onClick={onHide}>
+            <Button onClick={handleHide} variant="link">
               Cancel
             </Button>
             <Button

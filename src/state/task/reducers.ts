@@ -1,5 +1,5 @@
 import ITask from 'Entities/task-entities';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
 import {
   ADD,
@@ -40,11 +40,14 @@ const handlers: StateTypes.IHandlers<TasksState, any> = {
     ...state,
     tasks,
   }),
-  [REMOVE]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => ({
+  [REMOVE]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
     ...state,
     tasks: state.tasks.filter((task) => task.id !== id),
   }),
-  [FETCH_TASKS_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
+  [FETCH_TASKS_FAILURE]: (
+    state,
+    { payload: error }: StateTypes.IAction<typeof Error>
+  ) => ({
     ...state,
     error,
   }),
@@ -63,7 +66,10 @@ const handlers: StateTypes.IHandlers<TasksState, any> = {
   DEFAULT: (state) => state,
 };
 
-const taskReducer: StateTypes.Reducer<TasksState, any> = (state = initialState, action) => {
+const taskReducer: StateTypes.Reducer<TasksState, any> = (
+  state = initialState,
+  action
+) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

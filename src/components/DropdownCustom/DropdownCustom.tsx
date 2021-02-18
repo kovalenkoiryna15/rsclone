@@ -5,16 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProjectForm from 'Components/ProjectForm';
 import IProject from 'Entities/project-entities';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import { deleteProject, removeProject } from 'State/project/actions';
 import * as StateTypes from 'State/types';
 
 export default function DropdownCustom({ project }: { project: IProject }): JSX.Element {
-  const userID: Types.ID = useSelector((state: StateTypes.RootState) => state.user.user.id);
+  const userID: AppTypes.ID = useSelector(
+    (state: StateTypes.RootState) => state.user.user.id
+  );
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const { id } = project;
-  const handleDelete = (projectId: Types.ID, uid: string) => {
+  const handleDelete = (projectId: AppTypes.ID, uid: string) => {
     dispatch(deleteProject(projectId));
     dispatch(removeProject(projectId, uid));
   };

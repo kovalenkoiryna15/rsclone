@@ -1,13 +1,13 @@
-import * as Types from './types';
+import * as AppTypes from './types';
 import ITimeEntry from './time-entry';
 
 interface ITask {
-  id: Types.ID;
+  id: AppTypes.ID;
   title: string;
   deadline?: number;
   estimatedTime?: number;
   wastedTime?: number;
-  project?: Types.ID;
+  project?: AppTypes.ID;
   timeEntries?: Array<ITimeEntry>;
   isCompleted: boolean;
 }

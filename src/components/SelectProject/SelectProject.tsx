@@ -3,13 +3,13 @@ import IProjects from 'Entities/projects-entity';
 import * as React from 'react';
 import Select from 'react-select';
 
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 
 interface ISelectProjectProps {
   projects: IProjects<IProject>;
   onChange: (value: any, action: any) => void;
   // eslint-disable-next-line react/require-default-props
-  defaultValue?: Types.ID;
+  defaultValue?: AppTypes.ID;
 }
 
 type Option = {

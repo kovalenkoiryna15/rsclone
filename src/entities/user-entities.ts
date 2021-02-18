@@ -1,7 +1,7 @@
-import * as Types from './types';
+import * as AppTypes from './types';
 
 export default interface IUser {
-  id: Types.ID;
+  id: AppTypes.ID;
   email: string;
   password: string;
 }

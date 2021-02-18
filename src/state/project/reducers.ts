@@ -1,6 +1,6 @@
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
 import {
   ADD_PROJECT,
@@ -26,7 +26,7 @@ const handlers: StateTypes.IHandlers<IProjectState, any> = {
     ...state,
     projects: { ...state.projects, [project.id]: project },
   }),
-  [DELETE_PROJECT]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => ({
+  [DELETE_PROJECT]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
     ...state,
     projects: Object.fromEntries(
       Object.entries(state.projects).filter((project) => project[0] !== id)

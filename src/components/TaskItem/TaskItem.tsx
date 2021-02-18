@@ -3,17 +3,17 @@ import { Badge } from 'react-bootstrap';
 
 import IProject from 'Entities/project-entities';
 import ITask from 'Entities/task-entities';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 
 interface ITaskItemProps {
   task: ITask;
   // eslint-disable-next-line react/require-default-props
   project?: IProject;
-  userID: Types.ID;
-  removeTask: (task: ITask, userID: Types.ID) => void;
+  userID: AppTypes.ID;
+  removeTask: (task: ITask, userID: AppTypes.ID) => void;
   selectTask: (task: ITask) => void;
   showEdit: () => void;
-  updateTask: (task: ITask, userID: Types.ID) => void;
+  updateTask: (task: ITask, userID: AppTypes.ID) => void;
 }
 
 function TaskItem({

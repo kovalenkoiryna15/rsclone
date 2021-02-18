@@ -27,7 +27,7 @@ module.exports = {
       Store: path.resolve(__dirname, './src/store'),
       Styles: path.resolve(__dirname, './src/styles'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.svg'],
   },
   devtool: 'inline-source-map',
   watch: true,
@@ -136,7 +136,11 @@ module.exports = {
         type: 'javascript/auto',
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
+        type: 'asset/inline',
+      },
+      {
+        test: /\.svg/,
         type: 'asset/inline',
       },
     ],

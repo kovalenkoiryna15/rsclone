@@ -40,7 +40,8 @@
   },
   "include": [
     "src/**/*",
-    "test/**/*"
+    "test/**/*",
+    "src/custom.d.ts"
   ],
   "exclude": [
     "build",

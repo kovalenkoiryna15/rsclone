@@ -1,2 +1,3 @@
 *.config*.js
 *.d.ts
+*Mock.js

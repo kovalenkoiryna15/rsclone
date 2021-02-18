@@ -2,9 +2,9 @@ import firebase from 'firebase';
 
 import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
-import * as Types from 'Entities/types';
-import { database } from 'Utils/firebase';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
+import { database } from 'Utils/firebase';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 import DataSnapshot = firebase.database.DataSnapshot;
 
@@ -20,13 +20,16 @@ export const hideLoader = (): StateTypes.IAction<undefined> => ({
 
 export const pushTask = async (
   task: Omit<ITask, 'id'>,
-  userID: Types.ID
+  userID: AppTypes.ID
 ): Promise<ITask> => {
   const taskListRef = database.ref(`${userID}/tasks`);
   const newTaskRef = await taskListRef.push();
   await newTaskRef.set(task);
   return newTaskRef.key
-    ? Promise.resolve({ ...task, id: newTaskRef.key })
+    ? Promise.resolve({
+        ...task,
+        id: newTaskRef.key,
+      })
     : Promise.reject(Error("I can't get task ref!"));
 };
 
@@ -51,7 +54,7 @@ const parseTasksSnapshot = (tasksSnapshot: DataSnapshot) => {
   return tasks;
 };
 
-export const fetchTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
+export const fetchTasks = async (userID: AppTypes.ID): Promise<Array<ITask>> => {
   const taskListRef = database.ref(`${userID}/tasks`);
   const tasks: Array<ITask> = [] as Array<ITask>;
   await taskListRef.once('value', (tasksSnapshot) => {
@@ -60,12 +63,12 @@ export const fetchTasks = async (userID: Types.ID): Promise<Array<ITask>> => {
   return Promise.resolve(tasks);
 };
 
-export const putTask = async (task: ITask, userID: Types.ID): Promise<ITask> => {
+export const putTask = async (task: ITask, userID: AppTypes.ID): Promise<ITask> => {
   const { id, ...rest } = task;
   const taskRef = database.ref(`${userID}/tasks/${id}`);
   await taskRef.set({ ...rest });
   return Promise.resolve(task);
 };
 
-export const deleteTask = async (id: Types.ID, userID: Types.ID): Promise<any> =>
+export const deleteTask = async (id: AppTypes.ID, userID: AppTypes.ID): Promise<any> =>
   database.ref(`${userID}/tasks/${id}`).remove();

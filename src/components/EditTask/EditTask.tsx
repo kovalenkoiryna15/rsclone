@@ -6,7 +6,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import Calendar from 'Components/Calendar/Calendar';
 import SelectProject from 'Components/SelectProject';
 import ITask from 'Entities/task-entities';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 
 const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number /* ms */ => {
   if (!HHmm) return 0;
@@ -29,11 +29,11 @@ interface IEditTaskProps {
   // eslint-disable-next-line react/require-default-props
   task?: ITask;
   isVisible: boolean;
-  userID: Types.ID;
-  addTask: (task: Omit<ITask, 'id'>, userID: Types.ID) => void;
+  userID: AppTypes.ID;
+  addTask: (task: Omit<ITask, 'id'>, userID: AppTypes.ID) => void;
   deselectTask: () => void;
   hideEdit: () => void;
-  updateTask: (task: ITask, userID: Types.ID) => void;
+  updateTask: (task: ITask, userID: AppTypes.ID) => void;
 }
 
 interface IEditTaskState extends Omit<ITask, 'estimatedTime'> {
@@ -83,7 +83,7 @@ const EditTask = ({
   };
 
   const handleProjectChange = (
-    project: { value: Types.ID; label: string },
+    project: { value: AppTypes.ID; label: string },
     options: { action: string; name: string; option: any }
   ) => {
     if (project && options.action === 'select-option') {

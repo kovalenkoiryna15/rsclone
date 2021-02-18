@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
 import SelectProject from './SelectProject';
 
 type OwnProps = {
-  defaultValue?: Types.ID;
+  defaultValue?: AppTypes.ID;
   onChange: (
-    project: { value: Types.ID; label: string },
+    project: { value: AppTypes.ID; label: string },
     options: { action: string; name: string; option: any }
   ) => void;
 };

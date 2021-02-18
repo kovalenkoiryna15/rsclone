@@ -1,4 +1,4 @@
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
 import IUser from 'Entities/user-entities';
 import { auth } from 'Utils/firebase';
@@ -19,7 +19,7 @@ function isError(error: Error | unknown): error is Error {
   return (error as Error).message !== undefined;
 }
 
-export const setUserID = (id: Types.ID): StateTypes.IAction<Types.ID> => ({
+export const setUserID = (id: AppTypes.ID): StateTypes.IAction<AppTypes.ID> => ({
   type: SET_USER_ID,
   payload: id,
 });
@@ -39,9 +39,9 @@ export const loginFailure = (errorMessage: string): StateTypes.IAction<string> =
   payload: errorMessage,
 });
 
-export const login = (userData: IUser): StateTypes.AsyncDispatch<IUserState, any> => async (
-  dispatch
-) => {
+export const login = (
+  userData: IUser
+): StateTypes.AsyncDispatch<IUserState, any> => async (dispatch) => {
   dispatch(loginRequest(userData));
   try {
     const { email, password } = userData;

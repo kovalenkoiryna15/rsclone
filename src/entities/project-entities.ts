@@ -1,4 +1,4 @@
-import * as Types from './types';
+import * as AppTypes from './types';
 
 export enum ProjectView {
   List,
@@ -6,7 +6,7 @@ export enum ProjectView {
 }
 
 interface IProject {
-  id: Types.ID;
+  id: AppTypes.ID;
   title: string;
   color?: string;
   deadline?: Date | null;

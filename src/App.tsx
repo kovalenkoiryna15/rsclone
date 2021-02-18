@@ -9,18 +9,18 @@ import LoginModal from 'Components/LoginModal';
 import MainView from 'Components/MainView';
 import { fetchProjects } from 'State/project/actions';
 import { taskActions } from 'State/task';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { auth } from 'Utils/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state: MyModels.RootState) => {
+  const isAuth = useSelector((state: StateTypes.RootState) => {
     const {
       user: { isAuthorized },
     } = state;
     return isAuthorized;
   });
-  const isStillLoading = useSelector((state: MyModels.RootState) => {
+  const isStillLoading = useSelector((state: StateTypes.RootState) => {
     const {
       projects: { isLoading },
     } = state;

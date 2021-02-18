@@ -1,7 +1,7 @@
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -21,12 +21,12 @@ const initialState: IProjectState = {
   error: undefined,
 };
 
-const handlers: MyModels.IHandlers<IProjectState, any> = {
-  [ADD_PROJECT]: (state, { payload: project }: MyModels.IAction<IProject>) => ({
+const handlers: StateTypes.IHandlers<IProjectState, any> = {
+  [ADD_PROJECT]: (state, { payload: project }: StateTypes.IAction<IProject>) => ({
     ...state,
     projects: { ...state.projects, [project.id]: project },
   }),
-  [DELETE_PROJECT]: (state, { payload: id }: MyModels.IAction<Types.ID>) => ({
+  [DELETE_PROJECT]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => ({
     ...state,
     projects: Object.fromEntries(
       Object.entries(state.projects).filter((project) => project[0] !== id)
@@ -34,7 +34,7 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   }),
   [FETCH_PROJECTS_SUCCESS]: (
     state,
-    { payload: projects }: MyModels.IAction<IProjects<IProject>>
+    { payload: projects }: StateTypes.IAction<IProjects<IProject>>
   ) => ({
     ...state,
     projects,
@@ -47,11 +47,11 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
     ...state,
     isLoading: true,
   }),
-  [SHOW_ERROR]: (state, { payload: error }: MyModels.IAction<typeof Error>) => ({
+  [SHOW_ERROR]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [UPDATE_PROJECT]: (state, { payload }: MyModels.IAction<IProject>) => ({
+  [UPDATE_PROJECT]: (state, { payload }: StateTypes.IAction<IProject>) => ({
     ...state,
     projects: Object.fromEntries(
       Object.entries(state.projects).map(([key, value]) => {
@@ -70,14 +70,14 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   }),
   [WRITE_PROJECT_FAILURE]: (
     state,
-    { payload: error }: MyModels.IAction<typeof Error>
+    { payload: error }: StateTypes.IAction<typeof Error>
   ) => ({
     ...state,
     error,
   }),
   [REMOVE_PROJECT_FAILURE]: (
     state,
-    { payload: error }: MyModels.IAction<typeof Error>
+    { payload: error }: StateTypes.IAction<typeof Error>
   ) => ({
     ...state,
     error,
@@ -85,7 +85,7 @@ const handlers: MyModels.IHandlers<IProjectState, any> = {
   DEFAULT: (state) => state,
 };
 
-const projectsReducer: MyModels.Reducer<IProjectState, any> = (
+const projectsReducer: StateTypes.Reducer<IProjectState, any> = (
   state = initialState,
   action
 ) => {

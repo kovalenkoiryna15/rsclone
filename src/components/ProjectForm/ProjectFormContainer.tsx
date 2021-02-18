@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { addProject, updateProject, writeProject } from 'State/project/actions';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import ProjectForm from './ProjectForm';
 
 type OwnProps = {
@@ -12,7 +12,7 @@ type OwnProps = {
   projectData?: IProject;
 };
 
-const mapStateToProps = (state: MyModels.RootState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: StateTypes.RootState, ownProps: OwnProps) => ({
   isVisible: ownProps.isVisible,
   onShow: ownProps.onShow,
   projectData: ownProps.projectData,

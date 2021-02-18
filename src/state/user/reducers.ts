@@ -1,4 +1,4 @@
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import * as Types from 'Entities/types';
 import IUser from 'Entities/user-entities';
 import { IUserState } from 'State/user/action-types';
@@ -23,20 +23,20 @@ const initialState: IUserState = {
   errorMessage: undefined,
 };
 
-const handlers: MyModels.IHandlers<IUserState, any> = {
-  [ALERT_SUCCESS]: (state, { payload: message }: MyModels.IAction<string>) => ({
+const handlers: StateTypes.IHandlers<IUserState, any> = {
+  [ALERT_SUCCESS]: (state, { payload: message }: StateTypes.IAction<string>) => ({
     ...state,
     alertMessage: message,
   }),
-  [ALERT_ERROR]: (state, { payload: message }: MyModels.IAction<string>) => ({
+  [ALERT_ERROR]: (state, { payload: message }: StateTypes.IAction<string>) => ({
     ...state,
     alertMessage: message,
   }),
-  [ALERT_CLEAR]: (state, { payload: message }: MyModels.IAction<string>) => ({
+  [ALERT_CLEAR]: (state, { payload: message }: StateTypes.IAction<string>) => ({
     ...state,
     alertMessage: message,
   }),
-  [SET_USER_ID]: (state, { payload: id }: MyModels.IAction<Types.ID>) => {
+  [SET_USER_ID]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => {
     const { user } = state;
     const newUser: IUser = {
       ...user,
@@ -47,7 +47,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
       user: newUser,
     };
   },
-  [REGISTER_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
+  [REGISTER_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: false,
@@ -56,12 +56,12 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
     ...state,
     isAuthorized: true,
   }),
-  [LOGIN_REQUEST]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
+  [LOGIN_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: false,
   }),
-  [LOGIN_SUCCESS]: (state, { payload: user }: MyModels.IAction<IUser>) => ({
+  [LOGIN_SUCCESS]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: true,
@@ -74,7 +74,7 @@ const handlers: MyModels.IHandlers<IUserState, any> = {
   DEFAULT: (state) => state,
 };
 
-const userReducer: MyModels.Reducer<IUserState, any> = (state = initialState, action) => {
+const userReducer: StateTypes.Reducer<IUserState, any> = (state = initialState, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

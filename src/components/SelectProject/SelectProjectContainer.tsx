@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import * as Types from 'Entities/types';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import SelectProject from './SelectProject';
 
 type OwnProps = {
@@ -12,7 +12,7 @@ type OwnProps = {
   ) => void;
 };
 
-const mapStateToProps = (state: MyModels.RootState, ownProps: OwnProps) => ({
+const mapStateToProps = (state: StateTypes.RootState, ownProps: OwnProps) => ({
   defaultValue: ownProps.defaultValue,
   onChange: ownProps.onChange,
   projects: state.projects.projects,

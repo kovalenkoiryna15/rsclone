@@ -4,16 +4,16 @@ import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
 import * as Types from 'Entities/types';
 import { database } from 'Utils/firebase';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 import DataSnapshot = firebase.database.DataSnapshot;
 
-export const showLoader = (): MyModels.IAction<undefined> => ({
+export const showLoader = (): StateTypes.IAction<undefined> => ({
   type: SHOW_LOADER,
   payload: undefined,
 });
 
-export const hideLoader = (): MyModels.IAction<undefined> => ({
+export const hideLoader = (): StateTypes.IAction<undefined> => ({
   type: HIDE_LOADER,
   payload: undefined,
 });

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Badge } from 'react-bootstrap';
 
-import IProject from 'Entities/project-entities';
-import ITask from 'Entities/task-entities';
+import IProject from 'Entities/project';
+import ITask from 'Entities/task';
 import * as AppTypes from 'Entities/types';
 
 interface ITaskItemProps {

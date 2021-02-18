@@ -1,4 +1,4 @@
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 
 export type TaskListState = {
   isVisibleEdit: boolean;

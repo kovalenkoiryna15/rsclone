@@ -4,7 +4,7 @@ import { ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProjectForm from 'Components/ProjectForm';
-import IProject from 'Entities/project-entities';
+import IProject from 'Entities/project';
 import * as AppTypes from 'Entities/types';
 import { deleteProject, removeProject } from 'States/project/actions';
 import * as StateTypes from 'States/types';

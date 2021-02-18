@@ -1,4 +1,4 @@
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
 
 export const alertSuccess = (message: string): StateTypes.IAction<string> => ({

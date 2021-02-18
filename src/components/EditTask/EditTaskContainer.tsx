@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
-import { taskActions } from 'State/task';
-import { taskListActions } from 'State/task-list';
-import * as StateTypes from 'State/types';
+import { taskActions } from 'States/task';
+import { taskListActions } from 'States/task-list';
+import * as StateTypes from 'States/types';
 import EditTask from './EditTask';
 
 const mapStateToProps = (state: StateTypes.RootState) => ({

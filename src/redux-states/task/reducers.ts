@@ -1,6 +1,6 @@
 import ITask from 'Entities/task-entities';
 import * as AppTypes from 'Entities/types';
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import {
   ADD,
   ADD_FAILURE,

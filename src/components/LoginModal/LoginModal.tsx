@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as StateTypes from 'State/types';
-import { alertClear } from 'State/user/alert-action-creators';
+import * as StateTypes from 'States/types';
+import { alertClear } from 'States/user/alert-action-creators';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 

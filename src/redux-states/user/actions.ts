@@ -1,5 +1,5 @@
 import * as AppTypes from 'Entities/types';
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import IUser from 'Entities/user-entities';
 import { auth } from 'Utils/firebase';
 import { IUserState } from './action-types';

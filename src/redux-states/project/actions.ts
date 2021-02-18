@@ -1,7 +1,7 @@
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
 import * as AppTypes from 'Entities/types';
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import { database } from 'Utils/firebase';
 import {
   ADD_PROJECT,

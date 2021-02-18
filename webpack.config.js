@@ -24,7 +24,7 @@ module.exports = {
       Data: path.resolve(__dirname, './src/assets/data'),
       Entities: path.resolve(__dirname, './src/entities'),
       Images: path.resolve(__dirname, './src/assets/images'),
-      State: path.resolve(__dirname, './src/state'),
+      States: path.resolve(__dirname, './src/redux-states'),
       Styles: path.resolve(__dirname, './src/styles'),
       Utils: path.resolve(__dirname, './src/utils'),
     },

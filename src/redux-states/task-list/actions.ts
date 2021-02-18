@@ -1,5 +1,5 @@
 import ITask from 'Entities/task-entities';
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-constants';
 
 export const deselectTask = (): StateTypes.IAction<undefined> => ({

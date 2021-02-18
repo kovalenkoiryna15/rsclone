@@ -4,8 +4,8 @@ import { Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import IUser from 'Entities/user-entities';
-import * as StateTypes from 'State/types';
-import { register } from 'State/user/actions';
+import * as StateTypes from 'States/types';
+import { register } from 'States/user/actions';
 
 const RegisterForm = (): JSX.Element => {
   const dispatch = useDispatch();

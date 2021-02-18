@@ -1,6 +1,6 @@
-import * as StateTypes from 'State/types';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import IUser from 'Entities/user-entities';
+import * as StateTypes from 'State/types';
 import { IUserState } from 'State/user/action-types';
 import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
 import {
@@ -36,7 +36,7 @@ const handlers: StateTypes.IHandlers<IUserState, any> = {
     ...state,
     alertMessage: message,
   }),
-  [SET_USER_ID]: (state, { payload: id }: StateTypes.IAction<Types.ID>) => {
+  [SET_USER_ID]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => {
     const { user } = state;
     const newUser: IUser = {
       ...user,
@@ -74,7 +74,10 @@ const handlers: StateTypes.IHandlers<IUserState, any> = {
   DEFAULT: (state) => state,
 };
 
-const userReducer: StateTypes.Reducer<IUserState, any> = (state = initialState, action) => {
+const userReducer: StateTypes.Reducer<IUserState, any> = (
+  state = initialState,
+  action
+) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

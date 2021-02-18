@@ -1,8 +1,8 @@
 import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
-import * as Types from 'Entities/types';
-import { database } from 'Utils/firebase';
+import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'State/types';
+import { database } from 'Utils/firebase';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -28,7 +28,7 @@ export const updateProject = (project: IProject): StateTypes.IAction<IProject> =
   payload: project,
 });
 
-export const deleteProject = (id: Types.ID): StateTypes.IAction<Types.ID> => ({
+export const deleteProject = (id: AppTypes.ID): StateTypes.IAction<AppTypes.ID> => ({
   type: DELETE_PROJECT,
   payload: id,
 });
@@ -123,7 +123,7 @@ export const writeProject = (
 };
 
 export const removeProject = (
-  id: Types.ID,
+  id: AppTypes.ID,
   userId: string
 ): StateTypes.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {

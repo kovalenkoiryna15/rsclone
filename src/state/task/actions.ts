@@ -1,5 +1,5 @@
 import ITask from 'Entities/task-entities';
-import * as Types from 'Entities/types';
+import * as AppTypes from 'Entities/types';
 import {
   deleteTask,
   fetchTasks,
@@ -23,7 +23,7 @@ import {
 
 export const update = (
   task: ITask,
-  userID: Types.ID
+  userID: AppTypes.ID
 ): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     await putTask(task, userID);
@@ -41,7 +41,7 @@ export const update = (
 
 export const add = (
   task: Omit<ITask, 'id'>,
-  userID: Types.ID
+  userID: AppTypes.ID
 ): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   try {
     const { id } = await pushTask(task, userID);
@@ -61,7 +61,7 @@ export const add = (
 };
 
 export const getTasks = (
-  userID: Types.ID
+  userID: AppTypes.ID
 ): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   dispatch(showLoader());
   try {
@@ -82,7 +82,7 @@ export const getTasks = (
 
 export const removeTask = (
   task: ITask,
-  userID: Types.ID
+  userID: AppTypes.ID
 ): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
   const { id } = task;
   try {

@@ -2,7 +2,7 @@ import IProject from 'Entities/project-entities';
 import IProjects from 'Entities/projects-entity';
 import * as Types from 'Entities/types';
 import { database } from 'Utils/firebase';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import {
   ADD_PROJECT,
   DELETE_PROJECT,
@@ -18,44 +18,44 @@ import {
 import { IProjectState } from './action-types';
 import SAMPLE from './localStorage';
 
-export const addProject = (newProject: IProject): MyModels.IAction<IProject> => ({
+export const addProject = (newProject: IProject): StateTypes.IAction<IProject> => ({
   type: ADD_PROJECT,
   payload: newProject,
 });
 
-export const updateProject = (project: IProject): MyModels.IAction<IProject> => ({
+export const updateProject = (project: IProject): StateTypes.IAction<IProject> => ({
   type: UPDATE_PROJECT,
   payload: project,
 });
 
-export const deleteProject = (id: Types.ID): MyModels.IAction<Types.ID> => ({
+export const deleteProject = (id: Types.ID): StateTypes.IAction<Types.ID> => ({
   type: DELETE_PROJECT,
   payload: id,
 });
 
 export const fetchProjectsSuccess = (
   projects: IProjects<IProject>
-): MyModels.IAction<IProjects<IProject>> => ({
+): StateTypes.IAction<IProjects<IProject>> => ({
   type: FETCH_PROJECTS_SUCCESS,
   payload: projects,
 });
 
-export const fetchProjectsFailure = (error: Error): MyModels.IAction<Error> => ({
+export const fetchProjectsFailure = (error: Error): StateTypes.IAction<Error> => ({
   type: FETCH_PROJECTS_FAILURE,
   payload: error,
 });
 
-export const showLoader = (): MyModels.IAction<undefined> => ({
+export const showLoader = (): StateTypes.IAction<undefined> => ({
   type: SHOW_LOADER,
   payload: undefined,
 });
 
-export const hideLoader = (): MyModels.IAction<undefined> => ({
+export const hideLoader = (): StateTypes.IAction<undefined> => ({
   type: HIDE_LOADER,
   payload: undefined,
 });
 
-export const showError = (): MyModels.IAction<undefined> => ({
+export const showError = (): StateTypes.IAction<undefined> => ({
   type: SHOW_ERROR,
   payload: undefined,
 });
@@ -74,7 +74,7 @@ const parseProjects = (data: IProjects<IProject>): IProjects<IProject> =>
 export const fetchProjects = (
   idToken: string,
   userId: string
-): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     dispatch(showLoader());
     const response: Response = await fetch(
@@ -106,7 +106,7 @@ export const fetchProjects = (
 export const writeProject = (
   newProject: IProject,
   userId: string
-): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   const { id, deadline } = newProject;
   const parsedProject = {
     ...newProject,
@@ -125,7 +125,7 @@ export const writeProject = (
 export const removeProject = (
   id: Types.ID,
   userId: string
-): MyModels.AsyncDispatch<IProjectState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<IProjectState, any> => async (dispatch) => {
   try {
     await database.ref(`${userId}/projects/${id}`).remove();
   } catch (error) {

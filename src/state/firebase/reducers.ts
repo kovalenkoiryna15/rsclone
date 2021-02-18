@@ -1,12 +1,12 @@
 import { IFirebaseState } from 'State/firebase/action-types';
-import * as MyModels from 'State/types';
+import * as StateTypes from 'State/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 
 const initialState: IFirebaseState = {
   isLoading: true,
 };
 
-const handlers: MyModels.IHandlers<IFirebaseState, undefined> = {
+const handlers: StateTypes.IHandlers<IFirebaseState, undefined> = {
   [HIDE_LOADER]: (state) => ({
     ...state,
     isLoading: false,
@@ -18,7 +18,7 @@ const handlers: MyModels.IHandlers<IFirebaseState, undefined> = {
   DEFAULT: (state) => state,
 };
 
-const firebaseReducer: MyModels.Reducer<IFirebaseState, undefined> = (
+const firebaseReducer: StateTypes.Reducer<IFirebaseState, undefined> = (
   state = initialState,
   action
 ) => {

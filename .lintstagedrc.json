@@ -1,0 +1,5 @@
+{
+  "*.@(js|jsx|ts|tsx)": ["eslint --fix"],
+  "*.scss": ["stylelint --syntax scss './src/**/*.scss' --fix"],
+  "*.@(json|css|md)": ["prettier --write --ignore-path .gitignore"]
+}

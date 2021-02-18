@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as MyModels from 'Store/types';
-import { login } from 'Store/user/actions';
+import * as MyModels from 'State/types';
+import { login } from 'State/user/actions';
 
 const LoginForm = (): JSX.Element => {
   const dispatch = useDispatch();

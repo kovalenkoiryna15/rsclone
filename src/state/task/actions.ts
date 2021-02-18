@@ -7,9 +7,9 @@ import {
   pushTask,
   putTask,
   showLoader,
-} from 'Store/firebase/actions';
-import { TasksState } from 'Store/task/action-types';
-import * as MyModels from 'Store/types';
+} from 'State/firebase/actions';
+import { TasksState } from 'State/task/action-types';
+import * as MyModels from 'State/types';
 import {
   ADD,
   ADD_FAILURE,

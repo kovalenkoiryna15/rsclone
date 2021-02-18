@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Row, Spinner } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 import TaskList from 'Components/TaskList';
 import TaskListNav from 'Components/TaskListNav';
 import IProject from 'Entities/project-entities';

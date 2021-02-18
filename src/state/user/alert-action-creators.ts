@@ -1,4 +1,4 @@
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
 
 export const alertSuccess = (message: string): MyModels.IAction<string> => ({

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Navbar, Row, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { logout } from 'Store/user/actions';
+import { logout } from 'State/user/actions';
 
 export default function Header(): JSX.Element {
   const dispatch = useDispatch();

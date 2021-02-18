@@ -2,8 +2,8 @@ import IProject from 'Entities/project-entities';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { addProject, updateProject, writeProject } from 'Store/project/actions';
-import * as MyModels from 'Store/types';
+import { addProject, updateProject, writeProject } from 'State/project/actions';
+import * as MyModels from 'State/types';
 import ProjectForm from './ProjectForm';
 
 type OwnProps = {

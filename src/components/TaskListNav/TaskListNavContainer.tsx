@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 
 import TaskListNav from './TaskListNav';
 

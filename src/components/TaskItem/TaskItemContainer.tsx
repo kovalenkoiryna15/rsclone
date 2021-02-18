@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
 import ITask from 'Entities/task-entities';
-import { taskListActions } from 'State/task-list';
-import { taskActions } from 'State/task';
-import * as StateTypes from 'State/types';
+import { taskListActions } from 'States/task-list';
+import { taskActions } from 'States/task';
+import * as StateTypes from 'States/types';
 import TaskItem from './TaskItem';
 
 type OwnProps = {

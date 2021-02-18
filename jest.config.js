@@ -16,7 +16,7 @@ module.exports = {
     '^Data/(.*)$': '<rootDir>/src/assets/data/$1',
     '^Entities/(.*)$': '<rootDir>/src/entities/$1',
     '^Images/(.*)$': '<rootDir>/src/assets/images/$1',
-    '^State/(.*)$': '<rootDir>/src/state/$1',
+    '^States/(.*)$': '<rootDir>/src/redux-states/$1',
     '^Styles/(.*)$': '<rootDir>/src/styles/$1',
     '^Utils/(.*)$': '<rootDir>/src/utils/$1',
   },

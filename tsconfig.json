@@ -17,7 +17,7 @@
       "Data/*": ["assets/data/*"],
       "Entities/*": ["entities/*"],
       "Images/*": ["assets/images/*"],
-      "State/*": ["state/*"],
+      "States/*": ["redux-states/*"],
       "Styles/*": ["styles/*"],
       "Utils/*": ["utils/*"]
     },

@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
 import * as AppTypes from 'Entities/types';
-import * as StateTypes from 'State/types';
+import * as StateTypes from 'States/types';
 import { database } from 'Utils/firebase';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 import DataSnapshot = firebase.database.DataSnapshot;

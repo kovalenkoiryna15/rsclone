@@ -7,9 +7,9 @@ import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import MainView from 'Components/MainView';
-import { fetchProjects } from 'State/project/actions';
-import { taskActions } from 'State/task';
-import * as StateTypes from 'State/types';
+import { fetchProjects } from 'States/project/actions';
+import { taskActions } from 'States/task';
+import * as StateTypes from 'States/types';
 import { auth } from 'Utils/firebase';
 
 export default function App(): JSX.Element {

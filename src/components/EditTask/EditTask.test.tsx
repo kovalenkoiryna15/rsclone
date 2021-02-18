@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import store from 'States/store';
 
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 import EditTask from './EditTask';
 
 test('renders EditTask', () => {

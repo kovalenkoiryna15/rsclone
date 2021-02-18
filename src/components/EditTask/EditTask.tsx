@@ -5,7 +5,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 
 import Calendar from 'Components/Calendar/Calendar';
 import SelectProject from 'Components/SelectProject';
-import ITask from 'Entities/task-entities';
+import ITask from 'Entities/task';
 import * as AppTypes from 'Entities/types';
 
 const parseHHmmStringToMin = (HHmm?: string /* 'HH:mm' */): number /* ms */ => {

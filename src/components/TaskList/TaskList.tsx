@@ -22,7 +22,7 @@ const TaskList = ({
   showEdit,
   id,
 }: ITaskListProps): JSX.Element => {
-  const addNewTask = () => {
+  const handleEditTask = () => {
     deselectTask();
     showEdit();
   };
@@ -31,7 +31,7 @@ const TaskList = ({
     <Col className="task-list">
       <Nav activeKey="/home" className="justify-content-end p-1">
         <Nav.Item>
-          <Button className="text-uppercase text-nowrap" onClick={addNewTask}>
+          <Button className="text-uppercase text-nowrap" onClick={handleEditTask}>
             + Task
           </Button>
         </Nav.Item>

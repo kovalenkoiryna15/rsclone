@@ -7,14 +7,14 @@ import * as MyModels from 'Store/types';
 import ProjectForm from './ProjectForm';
 
 type OwnProps = {
-  handleShow: (event: React.MouseEvent<HTMLElement>) => void;
   isVisible: boolean;
+  onShow: (event: React.MouseEvent<HTMLElement>) => void;
   projectData?: IProject;
 };
 
 const mapStateToProps = (state: MyModels.RootState, ownProps: OwnProps) => ({
-  handleShow: ownProps.handleShow,
   isVisible: ownProps.isVisible,
+  onShow: ownProps.onShow,
   projectData: ownProps.projectData,
   userID: state.user.user.id,
 });

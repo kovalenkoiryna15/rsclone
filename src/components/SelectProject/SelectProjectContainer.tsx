@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import * as Types from 'Entities/types';
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 import SelectProject from './SelectProject';
 
 type OwnProps = {

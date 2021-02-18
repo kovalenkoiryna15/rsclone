@@ -7,10 +7,10 @@ import Footer from 'Components/Footer';
 import Header from 'Components/Header';
 import LoginModal from 'Components/LoginModal';
 import MainView from 'Components/MainView';
-import { fetchProjects } from 'Store/project/actions';
-import { taskActions } from 'Store/task';
-import * as MyModels from 'Store/types';
-import { auth } from 'Store/src/firebase';
+import { fetchProjects } from 'State/project/actions';
+import { taskActions } from 'State/task';
+import * as MyModels from 'State/types';
+import { auth } from 'Utils/firebase';
 
 export default function App(): JSX.Element {
   const dispatch = useDispatch();

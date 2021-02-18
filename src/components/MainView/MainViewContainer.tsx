@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import * as Types from 'Store/types';
+import * as Types from 'State/types';
 import MainView from './MainView';
 
 const mapStateToProps = (state: Types.RootState) => ({

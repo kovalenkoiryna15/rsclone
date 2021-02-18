@@ -1,7 +1,7 @@
 import * as Types from 'Entities/types';
-import * as MyModels from 'Store/types';
+import * as MyModels from 'State/types';
 import IUser from 'Entities/user-entities';
-import { auth } from '../src/firebase';
+import { auth } from 'Utils/firebase';
 import { IUserState } from './action-types';
 import { alertSuccess, alertError } from './alert-action-creators';
 import {

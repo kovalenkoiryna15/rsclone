@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 
-import store from 'Store/store';
+import store from 'State/store';
 import MainView from './MainView';
 
 test('renders MainView', () => {

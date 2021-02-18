@@ -3,8 +3,8 @@ import firebase from 'firebase';
 import ITask from 'Entities/task-entities';
 import ITimeEntry from 'Entities/time-entry';
 import * as Types from 'Entities/types';
-import { database } from 'Store/src/firebase';
-import * as MyModels from 'Store/types';
+import { database } from 'Utils/firebase';
+import * as MyModels from 'State/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 import DataSnapshot = firebase.database.DataSnapshot;
 

@@ -1,6 +1,6 @@
 import ITask from 'Entities/task';
 
-export type TasksState = {
+export type TaskState = {
   tasks: Array<ITask>;
   newTaskTitle: string;
   error?: typeof Error;

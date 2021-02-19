@@ -1,4 +1,4 @@
-import { IFirebaseState } from 'States/firebase/action-types';
+import { IFirebaseState } from 'States/firebase/model';
 import * as StateTypes from 'States/types';
 import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
 

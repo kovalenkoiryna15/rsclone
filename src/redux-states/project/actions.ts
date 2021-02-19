@@ -15,7 +15,7 @@ import {
   UPDATE_PROJECT,
   WRITE_PROJECT_FAILURE,
 } from './action-constants';
-import { IProjectState } from './action-types';
+import { IProjectState } from './model';
 import SAMPLE from './localStorage';
 
 export const addProject = (newProject: IProject): StateTypes.IAction<IProject> => ({

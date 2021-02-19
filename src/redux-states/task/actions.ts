@@ -3,7 +3,7 @@ import * as AppTypes from 'Entities/types';
 import * as firebaseActions from 'States/firebase/actions';
 import * as StateTypes from 'States/types';
 import * as t from './action-types';
-import { TaskState } from './types';
+import { TaskState } from './model';
 
 export const update = (
   task: ITask,

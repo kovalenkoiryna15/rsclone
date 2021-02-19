@@ -13,7 +13,7 @@ import {
   LOGIN_FAILURE,
   LOGOUT,
   SET_USER_ID,
-} from './action-constants';
+} from './action-types';
 
 function isError(error: Error | unknown): error is Error {
   return (error as Error).message !== undefined;

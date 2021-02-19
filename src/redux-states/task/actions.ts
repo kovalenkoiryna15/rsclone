@@ -8,7 +8,7 @@ import {
   putTask,
   showLoader,
 } from 'States/firebase/actions';
-import { TasksState } from 'States/task/action-types';
+import { TaskState } from 'States/task/action-types';
 import * as StateTypes from 'States/types';
 import {
   ADD,
@@ -24,7 +24,7 @@ import {
 export const update = (
   task: ITask,
   userID: AppTypes.ID
-): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TaskState, any> => async (dispatch) => {
   try {
     await putTask(task, userID);
     dispatch({
@@ -42,7 +42,7 @@ export const update = (
 export const add = (
   task: Omit<ITask, 'id'>,
   userID: AppTypes.ID
-): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TaskState, any> => async (dispatch) => {
   try {
     const { id } = await pushTask(task, userID);
     dispatch({
@@ -62,7 +62,7 @@ export const add = (
 
 export const getTasks = (
   userID: AppTypes.ID
-): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TaskState, any> => async (dispatch) => {
   dispatch(showLoader());
   try {
     await fetchTasks(userID).then((tasks) =>
@@ -83,7 +83,7 @@ export const getTasks = (
 export const removeTask = (
   task: ITask,
   userID: AppTypes.ID
-): StateTypes.AsyncDispatch<TasksState, any> => async (dispatch) => {
+): StateTypes.AsyncDispatch<TaskState, any> => async (dispatch) => {
   const { id } = task;
   try {
     await deleteTask(id, userID);

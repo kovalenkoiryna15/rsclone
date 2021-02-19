@@ -11,15 +11,15 @@ import {
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
-import { TasksState } from './action-types';
+import { TaskState } from './action-types';
 
-const initialState: TasksState = {
+const initialState: TaskState = {
   tasks: [],
   newTaskTitle: '',
   error: undefined,
 };
 
-const handlers: StateTypes.IHandlers<TasksState, any> = {
+const handlers: StateTypes.IHandlers<TaskState, any> = {
   [ADD]: (state, { payload: task }: StateTypes.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
@@ -66,7 +66,7 @@ const handlers: StateTypes.IHandlers<TasksState, any> = {
   DEFAULT: (state) => state,
 };
 
-const taskReducer: StateTypes.Reducer<TasksState, any> = (
+const taskReducer: StateTypes.Reducer<TaskState, any> = (
   state = initialState,
   action
 ) => {

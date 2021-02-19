@@ -1,7 +1,7 @@
 import ITask from 'Entities/task';
 import * as StateTypes from 'States/types';
 import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-constants';
-import { TaskListState } from './action-types';
+import { TaskListState } from './model';
 
 const initialState: TaskListState = {
   isVisibleEdit: false,

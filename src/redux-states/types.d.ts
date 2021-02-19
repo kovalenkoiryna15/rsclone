@@ -1,10 +1,10 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-import { IFirebaseState } from 'States/firebase/action-types';
-import { IProjectState } from 'States/project/action-types';
-import { TaskListState } from 'States/task-list/action-types';
-import { TaskState } from 'States/task/action-types';
-import { IUserState } from 'States/user/action-types';
+import { IFirebaseState } from 'States/firebase/model';
+import { IProjectState } from 'States/project/model';
+import { TaskListState } from 'States/task-list/model';
+import { TaskState } from 'States/task/model';
+import { IUserState } from 'States/user/model';
 
 export interface IAction<P> {
   type: string;

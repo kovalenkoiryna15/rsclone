@@ -5,7 +5,7 @@ import ITimeEntry from 'Entities/time-entry';
 import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'States/types';
 import { database } from 'Utils/firebase';
-import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
+import { HIDE_LOADER, SHOW_LOADER } from './action-types';
 import DataSnapshot = firebase.database.DataSnapshot;
 
 export const showLoader = (): StateTypes.IAction<undefined> => ({

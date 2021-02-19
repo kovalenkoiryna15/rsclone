@@ -19,7 +19,7 @@ import {
   REMOVE_FAILURE,
   UPDATE,
   UPDATE_FAILURE,
-} from './action-constants';
+} from './action-types';
 
 export const update = (
   task: ITask,

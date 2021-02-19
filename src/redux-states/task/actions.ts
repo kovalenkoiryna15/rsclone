@@ -8,7 +8,7 @@ import {
   putTask,
   showLoader,
 } from 'States/firebase/actions';
-import { TaskState } from 'States/task/action-types';
+import { TaskState } from 'States/task/types';
 import * as StateTypes from 'States/types';
 import {
   ADD,

@@ -11,7 +11,7 @@ import {
   UPDATE,
   UPDATE_FAILURE,
 } from './action-constants';
-import { TaskState } from './action-types';
+import { TaskState } from './types';
 
 const initialState: TaskState = {
   tasks: [],

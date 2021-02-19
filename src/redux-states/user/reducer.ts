@@ -1,16 +1,9 @@
 import * as AppTypes from 'Entities/types';
 import IUser from 'Entities/user';
 import * as StateTypes from 'States/types';
-import { IUserState } from 'States/user/model';
-import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-types';
-import {
-  REGISTER_SUCCESS,
-  LOGIN_SUCCESS,
-  LOGIN_REQUEST,
-  REGISTER_REQUEST,
-  SET_USER_ID,
-  LOGOUT,
-} from './action-types';
+import * as t from './action-types';
+import { ALERT_CLEAR, ALERT_ERROR, ALERT_SUCCESS } from './alert-action-types';
+import { IUserState } from './model';
 
 const initialState: IUserState = {
   user: {
@@ -36,7 +29,7 @@ const handlers: StateTypes.IHandlers<IUserState, any> = {
     ...state,
     alertMessage: message,
   }),
-  [SET_USER_ID]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => {
+  [t.SET_USER_ID]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => {
     const { user } = state;
     const newUser: IUser = {
       ...user,
@@ -47,26 +40,26 @@ const handlers: StateTypes.IHandlers<IUserState, any> = {
       user: newUser,
     };
   },
-  [REGISTER_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
+  [t.REGISTER_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: false,
   }),
-  [REGISTER_SUCCESS]: (state) => ({
+  [t.REGISTER_SUCCESS]: (state) => ({
     ...state,
     isAuthorized: true,
   }),
-  [LOGIN_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
+  [t.LOGIN_REQUEST]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: false,
   }),
-  [LOGIN_SUCCESS]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
+  [t.LOGIN_SUCCESS]: (state, { payload: user }: StateTypes.IAction<IUser>) => ({
     ...state,
     user,
     isAuthorized: true,
   }),
-  [LOGOUT]: (state) => ({
+  [t.LOGOUT]: (state) => ({
     ...state,
     isAuthorized: false,
     alertMessage: undefined,

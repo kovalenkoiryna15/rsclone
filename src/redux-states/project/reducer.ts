@@ -2,17 +2,7 @@ import IProject from 'Entities/project';
 import IProjects from 'Entities/projects';
 import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'States/types';
-import {
-  ADD_PROJECT,
-  DELETE_PROJECT,
-  FETCH_PROJECTS_SUCCESS,
-  HIDE_LOADER,
-  REMOVE_PROJECT_FAILURE,
-  SHOW_ERROR,
-  SHOW_LOADER,
-  UPDATE_PROJECT,
-  WRITE_PROJECT_FAILURE,
-} from './action-types';
+import * as t from './action-types';
 import { IProjectState } from './model';
 
 const initialState: IProjectState = {
@@ -22,36 +12,36 @@ const initialState: IProjectState = {
 };
 
 const handlers: StateTypes.IHandlers<IProjectState, any> = {
-  [ADD_PROJECT]: (state, { payload: project }: StateTypes.IAction<IProject>) => ({
+  [t.ADD_PROJECT]: (state, { payload: project }: StateTypes.IAction<IProject>) => ({
     ...state,
     projects: { ...state.projects, [project.id]: project },
   }),
-  [DELETE_PROJECT]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
+  [t.DELETE_PROJECT]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
     ...state,
     projects: Object.fromEntries(
       Object.entries(state.projects).filter((project) => project[0] !== id)
     ),
   }),
-  [FETCH_PROJECTS_SUCCESS]: (
+  [t.FETCH_PROJECTS_SUCCESS]: (
     state,
     { payload: projects }: StateTypes.IAction<IProjects<IProject>>
   ) => ({
     ...state,
     projects,
   }),
-  [HIDE_LOADER]: (state) => ({
+  [t.HIDE_LOADER]: (state) => ({
     ...state,
     isLoading: false,
   }),
-  [SHOW_LOADER]: (state) => ({
+  [t.SHOW_LOADER]: (state) => ({
     ...state,
     isLoading: true,
   }),
-  [SHOW_ERROR]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
+  [t.SHOW_ERROR]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [UPDATE_PROJECT]: (state, { payload }: StateTypes.IAction<IProject>) => ({
+  [t.UPDATE_PROJECT]: (state, { payload }: StateTypes.IAction<IProject>) => ({
     ...state,
     projects: Object.fromEntries(
       Object.entries(state.projects).map(([key, value]) => {
@@ -68,14 +58,14 @@ const handlers: StateTypes.IHandlers<IProjectState, any> = {
       })
     ),
   }),
-  [WRITE_PROJECT_FAILURE]: (
+  [t.WRITE_PROJECT_FAILURE]: (
     state,
     { payload: error }: StateTypes.IAction<typeof Error>
   ) => ({
     ...state,
     error,
   }),
-  [REMOVE_PROJECT_FAILURE]: (
+  [t.REMOVE_PROJECT_FAILURE]: (
     state,
     { payload: error }: StateTypes.IAction<typeof Error>
   ) => ({

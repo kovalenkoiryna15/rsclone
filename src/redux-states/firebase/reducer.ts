@@ -1,17 +1,17 @@
-import { IFirebaseState } from 'States/firebase/model';
 import * as StateTypes from 'States/types';
-import { HIDE_LOADER, SHOW_LOADER } from './action-types';
+import { IFirebaseState } from './model';
+import * as t from './action-types';
 
 const initialState: IFirebaseState = {
   isLoading: true,
 };
 
 const handlers: StateTypes.IHandlers<IFirebaseState, undefined> = {
-  [HIDE_LOADER]: (state) => ({
+  [t.HIDE_LOADER]: (state) => ({
     ...state,
     isLoading: false,
   }),
-  [SHOW_LOADER]: (state) => ({
+  [t.SHOW_LOADER]: (state) => ({
     ...state,
     isLoading: true,
   }),

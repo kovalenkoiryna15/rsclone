@@ -1,16 +1,7 @@
 import ITask from 'Entities/task';
 import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'States/types';
-import {
-  ADD,
-  ADD_FAILURE,
-  FETCH_TASKS,
-  FETCH_TASKS_FAILURE,
-  REMOVE,
-  REMOVE_FAILURE,
-  UPDATE,
-  UPDATE_FAILURE,
-} from './action-types';
+import * as t from './action-types';
 import { TaskState } from './model';
 
 const initialState: TaskState = {
@@ -20,46 +11,46 @@ const initialState: TaskState = {
 };
 
 const handlers: StateTypes.IHandlers<TaskState, any> = {
-  [ADD]: (state, { payload: task }: StateTypes.IAction<ITask>) => ({
+  [t.ADD]: (state, { payload: task }: StateTypes.IAction<ITask>) => ({
     ...state,
     tasks: [...state.tasks, task],
   }),
-  [UPDATE]: (state, { payload: task }: StateTypes.IAction<ITask>) => {
+  [t.UPDATE]: (state, { payload: newTask }: StateTypes.IAction<ITask>) => {
     const tasks = [...state.tasks];
     tasks.splice(
-      state.tasks.findIndex((t) => t.id === task.id),
+      state.tasks.findIndex((task) => task.id === newTask.id),
       1,
-      task
+      newTask
     );
     return {
       ...state,
       tasks,
     };
   },
-  [FETCH_TASKS]: (state, { payload: tasks }: StateTypes.IAction<Array<ITask>>) => ({
+  [t.FETCH_TASKS]: (state, { payload: tasks }: StateTypes.IAction<Array<ITask>>) => ({
     ...state,
     tasks,
   }),
-  [REMOVE]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
+  [t.REMOVE]: (state, { payload: id }: StateTypes.IAction<AppTypes.ID>) => ({
     ...state,
     tasks: state.tasks.filter((task) => task.id !== id),
   }),
-  [FETCH_TASKS_FAILURE]: (
+  [t.FETCH_TASKS_FAILURE]: (
     state,
     { payload: error }: StateTypes.IAction<typeof Error>
   ) => ({
     ...state,
     error,
   }),
-  [ADD_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
+  [t.ADD_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [UPDATE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
+  [t.UPDATE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),
-  [REMOVE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
+  [t.REMOVE_FAILURE]: (state, { payload: error }: StateTypes.IAction<typeof Error>) => ({
     ...state,
     error,
   }),

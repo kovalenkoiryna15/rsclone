@@ -1,23 +1,23 @@
 import ITask from 'Entities/task';
 import * as StateTypes from 'States/types';
-import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-types';
+import * as t from './action-types';
 
 export const deselectTask = (): StateTypes.IAction<undefined> => ({
-  type: DESELECT_TASK,
+  type: t.DESELECT_TASK,
   payload: undefined,
 });
 
 export const hideEdit = (): StateTypes.IAction<undefined> => ({
-  type: HIDE_EDIT,
+  type: t.HIDE_EDIT,
   payload: undefined,
 });
 
 export const selectTask = (task: ITask): StateTypes.IAction<ITask> => ({
-  type: SELECT_TASK,
+  type: t.SELECT_TASK,
   payload: task,
 });
 
 export const showEdit = (): StateTypes.IAction<undefined> => ({
-  type: SHOW_EDIT,
+  type: t.SHOW_EDIT,
   payload: undefined,
 });

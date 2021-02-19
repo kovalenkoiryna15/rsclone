@@ -10,7 +10,7 @@ import {
   REMOVE_FAILURE,
   UPDATE,
   UPDATE_FAILURE,
-} from './action-constants';
+} from './action-types';
 import { TaskState } from './types';
 
 const initialState: TaskState = {

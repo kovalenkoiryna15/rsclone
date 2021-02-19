@@ -3,60 +3,49 @@ import IProjects from 'Entities/projects';
 import * as AppTypes from 'Entities/types';
 import * as StateTypes from 'States/types';
 import { database } from 'Utils/firebase';
-import {
-  ADD_PROJECT,
-  DELETE_PROJECT,
-  FETCH_PROJECTS_FAILURE,
-  FETCH_PROJECTS_SUCCESS,
-  HIDE_LOADER,
-  REMOVE_PROJECT_FAILURE,
-  SHOW_ERROR,
-  SHOW_LOADER,
-  UPDATE_PROJECT,
-  WRITE_PROJECT_FAILURE,
-} from './action-types';
-import { IProjectState } from './model';
+import * as t from './action-types';
 import SAMPLE from './localStorage';
+import { IProjectState } from './model';
 
 export const addProject = (newProject: IProject): StateTypes.IAction<IProject> => ({
-  type: ADD_PROJECT,
+  type: t.ADD_PROJECT,
   payload: newProject,
 });
 
 export const updateProject = (project: IProject): StateTypes.IAction<IProject> => ({
-  type: UPDATE_PROJECT,
+  type: t.UPDATE_PROJECT,
   payload: project,
 });
 
 export const deleteProject = (id: AppTypes.ID): StateTypes.IAction<AppTypes.ID> => ({
-  type: DELETE_PROJECT,
+  type: t.DELETE_PROJECT,
   payload: id,
 });
 
 export const fetchProjectsSuccess = (
   projects: IProjects<IProject>
 ): StateTypes.IAction<IProjects<IProject>> => ({
-  type: FETCH_PROJECTS_SUCCESS,
+  type: t.FETCH_PROJECTS_SUCCESS,
   payload: projects,
 });
 
 export const fetchProjectsFailure = (error: Error): StateTypes.IAction<Error> => ({
-  type: FETCH_PROJECTS_FAILURE,
+  type: t.FETCH_PROJECTS_FAILURE,
   payload: error,
 });
 
 export const showLoader = (): StateTypes.IAction<undefined> => ({
-  type: SHOW_LOADER,
+  type: t.SHOW_LOADER,
   payload: undefined,
 });
 
 export const hideLoader = (): StateTypes.IAction<undefined> => ({
-  type: HIDE_LOADER,
+  type: t.HIDE_LOADER,
   payload: undefined,
 });
 
 export const showError = (): StateTypes.IAction<undefined> => ({
-  type: SHOW_ERROR,
+  type: t.SHOW_ERROR,
   payload: undefined,
 });
 
@@ -116,7 +105,7 @@ export const writeProject = (
     await database.ref(`${userId}/projects/${id}`).set(parsedProject);
   } catch (error) {
     dispatch({
-      type: WRITE_PROJECT_FAILURE,
+      type: t.WRITE_PROJECT_FAILURE,
       payload: error as Error,
     });
   }
@@ -130,7 +119,7 @@ export const removeProject = (
     await database.ref(`${userId}/projects/${id}`).remove();
   } catch (error) {
     dispatch({
-      type: REMOVE_PROJECT_FAILURE,
+      type: t.REMOVE_PROJECT_FAILURE,
       payload: error as Error,
     });
   }

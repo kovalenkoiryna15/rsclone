@@ -1,41 +1,32 @@
 import * as AppTypes from 'Entities/types';
-import * as StateTypes from 'States/types';
 import IUser from 'Entities/user';
+import * as StateTypes from 'States/types';
 import { auth } from 'Utils/firebase';
+import * as t from './action-types';
+import { alertError, alertSuccess } from './alert-action-creators';
 import { IUserState } from './model';
-import { alertSuccess, alertError } from './alert-action-creators';
-import {
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-  SET_USER_ID,
-} from './action-types';
 
 function isError(error: Error | unknown): error is Error {
   return (error as Error).message !== undefined;
 }
 
 export const setUserID = (id: AppTypes.ID): StateTypes.IAction<AppTypes.ID> => ({
-  type: SET_USER_ID,
+  type: t.SET_USER_ID,
   payload: id,
 });
 
 export const loginRequest = (user: IUser): StateTypes.IAction<IUser> => ({
-  type: LOGIN_REQUEST,
+  type: t.LOGIN_REQUEST,
   payload: user,
 });
 
 export const loginSuccess = (user: IUser): StateTypes.IAction<IUser> => ({
-  type: LOGIN_SUCCESS,
+  type: t.LOGIN_SUCCESS,
   payload: user,
 });
 
 export const loginFailure = (errorMessage: string): StateTypes.IAction<string> => ({
-  type: LOGIN_FAILURE,
+  type: t.LOGIN_FAILURE,
   payload: errorMessage,
 });
 
@@ -59,17 +50,17 @@ export const login = (
 };
 
 export const registerRequest = (user: IUser): StateTypes.IAction<IUser> => ({
-  type: REGISTER_REQUEST,
+  type: t.REGISTER_REQUEST,
   payload: user,
 });
 
 export const registerSuccess = (): StateTypes.IAction<undefined> => ({
-  type: REGISTER_SUCCESS,
+  type: t.REGISTER_SUCCESS,
   payload: undefined,
 });
 
 export const registerFailure = (errorMessage: string): StateTypes.IAction<string> => ({
-  type: REGISTER_FAILURE,
+  type: t.REGISTER_FAILURE,
   payload: errorMessage,
 });
 
@@ -96,6 +87,6 @@ export const register = (
 };
 
 export const logout = (): StateTypes.IAction<undefined> => ({
-  type: LOGOUT,
+  type: t.LOGOUT,
   payload: undefined,
 });

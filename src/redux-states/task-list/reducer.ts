@@ -1,6 +1,6 @@
 import ITask from 'Entities/task';
 import * as StateTypes from 'States/types';
-import { DESELECT_TASK, HIDE_EDIT, SELECT_TASK, SHOW_EDIT } from './action-types';
+import * as t from './action-types';
 import { TaskListState } from './model';
 
 const initialState: TaskListState = {
@@ -10,19 +10,19 @@ const initialState: TaskListState = {
 };
 
 const handlers: StateTypes.IHandlers<TaskListState, any> = {
-  [HIDE_EDIT]: (state) => ({
+  [t.HIDE_EDIT]: (state) => ({
     ...state,
     isVisibleEdit: false,
   }),
-  [SHOW_EDIT]: (state) => ({
+  [t.SHOW_EDIT]: (state) => ({
     ...state,
     isVisibleEdit: true,
   }),
-  [SELECT_TASK]: (state, { payload: selectedTask }: StateTypes.IAction<ITask>) => ({
+  [t.SELECT_TASK]: (state, { payload: selectedTask }: StateTypes.IAction<ITask>) => ({
     ...state,
     selectedTask,
   }),
-  [DESELECT_TASK]: (state) => ({
+  [t.DESELECT_TASK]: (state) => ({
     ...state,
     selectedTask: undefined,
   }),

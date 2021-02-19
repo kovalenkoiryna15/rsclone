@@ -2,7 +2,7 @@ import * as AppTypes from 'Entities/types';
 import IUser from 'Entities/user';
 import * as StateTypes from 'States/types';
 import { IUserState } from 'States/user/model';
-import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-constants';
+import { ALERT_SUCCESS, ALERT_ERROR, ALERT_CLEAR } from './alert-action-types';
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
@@ -10,7 +10,7 @@ import {
   REGISTER_REQUEST,
   SET_USER_ID,
   LOGOUT,
-} from './action-constants';
+} from './action-types';
 
 const initialState: IUserState = {
   user: {

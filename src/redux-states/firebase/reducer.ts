@@ -1,6 +1,6 @@
 import { IFirebaseState } from 'States/firebase/model';
 import * as StateTypes from 'States/types';
-import { HIDE_LOADER, SHOW_LOADER } from './action-constants';
+import { HIDE_LOADER, SHOW_LOADER } from './action-types';
 
 const initialState: IFirebaseState = {
   isLoading: true,

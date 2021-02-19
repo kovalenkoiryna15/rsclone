@@ -12,7 +12,7 @@ import {
   SHOW_LOADER,
   UPDATE_PROJECT,
   WRITE_PROJECT_FAILURE,
-} from './action-constants';
+} from './action-types';
 import { IProjectState } from './model';
 
 const initialState: IProjectState = {

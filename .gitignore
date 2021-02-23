@@ -224,3 +224,6 @@ package-lock.json
 
 # sensitive information: IP addresses, account credentials, and API keys/secrets
 .env.*
+
+# 2021.02.23
+.idea/

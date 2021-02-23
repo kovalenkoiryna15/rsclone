@@ -15,7 +15,7 @@ interface ITaskListNavState {
 interface ITaskListNavProps {
   projects: IProjects<IProject>;
   isLoading: boolean;
-  error?: Error;
+  error?: typeof Error;
 }
 
 class TaskListNav extends React.Component<ITaskListNavProps, ITaskListNavState> {

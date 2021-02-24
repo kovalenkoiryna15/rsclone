@@ -1,7 +1,7 @@
 module.exports = {
   preset: 'ts-jest',
   collectCoverage: true,
-  collectCoverageFrom: ['*.{ts,tsx}'],
+  collectCoverageFrom: ['*.{ts,tsx}', '!*.d.ts'],
   coverageDirectory: './coverage/',
   moduleDirectories: ['node_modules', 'src'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],

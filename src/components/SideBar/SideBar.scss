@@ -1,0 +1,38 @@
+.sidebar {
+  position: relative;
+  min-width: 300px;
+  min-height: 80vh;
+  padding: 1rem;
+  margin-right: 1rem;
+  overflow: hidden;
+
+  @include media-l-mobile() {
+    min-width: 90vw;
+  }
+
+  .sidebar-btn {
+    position: absolute;
+    top: 2rem;
+    right: .25rem;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid #002b36;
+    :focus {
+      outline: none;
+    }
+  }
+
+  &-collapsed {
+    flex-grow: 0;
+    min-width: 0;
+  }
+
+  .material-icons {
+    font-size: 1rem;
+    color: #002b36;
+  }
+}

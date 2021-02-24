@@ -1,0 +1,19 @@
+@import "reset";
+@import "~react-datetime/css/react-datetime";
+@import "App";
+@import "components/Calendar/Calendar";
+@import "components/DropdownCustom/DropdownCustom";
+@import "components/EditTask/EditTask";
+@import "components/Footer/Footer";
+@import "components/Header/Header";
+@import "components/LoginModal/LoginModal";
+@import "components/MainView/MainView";
+@import "components/ProjectForm/ProjectForm";
+@import "components/SideBar/SideBar";
+@import "components/TaskList/TaskList";
+@import "components/TaskListNav/TaskListNav";
+
+// Must be in the end
+@import "~bootswatch/dist/solar/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/solar/bootswatch";

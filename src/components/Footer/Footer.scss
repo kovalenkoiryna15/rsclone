@@ -1,0 +1,89 @@
+.footer {
+  align-items: center;
+  justify-content: center;
+  height: 11%;
+
+  @include tablet() {
+    height: auto;
+  }
+
+  .footer-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+
+    @include tablet() {
+      margin: 1rem 0;
+    }
+  }
+
+  .collaborator,
+  .rsschool-logo {
+    color: #839496;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .collaborator:hover,
+  .rsschool-logo:hover {
+    color: #a9bdbd;
+    transform: scale(1.2);
+  }
+
+  .rsschool-logo img {
+    height: 2rem;
+  }
+
+  .st0 {
+    fill: #fff;
+  }
+
+  .st1 {
+    clip-path: url("#SVGID_2_");
+  }
+
+  .st2 {
+    clip-path: url("#SVGID_4_");
+  }
+
+  .st3 {
+    clip-path: url("#SVGID_6_");
+  }
+
+  .st4 {
+    clip-path: url("#SVGID_8_");
+  }
+
+  .st5 {
+    fill: #fff;
+    stroke: #000;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+  }
+
+  .st6 {
+    clip-path: url("#SVGID_8_");
+  }
+
+  .st6,
+  .st7 {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+  }
+
+  .st8,
+  .st9 {
+    clip-path: url("#SVGID_10_");
+  }
+
+  .st9 {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+  }
+}

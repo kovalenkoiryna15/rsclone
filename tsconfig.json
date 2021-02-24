@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "src",
+    "checkJs": false,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist/",
+    "paths": {
+      "Assets/*": ["assets/*"],
+      "Audio/*": ["assets/audio/*"],
+      "Components/*": ["components/*"],
+      "Data/*": ["assets/data/*"],
+      "Entities/*": ["entities/*"],
+      "Images/*": ["assets/images/*"],
+      "States/*": ["redux-states/*"],
+      "Styles/*": ["styles/*"],
+      "Utils/*": ["utils/*"]
+    },
+    "plugins": [
+      {
+        "name": "typescript-eslint-language-service"
+      }
+    ],
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*", "test/**/*", "src/custom.d.ts"],
+  "exclude": ["build", "node_modules"]
+}

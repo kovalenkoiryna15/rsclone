@@ -1,0 +1,2 @@
+export const SHOW_LOADER = 'FIREBASE/SHOW_LOADER';
+export const HIDE_LOADER = 'FIREBASE/HIDE_LOADER';

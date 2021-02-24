@@ -1,0 +1,147 @@
+{
+  "name": "rsclone-trackingtime",
+  "version": "0.0.3",
+  "description": "RSClone Tracking Time.",
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@material-ui/core": "4.11.3",
+    "@material-ui/icons": "4.11.2",
+    "@testing-library/jest-dom": "5.11.9",
+    "@testing-library/react": "11.2.5",
+    "bootswatch": "4.6.0",
+    "firebase": "8.2.7",
+    "moment": "2.29.1",
+    "react": "16.14.0",
+    "react-bootstrap": "1.5.0",
+    "react-datetime": "3.0.4",
+    "react-dom": "16.14.0",
+    "react-redux": "7.2.2",
+    "react-router-dom": "5.2.0",
+    "react-select": "4.1.0",
+    "redux": "4.0.5",
+    "redux-thunk": "2.3.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.prod.js",
+    "build:stats": "webpack --config webpack.config.prod.js --profile --json > stats.json && webpack-bundle-analyzer stats.json dist/",
+    "build:watch": "npm run build -- --watch",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable",
+    "prepublishOnly": "pinst --disable",
+    "prettier:check": "prettier --check '**/*.+(js|jsx|json|css|md|ts|tsx|html)' --ignore-path .gitignore",
+    "prettier:write": "prettier --write '**/*.+(js|jsx|json|css|md|ts|tsx|html)' --ignore-path .gitignore",
+    "start": "webpack serve --config webpack.config.js",
+    "stylelint": "stylelint --syntax scss './src/**/*.scss'",
+    "stylelint:fix": "npm run stylelint -- --fix",
+    "test": "jest --coverage=false",
+    "test:coverage": "jest --coverage=true"
+  },
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Artsiom Platkouski",
+      "email": "komukc.apt@gmail.com",
+      "url": "https://www.linkedin.com/in/artsiom-platkouski/"
+    },
+    {
+      "name": "Dmitry Bogdan",
+      "email": "nextspace8bit@gmail.com",
+      "url": "https://www.linkedin.com/in/dmitry-bogdan-594b34173/"
+    },
+    {
+      "name": "Iryna Kavalenka",
+      "email": "kovalenkoiryna15@gmail.com",
+      "url": "https://github.com/kovalenkoiryna15"
+    }
+  ],
+  "keywords": [
+    "tracking",
+    "time",
+    "rsclone"
+  ],
+  "homepage": "https://github.com/kovalenkoiryna15/rsclone#README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kovalenkoiryna15/rsclone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kovalenkoiryna15/rsclone/issues"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 2 chrome versions"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
+    "@testing-library/user-event": "12.7.1",
+    "@types/jest": "26.0.20",
+    "@types/react": "16.14.4",
+    "@types/react-bootstrap": "0.32.25",
+    "@types/react-dom": "16.9.11",
+    "@types/react-redux": "7.1.16",
+    "@types/react-router-dom": "5.1.7",
+    "@types/react-select": "4.0.13",
+    "@typescript-eslint/eslint-plugin": "4.15.1",
+    "@typescript-eslint/parser": "4.15.1",
+    "@typescript-eslint/typescript-estree": "4.15.1",
+    "bootstrap": "4.6.0",
+    "clean-webpack-plugin": "3.0.0",
+    "css-loader": "5.0.2",
+    "css-minimizer-webpack-plugin": "1.2.0",
+    "dotenv-webpack": "6.0.0",
+    "eslint": "7.20.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-typescript": "12.3.1",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-import-resolver-webpack": "0.13.0",
+    "eslint-plugin-eslint-comments": "3.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.1.5",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-prettier": "3.3.1",
+    "eslint-plugin-promise": "4.3.1",
+    "eslint-plugin-react": "7.22.0",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-webpack-plugin": "2.5.1",
+    "html-loader": "2.0.0",
+    "html-webpack-plugin": "5.1.0",
+    "husky": "5.0.9",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "26.6.3",
+    "json5-loader": "4.0.1",
+    "lint-staged": "10.5.4",
+    "mini-css-extract-plugin": "1.3.7",
+    "mini-svg-data-uri": "1.2.3",
+    "node-sass": "5.0.0",
+    "pinst": "2.1.4",
+    "postcss-loader": "5.0.0",
+    "postcss-preset-env": "6.7.0",
+    "prettier": "2.2.1",
+    "sass-loader": "11.0.1",
+    "source-map-loader": "2.0.1",
+    "style-loader": "2.0.0",
+    "stylelint": "13.10.0",
+    "stylelint-config-recommended-scss": "4.2.0",
+    "stylelint-config-standard": "20.0.0",
+    "stylelint-config-twbs-bootstrap": "2.1.0",
+    "stylelint-order": "4.1.0",
+    "stylelint-scss": "3.19.0",
+    "ts-jest": "26.5.1",
+    "ts-loader": "8.0.17",
+    "typescript": "4.1.5",
+    "typescript-eslint-language-service": "4.1.3",
+    "webpack": "5.22.0",
+    "webpack-bundle-analyzer": "4.4.0",
+    "webpack-cli": "4.5.0",
+    "webpack-dev-server": "3.11.2"
+  }
+}

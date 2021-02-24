@@ -1,0 +1,21 @@
+.calendar-modal {
+  .modal-dialog,
+  .modal-content {
+    height: 100%;
+  }
+
+  .modal-dialog {
+    position: absolute;
+    right: 0;
+    width: 20rem;
+    margin: 0;
+
+    /* stylelint-disable selector-class-pattern */
+    .rdtPicker {
+      padding: 0;
+      background-color: var(--gray-dark);
+      border: none;
+    }
+    /* stylelint-enable selector-class-pattern */
+  }
+}

@@ -1,0 +1,24 @@
+.three-dots::after {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2aa198;
+  content: "\2807";
+}
+
+.custom-toggle.btn.btn-default,
+.custom-toggle.btn.btn-default:focus,
+.custom-toggle.btn.btn-default:hover,
+.custom-toggle.btn.btn-default:active {
+  padding: 0;
+  text-decoration: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  transition: none;
+}
+
+.custom-toggle.btn.btn-default:hover {
+  .three-dots::after {
+    color: #d33682;
+  }
+}
